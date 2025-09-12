@@ -1,0 +1,477 @@
+#!/usr/bin/env python3
+"""
+rim_center_detector_json.py
+
+Multi-task presence + center detector that supports labels.json (normalized centers)
+and CSV (absolute centers). Includes an --inspect mode to verify label->pixel mapping
+before training.
+
+Usage:
+  # Inspect labels vs images (no training)
+  python rim_center_detector_json.py --images_dir "/path/to/labeled_example_data" --labels "/mnt/data/labels.json" --inspect
+
+  # Train
+  python rim_center_detector_json.py --images_dir "/path/to/labeled_example_data" --labels "/mnt/data/labels.json" --epochs 20
+
+Notes:
+ - labels.json format expected: list of entries:
+    { "filename": "rim_000.png", "is_present": 1.0, "center": [x_norm, y_norm] }
+   where center is normalized (x fraction of width, y fraction of height).
+ - If is_present is 0 or missing center: treated as "no wheel".
+"""
+
+import os
+import math
+import json
+import argparse
+from pathlib import Path
+from typing import Tuple, Any, Dict
+import numpy as np
+import pandas as pd
+import cv2
+from PIL import Image
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms, models
+from tqdm import tqdm
+
+# ---------- Utilities ----------
+
+def make_gaussian_heatmap(h:int, w:int, cx:float, cy:float, sigma:float) -> np.ndarray:
+    if cx < 0 or cy < 0 or cx >= w or cy >= h:
+        return np.zeros((h,w), dtype=np.float32)
+    xs = np.arange(w, dtype=np.float32)
+    ys = np.arange(h, dtype=np.float32)
+    xv, yv = np.meshgrid(xs, ys)
+    dx = xv - float(cx)
+    dy = yv - float(cy)
+    d2 = (dx*dx + dy*dy) / (2.0 * sigma * sigma + 1e-9)
+    hm = np.exp(-d2)
+    hm = hm / (hm.max() + 1e-12)
+    return hm.astype(np.float32)
+
+def soft_argmax_2d_numpy(heatmap: np.ndarray) -> Tuple[float, float]:
+    h,w = heatmap.shape
+    flat = heatmap.reshape(-1)
+    flat_max = flat.max()
+    exp_flat = np.exp(flat - flat_max)
+    prob = exp_flat / (exp_flat.sum() + 1e-12)
+    xs = np.arange(w, dtype=np.float32)
+    ys = np.arange(h, dtype=np.float32)
+    xv, yv = np.meshgrid(xs, ys)
+    x = float((prob * xv.reshape(-1)).sum())
+    y = float((prob * yv.reshape(-1)).sum())
+    return x,y
+
+def soft_argmax_2d_torch(heatmap: torch.Tensor) -> torch.Tensor:
+    if heatmap.dim() == 4:
+        heat = heatmap.squeeze(1)  # B,H,W
+    else:
+        heat = heat
+    b,h,w = heat.shape
+    flat = heat.view(b, -1)
+    flat_max = flat.max(dim=1, keepdim=True).values
+    exp = torch.exp(flat - flat_max)
+    prob = exp / (exp.sum(dim=1, keepdim=True) + 1e-12)
+    prob = prob.view(b,h,w)
+    xs = torch.linspace(0, w-1, w, device=heat.device)
+    ys = torch.linspace(0, h-1, h, device=heat.device)
+    xv = xs.unsqueeze(0).unsqueeze(0).expand(b,h,w)
+    yv = ys.unsqueeze(0).unsqueeze(1).expand(b,h,w)
+    x = (prob * xv).view(b,-1).sum(dim=1)
+    y = (prob * yv).view(b,-1).sum(dim=1)
+    return torch.stack([x,y], dim=1)
+
+
+# ---------- Dataset (JSON-aware) ----------
+
+class RimCenterDataset(Dataset):
+    def __init__(self, images_dir: str, labels_path: str, img_size: Tuple[int,int]=(320,320),
+                 heatmap_sigma: float = 6.0, augment: bool = True):
+        self.images_dir = Path(images_dir)
+        self.img_size = tuple(img_size)
+        self.heatmap_sigma = float(heatmap_sigma)
+        self.augment = bool(augment)
+
+        self.samples = []
+        labels_path = Path(labels_path)
+        if not labels_path.exists():
+            raise RuntimeError(f"Labels file not found: {labels_path}")
+
+        if labels_path.suffix.lower() == '.json':
+            with open(labels_path, 'r') as f:
+                data = json.load(f)
+            for entry in data:
+                fname = entry.get('filename') or entry.get('file') or entry.get('image')
+                if not fname:
+                    continue
+                imgp = self.images_dir / fname
+                if not imgp.exists():
+                    alt = self.images_dir / Path(fname).name
+                    if alt.exists():
+                        imgp = alt
+                    else:
+                        # keep record but mark missing; inspect mode will reveal missing paths
+                        imgp = self.images_dir / fname  # keep path; will be missing on load
+                is_present = entry.get('is_present', entry.get('present', 0))
+                has_wheel = bool(float(is_present)) if is_present is not None else False
+                center = entry.get('center', None)
+                if center and len(center) >= 2 and has_wheel:
+                    # store normalized coords; convert later at runtime using image size
+                    self.samples.append({'imgp': imgp, 'x_norm': float(center[0]), 'y_norm': float(center[1]), 'has_wheel': True})
+                else:
+                    self.samples.append({'imgp': imgp, 'x_norm': -1.0, 'y_norm': -1.0, 'has_wheel': False})
+        else:
+            # fallback CSV loader (absolute coords expected)
+            df = pd.read_csv(labels_path)
+            lower_cols = {c.lower(): c for c in df.columns}
+            fname_col = lower_cols.get('filename') or lower_cols.get('file') or list(df.columns)[0]
+            cx_col = lower_cols.get('center_x') or lower_cols.get('cx') or lower_cols.get('x')
+            cy_col = lower_cols.get('center_y') or lower_cols.get('cy') or lower_cols.get('y')
+            if cx_col is None or cy_col is None:
+                raise ValueError("CSV labels must have center_x/center_y or x/y.")
+            for _, row in df.iterrows():
+                fname = str(row[fname_col]).strip()
+                imgp = self.images_dir / fname
+                if not imgp.exists():
+                    alt = self.images_dir / Path(fname).name
+                    if alt.exists():
+                        imgp = alt
+                try:
+                    cx = float(row[cx_col]); cy = float(row[cy_col])
+                except Exception:
+                    cx, cy = -1.0, -1.0
+                has_wheel = not (math.isnan(cx) or math.isnan(cy) or cx < 0 or cy < 0)
+                # store absolute coords as cx_abs/cy_abs
+                self.samples.append({'imgp': imgp, 'cx_abs': cx, 'cy_abs': cy, 'has_wheel': bool(has_wheel)})
+
+        # basic transforms
+        self.to_tensor = transforms.ToTensor()
+        self.normalize = transforms.Normalize(mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225])
+
+    def __len__(self):
+        return len(self.samples)
+
+    def _augment_cv(self, img_np: np.ndarray, center_px: Tuple[float,float]) -> Tuple[np.ndarray, Tuple[float,float]]:
+        h,w = img_np.shape[:2]
+        cx, cy = center_px if center_px is not None else (-1.0, -1.0)
+        # flip
+        if np.random.rand() < 0.5:
+            img_np = cv2.flip(img_np, 1)
+            if cx >= 0:
+                cx = w - 1 - cx
+        # small perspective
+        if np.random.rand() < 0.4:
+            margin = int(0.06 * min(h,w))
+            pts1 = np.float32([[margin, margin], [w-1-margin, margin], [w-1-margin, h-1-margin], [margin, h-1-margin]])
+            jitter = margin
+            pts2 = pts1 + np.random.uniform(-jitter, jitter, pts1.shape).astype(np.float32)
+            M = cv2.getPerspectiveTransform(pts1, pts2)
+            img_np = cv2.warpPerspective(img_np, M, (w,h), borderMode=cv2.BORDER_REPLICATE)
+            if cx >= 0:
+                pt = np.array([cx, cy, 1.0], dtype=np.float32)
+                pt2 = M.dot(pt)
+                if abs(pt2[2]) > 1e-6:
+                    cx = float(pt2[0] / pt2[2])
+                    cy = float(pt2[1] / pt2[2])
+                else:
+                    cx,cy = -1.0,-1.0
+        # blur / brightness jitter
+        if np.random.rand() < 0.3:
+            k = np.random.choice([3,5])
+            img_np = cv2.GaussianBlur(img_np, (k,k), 0)
+        if np.random.rand() < 0.3:
+            factor = 1.0 + (np.random.rand()*0.4 - 0.2)
+            img_np = np.clip(img_np.astype(np.float32) * factor, 0, 255).astype(np.uint8)
+        return img_np, (cx, cy)
+
+    def __getitem__(self, idx):
+        s = self.samples[idx]
+        path = s['imgp']
+        # read image (BGR)
+        img_cv = cv2.imread(str(path))
+        if img_cv is None:
+            raise RuntimeError(f"Failed to read image: {path}")
+        h0,w0 = img_cv.shape[:2]
+        # determine absolute pixel center
+        if 'x_norm' in s:
+            if s['has_wheel']:
+                cx_abs = float(s['x_norm']) * float(w0)
+                cy_abs = float(s['y_norm']) * float(h0)
+            else:
+                cx_abs, cy_abs = -1.0, -1.0
+        else:
+            # CSV absolute coords
+            if s['has_wheel']:
+                cx_abs = float(s.get('cx_abs', -1.0))
+                cy_abs = float(s.get('cy_abs', -1.0))
+            else:
+                cx_abs, cy_abs = -1.0, -1.0
+
+        # augmentation
+        if self.augment:
+            img_aug, (cx_aug, cy_aug) = self._augment_cv(img_cv.copy(), (cx_abs, cy_abs) if cx_abs >= 0 else None)
+        else:
+            img_aug = img_cv
+            cx_aug, cy_aug = (cx_abs, cy_abs)
+
+        # resize to target
+        target_h, target_w = self.img_size
+        img_rgb = cv2.cvtColor(img_aug, cv2.COLOR_BGR2RGB)
+        pil = Image.fromarray(img_rgb)
+        cur_w, cur_h = pil.size
+        scale_x = float(target_w) / float(cur_w)
+        scale_y = float(target_h) / float(cur_h)
+        pil_resized = pil.resize((target_w, target_h), resample=Image.BILINEAR)
+        if cx_aug >= 0:
+            cx_resized = float(cx_aug) * scale_x
+            cy_resized = float(cy_aug) * scale_y
+            has = 1
+        else:
+            cx_resized, cy_resized = -1.0, -1.0
+            has = 0
+
+        # heatmap target
+        H,W = target_h, target_w
+        if has:
+            hm = make_gaussian_heatmap(H, W, cx_resized, cy_resized, max(1.0, self.heatmap_sigma))
+        else:
+            hm = np.zeros((H,W), dtype=np.float32)
+
+        # image to tensor
+        img_t = transforms.ToTensor()(pil_resized)
+        img_t = self.normalize(img_t)
+        heat_t = torch.from_numpy(hm).unsqueeze(0)  # 1,H,W
+        presence = torch.tensor(float(has), dtype=torch.float32)
+        sample = {'image': img_t, 'heatmap': heat_t, 'presence': presence,
+                  'gt_center': torch.tensor([cx_resized if has else -1.0, cy_resized if has else -1.0], dtype=torch.float32),
+                  'meta': {'orig_path': str(path), 'orig_size': (h0,w0)}}
+        return sample
+
+# ---------- Model: same multi-task RimCenterNet as before ----------
+
+class RimCenterNet(nn.Module):
+    def __init__(self, pretrained: bool = True):
+        super().__init__()
+        resnet = models.resnet18(pretrained=pretrained)
+        self.stem = nn.Sequential(resnet.conv1, resnet.bn1, resnet.relu, resnet.maxpool)
+        self.layer1 = resnet.layer1
+        self.layer2 = resnet.layer2
+        self.layer3 = resnet.layer3
+        self.layer4 = resnet.layer4
+
+        self.up1 = nn.ConvTranspose2d(512,256,4,2,1)
+        self.conv_up1 = nn.Sequential(nn.BatchNorm2d(256), nn.ReLU(inplace=True), nn.Conv2d(256,256,3,padding=1))
+        self.up2 = nn.ConvTranspose2d(256,128,4,2,1)
+        self.conv_up2 = nn.Sequential(nn.BatchNorm2d(128), nn.ReLU(inplace=True), nn.Conv2d(128,128,3,padding=1))
+        self.up3 = nn.ConvTranspose2d(128,64,4,2,1)
+        self.conv_up3 = nn.Sequential(nn.BatchNorm2d(64), nn.ReLU(inplace=True), nn.Conv2d(64,64,3,padding=1))
+        self.up4 = nn.ConvTranspose2d(64,32,4,2,1)
+        self.conv_up4 = nn.Sequential(nn.BatchNorm2d(32), nn.ReLU(inplace=True), nn.Conv2d(32,32,3,padding=1))
+        self.up5 = nn.ConvTranspose2d(32,16,4,2,1)
+        self.conv_up5 = nn.Sequential(nn.BatchNorm2d(16), nn.ReLU(inplace=True), nn.Conv2d(16,16,3,padding=1))
+        self.heatmap_head = nn.Conv2d(16,1,1)
+        self.presence_pool = nn.AdaptiveAvgPool2d((1,1))
+        self.presence_fc = nn.Sequential(nn.Linear(512,128), nn.ReLU(inplace=True), nn.Linear(128,1))
+        self._init_weights()
+
+    def _init_weights(self):
+        for m in [self.up1, self.up2, self.up3, self.up4, self.up5, self.heatmap_head]:
+            if isinstance(m, (nn.ConvTranspose2d, nn.Conv2d)):
+                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+                if getattr(m, 'bias', None) is not None:
+                    nn.init.constant_(m.bias, 0)
+
+    def forward(self, x):
+        x0 = self.stem(x)
+        x1 = self.layer1(x0)
+        x2 = self.layer2(x1)
+        x3 = self.layer3(x2)
+        x4 = self.layer4(x3)
+        pooled = self.presence_pool(x4).view(x4.size(0), -1)
+        presence_logit = self.presence_fc(pooled).squeeze(1)
+        u = self.up1(x4); u = self.conv_up1(u)
+        u = self.up2(u); u = self.conv_up2(u)
+        u = self.up3(u); u = self.conv_up3(u)
+        u = self.up4(u); u = self.conv_up4(u)
+        u = self.up5(u); u = self.conv_up5(u)
+        hm_logits = self.heatmap_head(u)
+        if hm_logits.shape[2:] != x.shape[2:]:
+            hm_logits = F.interpolate(hm_logits, size=(x.shape[2], x.shape[3]), mode='bilinear', align_corners=False)
+        return {'heatmap_logits': hm_logits, 'presence_logit': presence_logit}
+
+# ---------- Loss & metrics (same principles) ----------
+
+def multi_task_loss(preds: Dict[str,torch.Tensor], targets: Dict[str,torch.Tensor],
+                    heatmap_weight: float = 1.0, presence_weight: float = 1.0):
+    heatmap_logits = preds['heatmap_logits']
+    presence_logit = preds['presence_logit']
+    target_heat = targets['heatmap'].to(heatmap_logits.device)
+    target_presence = targets['presence'].to(presence_logit.device)
+    presence_loss = F.binary_cross_entropy_with_logits(presence_logit, target_presence)
+    pred_heat = torch.sigmoid(heatmap_logits)
+    mask = target_presence.view(-1,1,1,1)
+    mse = (pred_heat - target_heat).pow(2)
+    if mask.sum() > 0:
+        heatmap_loss = (mse * mask).sum() / (mask.sum() * target_heat.numel() / target_heat.shape[0] + 1e-12)
+    else:
+        heatmap_loss = torch.tensor(0.0, device=heatmap_logits.device)
+    total = presence_weight * presence_loss + heatmap_weight * heatmap_loss
+    return total, {'presence_loss': presence_loss.item(), 'heatmap_loss': heatmap_loss.item()}
+
+def compute_metrics(preds: Dict[str,torch.Tensor], targets: Dict[str,torch.Tensor], thr_presence: float = 0.5):
+    pred_presence_prob = torch.sigmoid(preds['presence_logit']).detach().cpu().numpy()
+    pred_presence = (pred_presence_prob >= thr_presence).astype(int)
+    target_presence = targets['presence'].detach().cpu().numpy().astype(int)
+    TP = int(((pred_presence == 1) & (target_presence == 1)).sum())
+    FP = int(((pred_presence == 1) & (target_presence == 0)).sum())
+    FN = int(((pred_presence == 0) & (target_presence == 1)).sum())
+    precision = TP / (TP + FP + 1e-12)
+    recall = TP / (TP + FN + 1e-12)
+    f1 = 2 * precision * recall / (precision + recall + 1e-12)
+    mae_list = []
+    pred_hm = torch.sigmoid(preds['heatmap_logits']).detach().cpu().numpy()
+    target_hm = targets['heatmap'].detach().cpu().numpy()
+    for i in range(pred_hm.shape[0]):
+        if target_presence[i] == 1 and pred_presence[i] == 1:
+            ph = pred_hm[i,0]; th = target_hm[i,0]
+            px, py = soft_argmax_2d_numpy(ph)
+            tx, ty = soft_argmax_2d_numpy(th)
+            mae_list.append(math.hypot(px - tx, py - ty))
+    mae = float(np.mean(mae_list)) if len(mae_list) > 0 else float('nan')
+    return {'precision': precision, 'recall': recall, 'f1': f1, 'mae': mae, 'tp': TP, 'fp': FP, 'fn': FN, 'n_loc_samples': len(mae_list)}
+
+# ---------- Train / Eval functions ----------
+
+def train_one_epoch(model, loader, optimizer, device, epoch):
+    model.train()
+    running_loss = 0.0; cnt = 0
+    for batch in tqdm(loader, desc=f"Train E{epoch}"):
+        imgs = batch['image'].to(device)
+        heat = batch['heatmap'].to(device)
+        pres = batch['presence'].to(device)
+        preds = model(imgs)
+        loss, details = multi_task_loss(preds, {'heatmap': heat, 'presence': pres})
+        optimizer.zero_grad(); loss.backward(); optimizer.step()
+        running_loss += float(loss.item()) * imgs.shape[0]; cnt += imgs.shape[0]
+    return running_loss / max(1,cnt)
+
+def evaluate(model, loader, device):
+    model.eval()
+    TP = FP = FN = 0; mae_list = []
+    with torch.no_grad():
+        for batch in tqdm(loader, desc="Eval"):
+            imgs = batch['image'].to(device)
+            heat = batch['heatmap'].to(device)
+            pres = batch['presence'].to(device)
+            preds = model(imgs)
+            m = compute_metrics(preds, {'heatmap': heat, 'presence': pres})
+            TP += m['tp']; FP += m['fp']; FN += m['fn']
+            if not math.isnan(m['mae']):
+                mae_list.append(m['mae'])
+    precision = TP / (TP + FP + 1e-12)
+    recall = TP / (TP + FN + 1e-12)
+    f1 = 2 * precision * recall / (precision + recall + 1e-12)
+    mae = float(np.mean(mae_list)) if len(mae_list) > 0 else float('nan')
+    return {'precision': precision, 'recall': recall, 'f1': f1, 'mae': mae, 'tp': TP, 'fp': FP, 'fn': FN, 'n_loc_samples': len(mae_list)}
+
+# ---------- Main ----------
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--images_dir', required=True)
+    parser.add_argument('--labels', required=True)
+    parser.add_argument('--out_dir', default='out')
+    parser.add_argument('--epochs', type=int, default=20)
+    parser.add_argument('--batch_size', type=int, default=12)
+    parser.add_argument('--img_h', type=int, default=320)
+    parser.add_argument('--img_w', type=int, default=320)
+    parser.add_argument('--lr', type=float, default=1e-4)
+    parser.add_argument('--inspect', action='store_true', help='Inspect dataset and print sample pixel centers; then exit')
+    parser.add_argument('--num_workers', type=int, default=4)
+    parser.add_argument('--seed', type=int, default=42)
+    args = parser.parse_args()
+
+    np.random.seed(args.seed); torch.manual_seed(args.seed)
+    out_dir = Path(args.out_dir); out_dir.mkdir(parents=True, exist_ok=True)
+
+    dataset = RimCenterDataset(args.images_dir, args.labels, img_size=(args.img_h, args.img_w), heatmap_sigma=6.0, augment=False)
+
+    # If inspect mode: list missing images and print first few mapping examples
+    if args.inspect:
+        missing = []
+        present = []
+        for i, s in enumerate(dataset.samples[:2000]):
+            p = s['imgp']
+            if not Path(p).exists():
+                missing.append(str(p))
+            else:
+                present.append(str(p))
+        print(f"Total label entries: {len(dataset.samples)}")
+        print(f"Images present under images_dir: {len(present)}; missing (first 20):")
+        for m in missing[:20]:
+            print(" -", m)
+        # print first 8 pixel-mapped centers for entries whose image exists
+        printed = 0
+        print("\nSample mapping (filename -> pixel center at original size):")
+        for s in dataset.samples:
+            p = Path(s['imgp'])
+            if p.exists():
+                # read image to get original size and compute pixel center
+                img = cv2.imread(str(p))
+                h0,w0 = img.shape[:2]
+                if 'x_norm' in s:
+                    if s['has_wheel']:
+                        cx = float(s['x_norm'])*w0; cy = float(s['y_norm'])*h0
+                    else:
+                        cx,cy = -1.0,-1.0
+                else:
+                    if s['has_wheel']:
+                        cx = float(s.get('cx_abs', -1.0)); cy = float(s.get('cy_abs', -1.0))
+                    else:
+                        cx,cy = -1.0,-1.0
+                print(f"{p.name}: size=({w0},{h0}) -> center_pixels=({cx:.1f},{cy:.1f}) present={s['has_wheel']}")
+                printed += 1
+                if printed >= 8:
+                    break
+        return
+
+    n = len(dataset)
+    if n == 0:
+        raise RuntimeError("No samples found in dataset. Check --labels and --images_dir")
+
+    # simple split 70/15/15
+    idxs = np.arange(n)
+    np.random.shuffle(idxs)
+    n_train = int(0.7 * n); n_val = int(0.15 * n)
+    train_idx = idxs[:n_train].tolist()
+    val_idx = idxs[n_train:n_train + n_val].tolist()
+    test_idx = idxs[n_train + n_val:].tolist()
+
+    train_loader = DataLoader(torch.utils.data.Subset(dataset, train_idx), batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, pin_memory=True)
+    val_loader = DataLoader(torch.utils.data.Subset(dataset, val_idx), batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, pin_memory=True)
+    test_loader = DataLoader(torch.utils.data.Subset(dataset, test_idx), batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, pin_memory=True)
+
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    model = RimCenterNet(pretrained=True).to(device)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-4)
+    best_val_f1 = -1.0
+    for epoch in range(1, args.epochs + 1):
+        train_loss = train_one_epoch(model, train_loader, optimizer, device, epoch)
+        val_metrics = evaluate(model, val_loader, device)
+        print(f"Epoch {epoch}: train_loss {train_loss:.4f} | val f1 {val_metrics['f1']:.4f} precision {val_metrics['precision']:.4f} recall {val_metrics['recall']:.4f} mae {val_metrics['mae']:.2f}")
+        if val_metrics['f1'] > best_val_f1:
+            best_val_f1 = val_metrics['f1']
+            torch.save({'model_state': model.state_dict(), 'epoch': epoch}, out_dir / 'best_model.pth')
+            print("Saved best model.")
+    # final test
+    ckpt = torch.load(out_dir / 'best_model.pth', map_location=device)
+    model.load_state_dict(ckpt['model_state'])
+    test_metrics = evaluate(model, test_loader, device)
+    print("Test metrics:", test_metrics)
+    print("Done. Visualizations (few samples) saved to out/vis_samples (if enabled).")
+
+if __name__ == '__main__':
+    main()

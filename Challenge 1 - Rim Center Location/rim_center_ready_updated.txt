@@ -1,0 +1,866 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "59fcea10",
+   "metadata": {},
+   "source": [
+    "# Rim Center Identification — Ready-to-run Notebook (Updated)\n",
+    "\n",
+    "This notebook implements a heatmap-based UNet with an auxiliary visibility head, combined loss (MSE + BCE), safe training/saving, and evaluation helpers. Edit the `images_dir` and `labels_json` paths in the **Usage** cell before running."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "11e850d8",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Using device: mps\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Cell 1 - imports & device selection\n",
+    "from pathlib import Path\n",
+    "import json\n",
+    "import math\n",
+    "import random\n",
+    "from typing import Tuple, List, Optional\n",
+    "\n",
+    "import numpy as np\n",
+    "import cv2\n",
+    "import matplotlib.pyplot as plt\n",
+    "from tqdm.auto import tqdm\n",
+    "\n",
+    "import torch\n",
+    "import torch.nn as nn\n",
+    "import torch.nn.functional as F\n",
+    "from torch.utils.data import Dataset, DataLoader, random_split\n",
+    "\n",
+    "# Select device: prefer MPS on Apple silicon, else CUDA, else CPU\n",
+    "if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():\n",
+    "    device = torch.device('mps')\n",
+    "elif torch.cuda.is_available():\n",
+    "    device = torch.device('cuda')\n",
+    "else:\n",
+    "    device = torch.device('cpu')\n",
+    "print('Using device:', device)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "eee7388d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Cell 2 - heatmap utility\n",
+    "def make_gaussian_heatmap(h: int, w: int, center: tuple, sigma: float=2.0):\n",
+    "    \"\"\"Create a normalized gaussian heatmap with peak 1 at `center` (x,y in pixels).\"\"\"\n",
+    "    x0, y0 = center\n",
+    "    xs = np.arange(0, w, 1, np.float32)\n",
+    "    ys = np.arange(0, h, 1, np.float32)[:, None]\n",
+    "    d2 = (xs - x0)**2 + (ys - y0)**2\n",
+    "    heat = np.exp(-d2 / (2 * sigma**2)).astype(np.float32)\n",
+    "    heat = heat / (heat.max() + 1e-12)\n",
+    "    return heat\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "b9414277",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Cell 3 - Dataset class (handles list or dict JSON formats, normalized centers)\n",
+    "class RimCenterDataset(Dataset):\n",
+    "    def __init__(self, images_dir, labels_json, img_size=(128,128), sigma=2.0, transform=None):\n",
+    "        self.images_dir = Path(images_dir)\n",
+    "        with open(labels_json, 'r') as f:\n",
+    "            raw = json.load(f)\n",
+    "        if isinstance(raw, dict):\n",
+    "            self.entries = [{'filename': k, **v} for k,v in raw.items()]\n",
+    "        elif isinstance(raw, list):\n",
+    "            self.entries = raw\n",
+    "        else:\n",
+    "            raise ValueError('Unsupported labels.json format (expect list or dict)')\n",
+    "        self.img_size = tuple(img_size)\n",
+    "        self.sigma = sigma\n",
+    "        self.transform = transform\n",
+    "\n",
+    "    def __len__(self):\n",
+    "        return len(self.entries)\n",
+    "\n",
+    "    def __getitem__(self, idx):\n",
+    "        item = self.entries[idx]\n",
+    "        fname = item.get('filename') or item.get('file_name') or item.get('image')\n",
+    "        img_path = self.images_dir / fname\n",
+    "        img = cv2.imread(str(img_path))\n",
+    "        if img is None:\n",
+    "            raise FileNotFoundError(f'Image not found: {img_path}')\n",
+    "        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)\n",
+    "        orig_h, orig_w = img.shape[:2]\n",
+    "\n",
+    "        # resize only if needed\n",
+    "        if (orig_h, orig_w) != self.img_size:\n",
+    "            img_resized = cv2.resize(img, (self.img_size[1], self.img_size[0]), interpolation=cv2.INTER_LINEAR)\n",
+    "        else:\n",
+    "            img_resized = img\n",
+    "\n",
+    "        img_resized = img_resized.astype(np.float32) / 255.0\n",
+    "        img_t = torch.tensor(img_resized).permute(2,0,1)  # C,H,W\n",
+    "\n",
+    "        is_present = float(item.get('is_present', item.get('visible', 0.0)))\n",
+    "        if is_present:\n",
+    "            cx_norm, cy_norm = item['center']\n",
+    "            px = cx_norm * (self.img_size[1])\n",
+    "            py = cy_norm * (self.img_size[0])\n",
+    "            heat = make_gaussian_heatmap(self.img_size[0], self.img_size[1], (px, py), sigma=self.sigma)\n",
+    "            target = torch.tensor(heat).unsqueeze(0)\n",
+    "            visible = torch.tensor(1.0, dtype=torch.float32)\n",
+    "        else:\n",
+    "            target = torch.zeros((1, self.img_size[0], self.img_size[1]), dtype=torch.float32)\n",
+    "            visible = torch.tensor(0.0, dtype=torch.float32)\n",
+    "\n",
+    "        return {'image': img_t, 'heat': target, 'visible': visible, 'meta': {'filename': fname}}\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "cd65fdef",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Cell 4 - Simple UNet with auxiliary visibility head\n",
+    "class ConvBlock(nn.Module):\n",
+    "    def __init__(self, in_c, out_c):\n",
+    "        super().__init__()\n",
+    "        self.conv = nn.Sequential(\n",
+    "            nn.Conv2d(in_c, out_c, 3, padding=1, bias=False),\n",
+    "            nn.BatchNorm2d(out_c),\n",
+    "            nn.ReLU(inplace=True),\n",
+    "            nn.Conv2d(out_c, out_c, 3, padding=1, bias=False),\n",
+    "            nn.BatchNorm2d(out_c),\n",
+    "            nn.ReLU(inplace=True),\n",
+    "        )\n",
+    "    def forward(self,x): return self.conv(x)\n",
+    "\n",
+    "class Up(nn.Module):\n",
+    "    def __init__(self, in_c, out_c):\n",
+    "        super().__init__()\n",
+    "        self.up = nn.ConvTranspose2d(in_c, out_c, 2, stride=2)\n",
+    "        self.conv = ConvBlock(in_c, out_c)\n",
+    "    def forward(self,x,skip):\n",
+    "        x = self.up(x)\n",
+    "        if x.shape[2:] != skip.shape[2:]:\n",
+    "            dh = skip.shape[2] - x.shape[2]\n",
+    "            dw = skip.shape[3] - x.shape[3]\n",
+    "            skip = skip[:,:,dh//2:dh//2 + x.shape[2], dw//2:dw//2 + x.shape[3]]\n",
+    "        x = torch.cat([x, skip], dim=1)\n",
+    "        return self.conv(x)\n",
+    "\n",
+    "class SimpleUNetWithVis(nn.Module):\n",
+    "    def __init__(self, in_ch=3, base=32, img_size=(128,128)):\n",
+    "        super().__init__()\n",
+    "        self.enc1 = ConvBlock(in_ch, base)\n",
+    "        self.enc2 = ConvBlock(base, base*2)\n",
+    "        self.enc3 = ConvBlock(base*2, base*4)\n",
+    "        self.pool = nn.MaxPool2d(2)\n",
+    "        self.bottleneck = ConvBlock(base*4, base*8)\n",
+    "\n",
+    "        self.up1 = Up(base*8, base*4)\n",
+    "        self.up2 = Up(base*4, base*2)\n",
+    "        self.up3 = Up(base*2, base)\n",
+    "        self.final = nn.Conv2d(base, 1, kernel_size=1)\n",
+    "\n",
+    "        # auxiliary visibility head: global pooled features -> scalar\n",
+    "        self.vis_pool = nn.AdaptiveAvgPool2d((1,1))\n",
+    "        self.vis_fc = nn.Sequential(\n",
+    "            nn.Linear(base*8, base*4),\n",
+    "            nn.ReLU(inplace=True),\n",
+    "            nn.Linear(base*4, 1),\n",
+    "            nn.Sigmoid()\n",
+    "        )\n",
+    "        self.img_size = img_size\n",
+    "\n",
+    "    def forward(self,x):\n",
+    "        e1 = self.enc1(x)\n",
+    "        e2 = self.enc2(self.pool(e1))\n",
+    "        e3 = self.enc3(self.pool(e2))\n",
+    "        b = self.bottleneck(self.pool(e3))\n",
+    "        u1 = self.up1(b, e3)\n",
+    "        u2 = self.up2(u1, e2)\n",
+    "        u3 = self.up3(u2, e1)\n",
+    "        heat = self.final(u3)\n",
+    "        heat = torch.sigmoid(heat)  # 0..1 heatmap\n",
+    "\n",
+    "        # visibility head uses bottleneck features\n",
+    "        v = self.vis_pool(b)  # N, C, 1, 1\n",
+    "        v = v.view(v.shape[0], -1)  # N, C\n",
+    "        vis = self.vis_fc(v).squeeze(1)  # N\n",
+    "        return heat, vis\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "1de02ff7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Cell 5 - decode & evaluation utilities\n",
+    "import math\n",
+    "\n",
+    "def heatmap_to_point(heat: np.ndarray):\n",
+    "    idx = heat.argmax()\n",
+    "    h, w = heat.shape\n",
+    "    y = int(idx // w)\n",
+    "    x = int(idx % w)\n",
+    "    conf = float(heat[y, x])\n",
+    "    return float(x), float(y), conf\n",
+    "\n",
+    "def pixel_distance(a: tuple, b: tuple):\n",
+    "    return math.hypot(a[0]-b[0], a[1]-b[1])\n",
+    "\n",
+    "def evaluate_model(model, dataloader, device, max_display=4):\n",
+    "    model.eval()\n",
+    "    dists = []\n",
+    "    vis_conf_neg = []\n",
+    "    vis_preds = []\n",
+    "    with torch.no_grad():\n",
+    "        for batch in tqdm(dataloader, desc='Eval'):\n",
+    "            imgs = batch['image'].to(device)\n",
+    "            targets = batch['heat'].cpu().numpy()  # N,1,H,W\n",
+    "            visible = batch['visible'].numpy()\n",
+    "            preds_heat, preds_vis = model(imgs)\n",
+    "            preds_heat = preds_heat.cpu().numpy()\n",
+    "            preds_vis = preds_vis.cpu().numpy()\n",
+    "            N = preds_heat.shape[0]\n",
+    "            for i in range(N):\n",
+    "                pred_h = preds_heat[i,0]\n",
+    "                tar_h = targets[i,0]\n",
+    "                if visible[i] == 1.0:\n",
+    "                    gt_x, gt_y, _ = heatmap_to_point(tar_h)\n",
+    "                    px, py, conf = heatmap_to_point(pred_h)\n",
+    "                    d = pixel_distance((px,py),(gt_x,gt_y))\n",
+    "                    dists.append(d)\n",
+    "                else:\n",
+    "                    vis_conf_neg.append(pred_h.max())\n",
+    "                vis_preds.append(preds_vis[i])\n",
+    "    stats = {}\n",
+    "    if len(dists)>0:\n",
+    "        dists = np.array(dists)\n",
+    "        stats['dist_mean'] = float(dists.mean())\n",
+    "        stats['dist_med'] = float(np.median(dists))\n",
+    "        stats['pct_within_5px'] = float((dists <= 5).mean())\n",
+    "        stats['pct_within_10px'] = float((dists <= 10).mean())\n",
+    "    else:\n",
+    "        stats.update({'dist_mean': None, 'dist_med': None, 'pct_within_5px': None, 'pct_within_10px': None})\n",
+    "    if len(vis_conf_neg)>0:\n",
+    "        stats['neg_mean_conf'] = float(np.mean(vis_conf_neg))\n",
+    "        stats['neg_max_conf'] = float(np.max(vis_conf_neg))\n",
+    "    else:\n",
+    "        stats['neg_mean_conf'] = stats['neg_max_conf'] = None\n",
+    "    return stats\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "f79f79c6",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Cell 6 - training loop (combined loss: heatmap MSE + BCE for visibility)\n",
+    "def train_model(model, train_loader, val_loader, device, epochs=10, lr=1e-3, alpha=1.0, beta=1.0, save_path='model_rim.pth'):\n",
+    "    \"\"\"alpha: weight for heatmap MSE, beta: weight for vis BCE\"\"\"\n",
+    "    model = model.to(device)\n",
+    "    optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n",
+    "    mse = nn.MSELoss()\n",
+    "    bce = nn.BCELoss()\n",
+    "\n",
+    "    best_val = 1e9\n",
+    "    for epoch in range(1, epochs+1):\n",
+    "        model.train()\n",
+    "        running_loss = 0.0\n",
+    "        pbar = tqdm(train_loader, desc=f'Epoch {epoch}/{epochs}')\n",
+    "        for batch in pbar:\n",
+    "            imgs = batch['image'].to(device)\n",
+    "            heat_gt = batch['heat'].to(device)\n",
+    "            vis_gt = batch['visible'].to(device)\n",
+    "\n",
+    "            preds_heat, preds_vis = model(imgs)\n",
+    "            loss_heat = mse(preds_heat, heat_gt)\n",
+    "            loss_vis = bce(preds_vis, vis_gt)\n",
+    "            loss = alpha * loss_heat + beta * loss_vis\n",
+    "\n",
+    "            optimizer.zero_grad()\n",
+    "            loss.backward()\n",
+    "            optimizer.step()\n",
+    "\n",
+    "            running_loss += float(loss.item())\n",
+    "            pbar.set_postfix({'loss': running_loss / (pbar.n + 1e-12)})\n",
+    "\n",
+    "        # validation\n",
+    "        val_stats = evaluate_model(model, val_loader, device)\n",
+    "        print(f\"Epoch {epoch} val: {val_stats}\")\n",
+    "        # use median distance if available or loss as fallback\n",
+    "        save_metric = val_stats['dist_med'] if val_stats['dist_med'] is not None else running_loss/len(train_loader)\n",
+    "        if save_metric < best_val:\n",
+    "            best_val = save_metric\n",
+    "            torch.save({'model_state': model.state_dict(), 'epoch': epoch}, save_path)\n",
+    "            print('Saved best model:', save_path)\n",
+    "    return model\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "d2ed7338",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Cell 6b - Safe train wrapper\n",
+    "from tqdm.auto import tqdm\n",
+    "from pathlib import Path\n",
+    "import torch\n",
+    "\n",
+    "def train_model_safe(model, train_loader, val_loader, device, epochs=10, lr=1e-3,\n",
+    "                     alpha=1.0, beta=1.0, save_path=None):\n",
+    "    \"\"\"Safe train: ensures save directory exists before torch.save.\n",
+    "    If save_path is None, will save to ./models/rim_unet_vis_best.pth\n",
+    "    \"\"\"\n",
+    "    if save_path is None:\n",
+    "        save_path = Path.cwd() / \"models\" / \"rim_unet_vis_best.pth\"\n",
+    "    else:\n",
+    "        save_path = Path(save_path)\n",
+    "\n",
+    "    save_path.parent.mkdir(parents=True, exist_ok=True)  # create parent dirs if needed\n",
+    "\n",
+    "    model = model.to(device)\n",
+    "    optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n",
+    "    mse = nn.MSELoss()\n",
+    "    bce = nn.BCELoss()\n",
+    "\n",
+    "    best_val = float('inf')\n",
+    "    for epoch in range(1, epochs+1):\n",
+    "        model.train()\n",
+    "        running_loss = 0.0\n",
+    "        pbar = tqdm(train_loader, desc=f'Epoch {epoch}/{epochs}')\n",
+    "        for batch in pbar:\n",
+    "            imgs = batch['image'].to(device)\n",
+    "            heat_gt = batch['heat'].to(device)\n",
+    "            vis_gt = batch['visible'].to(device)\n",
+    "\n",
+    "            preds_heat, preds_vis = model(imgs)\n",
+    "            loss_heat = mse(preds_heat, heat_gt)\n",
+    "            loss_vis = bce(preds_vis, vis_gt)\n",
+    "            loss = alpha * loss_heat + beta * loss_vis\n",
+    "\n",
+    "            optimizer.zero_grad()\n",
+    "            loss.backward()\n",
+    "            optimizer.step()\n",
+    "\n",
+    "            running_loss += float(loss.item())\n",
+    "            pbar.set_postfix({'loss': running_loss / (pbar.n + 1e-12)})\n",
+    "\n",
+    "        # validation\n",
+    "        val_stats = evaluate_model(model, val_loader, device)\n",
+    "        print(f\"Epoch {epoch} val: {val_stats}\")\n",
+    "        save_metric = val_stats.get('dist_med')\n",
+    "        if save_metric is None:\n",
+    "            save_metric = running_loss / (len(train_loader) if len(train_loader) else 1.0)\n",
+    "        if save_metric < best_val:\n",
+    "            best_val = save_metric\n",
+    "            # Save state_dict on CPU for portability\n",
+    "            state = {'model_state': {k: v.cpu() for k, v in model.state_dict().items()},\n",
+    "                     'epoch': epoch}\n",
+    "            torch.save(state, str(save_path))\n",
+    "            print('Saved best model to', str(save_path))\n",
+    "    return model\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "4d8223c2",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Dataset sizes: 850 150\n",
+      "Sample shapes: torch.Size([3, 128, 128]) torch.Size([1, 128, 128]) visible tensor(1.)\n",
+      "Model parameters (M): 1.960034\n",
+      "Smoke forward shapes -> heat: torch.Size([2, 1, 128, 128]) vis: torch.Size([2])\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "861a158051824bfda941ba46deb04629",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Epoch 1/6:   0%|          | 0/54 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "f49533c02435495db89fafb225af3946",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Eval:   0%|          | 0/19 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 1 val: {'dist_mean': 42.7394246997173, 'dist_med': 34.90701273908539, 'pct_within_5px': 0.0, 'pct_within_10px': 0.02, 'neg_mean_conf': None, 'neg_max_conf': None}\n",
+      "Saved best model to /Users/amrattia/projects/ATI Perception Take Home Challenge/Challenge 1 - Rim Center Location/models/rim_unet_vis_best.pth\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "94e2595e852649a3970937ecc9b5340d",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Epoch 2/6:   0%|          | 0/54 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "982ccc8cdcc046199b8c6317cfc671ab",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Eval:   0%|          | 0/19 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 2 val: {'dist_mean': 52.64184761034766, 'dist_med': 49.37088184601943, 'pct_within_5px': 0.006666666666666667, 'pct_within_10px': 0.013333333333333334, 'neg_mean_conf': None, 'neg_max_conf': None}\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "982d590f48e64a71bdf795564bc161d0",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Epoch 3/6:   0%|          | 0/54 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "8b7ffc40ee47470ba1bd90f1605bd05c",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Eval:   0%|          | 0/19 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 3 val: {'dist_mean': 52.18985623353323, 'dist_med': 48.584322841338704, 'pct_within_5px': 0.013333333333333334, 'pct_within_10px': 0.02666666666666667, 'neg_mean_conf': None, 'neg_max_conf': None}\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "03f02006a1a4474b9097ea8304f17011",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Epoch 4/6:   0%|          | 0/54 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "35fea627f39b4d7d95491e1465019475",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Eval:   0%|          | 0/19 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 4 val: {'dist_mean': 56.67364621934306, 'dist_med': 52.42832723327163, 'pct_within_5px': 0.006666666666666667, 'pct_within_10px': 0.013333333333333334, 'neg_mean_conf': None, 'neg_max_conf': None}\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "44aa43256cb04ef99d2a0537b15281b9",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Epoch 5/6:   0%|          | 0/54 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "58bd1ad144b949d69496a1b5ed6e8b79",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Eval:   0%|          | 0/19 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 5 val: {'dist_mean': 58.51588633456602, 'dist_med': 53.04899606332817, 'pct_within_5px': 0.006666666666666667, 'pct_within_10px': 0.006666666666666667, 'neg_mean_conf': None, 'neg_max_conf': None}\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "4796b25fded3418c9bd9538a19f2f8d0",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Epoch 6/6:   0%|          | 0/54 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "43cd8860820c44b2bcfb5c954d36e47d",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Eval:   0%|          | 0/19 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Epoch 6 val: {'dist_mean': 51.50602586354022, 'dist_med': 47.92029799947607, 'pct_within_5px': 0.006666666666666667, 'pct_within_10px': 0.006666666666666667, 'neg_mean_conf': None, 'neg_max_conf': None}\n"
+     ]
+    },
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "536d6ed4c8464495850798a6c4003b91",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Eval:   0%|          | 0/19 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Final eval stats: {'dist_mean': 51.50602586354022, 'dist_med': 47.92029799947607, 'pct_within_5px': 0.006666666666666667, 'pct_within_10px': 0.006666666666666667, 'neg_mean_conf': None, 'neg_max_conf': None}\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Cell 7 - Usage example (edit paths and run)\n",
+    "# Update these paths to point to your local dataset\n",
+    "base_dir = Path.cwd()\n",
+    "images_dir = base_dir / 'labeled_example_data'   # <-- edit if needed\n",
+    "labels_json = images_dir / 'labels.json'         # <-- edit if needed\n",
+    "\n",
+    "# params\n",
+    "img_size = (128,128)\n",
+    "sigma = 2.0\n",
+    "\n",
+    "dataset = RimCenterDataset(images_dir, labels_json, img_size=img_size, sigma=sigma)\n",
+    "n = len(dataset)\n",
+    "val_frac = 0.15\n",
+    "val_n = int(n * val_frac)\n",
+    "train_n = n - val_n\n",
+    "train_ds, val_ds = random_split(dataset, [train_n, val_n], generator=torch.Generator().manual_seed(42))\n",
+    "\n",
+    "# DataLoader safe defaults for macOS / MPS debugging: num_workers=0\n",
+    "use_cuda = torch.cuda.is_available()\n",
+    "pin_memory = True if use_cuda else False\n",
+    "train_loader = DataLoader(train_ds, batch_size=16, shuffle=True, num_workers=0, pin_memory=pin_memory)\n",
+    "val_loader   = DataLoader(val_ds,   batch_size=8,  shuffle=False, num_workers=0, pin_memory=pin_memory)\n",
+    "\n",
+    "print('Dataset sizes:', len(train_ds), len(val_ds))\n",
+    "sample = dataset[0]\n",
+    "print('Sample shapes:', sample['image'].shape, sample['heat'].shape, 'visible', sample['visible'])\n",
+    "\n",
+    "# Instantiate model\n",
+    "model = SimpleUNetWithVis(in_ch=3, base=32, img_size=img_size)\n",
+    "print('Model parameters (M):', sum(p.numel() for p in model.parameters())/1e6)\n",
+    "\n",
+    "# Move to device BEFORE forward\n",
+    "model = model.to(device)\n",
+    "\n",
+    "# Quick smoke forward\n",
+    "x = torch.rand(2,3,img_size[0], img_size[1], device=device)\n",
+    "h, v = model(x)\n",
+    "print('Smoke forward shapes -> heat:', h.shape, 'vis:', v.shape)\n",
+    "\n",
+    "# Train for a few epochs (tune lr, alpha, beta as needed)\n",
+    "trained = train_model_safe(model, train_loader, val_loader, device, epochs=6, lr=1e-3, alpha=1.0, beta=1.0, save_path=Path.cwd() / 'models' / 'rim_unet_vis_best.pth')\n",
+    "\n",
+    "# After training, evaluate on validation set\n",
+    "stats = evaluate_model(trained, val_loader, device)\n",
+    "print('Final eval stats:', stats)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "77a24919",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Cell 8 - helper to visualize predictions for a few validation samples\n",
+    "def show_predictions(model, dataset, device, n=6):\n",
+    "    model.eval()\n",
+    "    fig = plt.figure(figsize=(12, 2*n))\n",
+    "    shown = 0\n",
+    "    with torch.no_grad():\n",
+    "        for i in range(len(dataset)):\n",
+    "            sample = dataset[i]\n",
+    "            img = sample['image'].unsqueeze(0).to(device)\n",
+    "            heat_gt = sample['heat'].numpy()[0]\n",
+    "            vis_gt = sample['visible'].item()\n",
+    "            pred_h, pred_v = model(img)\n",
+    "            pred_h = pred_h.cpu().numpy()[0,0]\n",
+    "            pred_v = float(pred_v.cpu().numpy()[0])\n",
+    "            ax = plt.subplot(n, 3, shown*3 + 1)\n",
+    "            ax.imshow(sample['image'].permute(1,2,0).numpy())\n",
+    "            ax.set_title(f'input - vis_gt={vis_gt}')\n",
+    "            ax.axis('off')\n",
+    "            ax = plt.subplot(n, 3, shown*3 + 2)\n",
+    "            ax.imshow(heat_gt, vmin=0, vmax=1)\n",
+    "            ax.set_title('gt heatmap')\n",
+    "            ax.axis('off')\n",
+    "            ax = plt.subplot(n, 3, shown*3 + 3)\n",
+    "            ax.imshow(pred_h, vmin=0, vmax=1)\n",
+    "            ax.set_title(f'pred heat - vis_pred={pred_v:.2f}')\n",
+    "            ax.axis('off')\n",
+    "            shown += 1\n",
+    "            if shown >= n:\n",
+    "                break\n",
+    "    plt.tight_layout()\n",
+    "    plt.show()\n",
+    "\n",
+    "# Example usage (run after training)\n",
+    "# show_predictions(trained, val_ds, device, n=4)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "e201579c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Cell X - Save overlay images with predicted (green) and GT (red) centers\n",
+    "import os\n",
+    "\n",
+    "def save_overlay_predictions(model, dataset, device, out_dir=\"predictions_vis\", max_samples=None):\n",
+    "    model.eval()\n",
+    "    out_dir = Path(out_dir)\n",
+    "    out_dir.mkdir(parents=True, exist_ok=True)\n",
+    "\n",
+    "    with torch.no_grad():\n",
+    "        for i, sample in enumerate(tqdm(dataset, desc=\"Saving overlays\")):\n",
+    "            img = sample['image'].unsqueeze(0).to(device)\n",
+    "            fname = sample['meta']['filename']\n",
+    "            heat_gt = sample['heat'].numpy()[0]\n",
+    "            vis_gt = int(sample['visible'].item())\n",
+    "\n",
+    "            # predict\n",
+    "            pred_h, pred_v = model(img)\n",
+    "            pred_h = pred_h.cpu().numpy()[0,0]\n",
+    "            pred_v = float(pred_v.cpu().numpy()[0])\n",
+    "\n",
+    "            # decode GT and pred points\n",
+    "            gt_x, gt_y, _ = heatmap_to_point(heat_gt)\n",
+    "            px, py, _ = heatmap_to_point(pred_h)\n",
+    "\n",
+    "            # convert original tensor back to image\n",
+    "            img_disp = (sample['image'].permute(1,2,0).numpy() * 255).astype(np.uint8).copy()\n",
+    "\n",
+    "            # draw GT (red) and pred (green)\n",
+    "            if vis_gt == 1:\n",
+    "                cv2.circle(img_disp, (int(gt_x), int(gt_y)), 4, (255,0,0), -1)  # Red (BGR)\n",
+    "            cv2.circle(img_disp, (int(px), int(py)), 4, (0,255,0), -1)  # Green\n",
+    "\n",
+    "            out_path = out_dir / f\"{Path(fname).stem}_overlay.png\"\n",
+    "            cv2.imwrite(str(out_path), cv2.cvtColor(img_disp, cv2.COLOR_RGB2BGR))\n",
+    "\n",
+    "            if max_samples is not None and i+1 >= max_samples:\n",
+    "                break\n",
+    "\n",
+    "    print(f\"Saved overlays to {out_dir}\")\n",
+    "\n",
+    "# Example usage after training:\n",
+    "# save_overlay_predictions(trained, val_ds, device, out_dir=\"predictions_vis\", max_samples=50)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "1682467c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "application/vnd.jupyter.widget-view+json": {
+       "model_id": "834d63913f784ea6a347d1ea6b98b5ed",
+       "version_major": 2,
+       "version_minor": 0
+      },
+      "text/plain": [
+       "Saving overlays:   0%|          | 0/1000 [00:00<?, ?it/s]"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Saved overlays to predictions_vis\n"
+     ]
+    }
+   ],
+   "source": [
+    "save_overlay_predictions(model, dataset, device, out_dir=\"predictions_vis\", max_samples=None)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "69393603",
+   "metadata": {},
+   "source": [
+    "## Notebook: Assessment readiness\n",
+    "\n",
+    "This notebook is updated to be **ready-to-run** for the Rim Center Identification assessment. Changes made:\n",
+    "\n",
+    "- Replaced `tqdm.notebook` with `tqdm.auto` for robust progress bars without requiring ipywidgets.\n",
+    "- Added `train_model_safe` which:\n",
+    "  - Ensures the model save directory exists.\n",
+    "  - Saves model `state_dict` with tensors moved to CPU for portability.\n",
+    "  - Uses `tqdm.auto` for iteration progress.\n",
+    "- The usage cell calls `train_model_safe` and saves to `./models/rim_unet_vis_best.pth`.\n",
+    "- Dataset loader supports your `labels.json` format (`filename`, `is_present`, normalized `center`).\n",
+    "- Includes evaluation metrics (mean/median pixel error, % within 5/10 px) and visualization helpers to inspect predictions.\n",
+    "\n",
+    "**How this meets assessment requirements**\n",
+    "- Provides a clear, documented pipeline for heatmap-based rim-center detection.\n",
+    "- Implements training and evaluation code (heatmap target generation, UNet with auxiliary visibility head, combined loss).\n",
+    "- Visual helpers and metrics enable validation and debugging.\n",
+    "- Ready for local execution (macOS M-series: uses MPS if available, and safe DataLoader defaults).\n",
+    "\n",
+    "**How to run**\n",
+    "1. Edit `images_dir` and `labels_json` in Cell 7 (Usage) to point to your dataset.\n",
+    "2. Run cells in order.\n",
+    "3. After training, view metrics printed and run `show_predictions(trained, val_ds, device, n=4)` to visualize.\n",
+    "\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": ".venv",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

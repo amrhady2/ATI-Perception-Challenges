@@ -1,0 +1,3616 @@
+venv) Amrs-MacBook-Air:Challenge 1 - Rim Center Location amrattia$ ls
+ATI Perception Challenge - Rim Center.pdf	Heatmaps Beat Direct Regression_1.1.ipynb	labeled_example_data.zip			out
+detection_vs_gt.csv				Heatmaps Beat Direct Regression_1.2.ipynb	labeled_with_red_dot				Relabeling pipeline for annotation drift_1.0.py
+eval_outputs					Heatmaps Beat Direct Regression_1.2.txt		Main_1.5.ipynb					train_labels_updated.csv
+gt_centers_pixels.csv				labeled_example_data				Old
+(.venv) Amrs-MacBook-Air:Challenge 1 - Rim Center Location amrattia$ ls
+ATI Perception Challenge - Rim Center.pdf	gt_centers_pixels.csv				labeled_example_data.zip			out
+audit_presence_localization.py			Heatmaps Beat Direct Regression_1.2.ipynb	labeled_with_red_dot				Relabeling pipeline for annotation drift_1.0.py
+detection_vs_gt.csv				Heatmaps Beat Direct Regression_1.2.txt		Main_1.5.ipynb					train_labels_updated.csv
+eval_outputs					labeled_example_data				Old
+(.venv) Amrs-MacBook-Air:Challenge 1 - Rim Center Location amrattia$ cd out
+(.venv) Amrs-MacBook-Air:out amrattia$ ls
+best_model.pth	eval
+(.venv) Amrs-MacBook-Air:out amrattia$ cd eval
+(.venv) Amrs-MacBook-Air:eval amrattia$ ls
+heatmaps	overlays	worst_overlays
+(.venv) Amrs-MacBook-Air:eval amrattia$ cd heatmaps
+(.venv) Amrs-MacBook-Air:heatmaps amrattia$ ls
+hm_rim_001.png	hm_rim_090.png	hm_rim_152.png	hm_rim_248.png	hm_rim_383.png	hm_rim_462.png	hm_rim_554.png	hm_rim_602.png	hm_rim_665.png	hm_rim_746.png	hm_rim_809.png	hm_rim_871.png	hm_rim_960.png
+hm_rim_002.png	hm_rim_092.png	hm_rim_156.png	hm_rim_254.png	hm_rim_386.png	hm_rim_464.png	hm_rim_556.png	hm_rim_607.png	hm_rim_673.png	hm_rim_747.png	hm_rim_814.png	hm_rim_875.png	hm_rim_965.png
+hm_rim_007.png	hm_rim_096.png	hm_rim_171.png	hm_rim_256.png	hm_rim_393.png	hm_rim_465.png	hm_rim_557.png	hm_rim_612.png	hm_rim_675.png	hm_rim_753.png	hm_rim_818.png	hm_rim_877.png	hm_rim_966.png
+hm_rim_013.png	hm_rim_097.png	hm_rim_179.png	hm_rim_277.png	hm_rim_395.png	hm_rim_466.png	hm_rim_558.png	hm_rim_615.png	hm_rim_690.png	hm_rim_754.png	hm_rim_821.png	hm_rim_879.png	hm_rim_969.png
+hm_rim_014.png	hm_rim_102.png	hm_rim_194.png	hm_rim_282.png	hm_rim_400.png	hm_rim_481.png	hm_rim_559.png	hm_rim_617.png	hm_rim_693.png	hm_rim_756.png	hm_rim_822.png	hm_rim_894.png	hm_rim_974.png
+hm_rim_019.png	hm_rim_103.png	hm_rim_201.png	hm_rim_284.png	hm_rim_407.png	hm_rim_489.png	hm_rim_566.png	hm_rim_621.png	hm_rim_700.png	hm_rim_757.png	hm_rim_830.png	hm_rim_898.png	hm_rim_978.png
+hm_rim_032.png	hm_rim_104.png	hm_rim_205.png	hm_rim_293.png	hm_rim_411.png	hm_rim_493.png	hm_rim_568.png	hm_rim_623.png	hm_rim_710.png	hm_rim_761.png	hm_rim_837.png	hm_rim_903.png	hm_rim_985.png
+hm_rim_045.png	hm_rim_105.png	hm_rim_217.png	hm_rim_316.png	hm_rim_422.png	hm_rim_502.png	hm_rim_572.png	hm_rim_630.png	hm_rim_712.png	hm_rim_762.png	hm_rim_838.png	hm_rim_908.png	hm_rim_992.png
+hm_rim_055.png	hm_rim_111.png	hm_rim_219.png	hm_rim_317.png	hm_rim_423.png	hm_rim_503.png	hm_rim_573.png	hm_rim_634.png	hm_rim_717.png	hm_rim_770.png	hm_rim_839.png	hm_rim_912.png
+hm_rim_061.png	hm_rim_115.png	hm_rim_222.png	hm_rim_318.png	hm_rim_431.png	hm_rim_519.png	hm_rim_574.png	hm_rim_638.png	hm_rim_723.png	hm_rim_776.png	hm_rim_842.png	hm_rim_918.png
+hm_rim_062.png	hm_rim_119.png	hm_rim_224.png	hm_rim_330.png	hm_rim_435.png	hm_rim_520.png	hm_rim_579.png	hm_rim_639.png	hm_rim_725.png	hm_rim_780.png	hm_rim_846.png	hm_rim_920.png
+hm_rim_064.png	hm_rim_129.png	hm_rim_229.png	hm_rim_333.png	hm_rim_441.png	hm_rim_526.png	hm_rim_581.png	hm_rim_643.png	hm_rim_733.png	hm_rim_788.png	hm_rim_849.png	hm_rim_924.png
+hm_rim_070.png	hm_rim_132.png	hm_rim_232.png	hm_rim_335.png	hm_rim_454.png	hm_rim_527.png	hm_rim_582.png	hm_rim_648.png	hm_rim_736.png	hm_rim_791.png	hm_rim_857.png	hm_rim_927.png
+hm_rim_071.png	hm_rim_134.png	hm_rim_239.png	hm_rim_358.png	hm_rim_455.png	hm_rim_539.png	hm_rim_586.png	hm_rim_649.png	hm_rim_741.png	hm_rim_794.png	hm_rim_863.png	hm_rim_933.png
+hm_rim_074.png	hm_rim_146.png	hm_rim_240.png	hm_rim_363.png	hm_rim_457.png	hm_rim_540.png	hm_rim_592.png	hm_rim_653.png	hm_rim_744.png	hm_rim_801.png	hm_rim_869.png	hm_rim_939.png
+hm_rim_080.png	hm_rim_151.png	hm_rim_247.png	hm_rim_364.png	hm_rim_461.png	hm_rim_549.png	hm_rim_598.png	hm_rim_662.png	hm_rim_745.png	hm_rim_806.png	hm_rim_870.png	hm_rim_959.png
+(.venv) Amrs-MacBook-Air:heatmaps amrattia$ cd ..
+(.venv) Amrs-MacBook-Air:eval amrattia$ cd ..
+(.venv) Amrs-MacBook-Air:out amrattia$ cd ..
+(.venv) Amrs-MacBook-Air:Challenge 1 - Rim Center Location amrattia$ ls
+ATI Perception Challenge - Rim Center.pdf	gt_centers_pixels.csv				labeled_example_data.zip			Relabeling pipeline for annotation drift_1.0.py
+debug_check					Heatmaps Beat Direct Regression_1.3 copy.txt	labeled_with_red_dot				requirements.txt
+debug_check_manual				Heatmaps Beat Direct Regression_1.3.ipynb	Old						train_labels_updated.csv
+detection_vs_gt.csv				Heatmaps Beat Direct Regression_1.3.txt		out
+eval_outputs					labeled_example_data				Regression.ipynb
+(.venv) Amrs-MacBook-Air:Challenge 1 - Rim Center Location amrattia$ pwd
+/Users/amrattia/projects/ATI Perception Take Home Challenge/Challenge 1 - Rim Center Location
+(.venv) Amrs-MacBook-Air:Challenge 1 - Rim Center Location amrattia$ ls
+ATI Perception Challenge - Rim Center.pdf	Heatmaps Beat Direct Regression_1.3 copy.txt	labeled_with_red_dot				rim_center_ready_updated.ipynb
+debug_check					Heatmaps Beat Direct Regression_1.3.ipynb	models						rim_center_ready.ipynb
+debug_check_manual				Heatmaps Beat Direct Regression_1.3.txt		Old						train_labels_updated.csv
+detection_vs_gt.csv				Heatmaps Beat Direct Regression_1.4.ipynb	out
+eval_outputs					labeled_example_data				Relabeling pipeline for annotation drift_1.0.py
+gt_centers_pixels.csv				labeled_example_data.zip			requirements.txt
+(.venv) Amrs-MacBook-Air:Challenge 1 - Rim Center Location amrattia$ cd labeled_example_data
+(.venv) Amrs-MacBook-Air:labeled_example_data amrattia$ ls
+'labels.json	rim_076.png	rim_153.png	rim_230.png	rim_307.png	rim_384.png	rim_461.png	rim_538.png	rim_615.png	rim_692.png	rim_769.png	rim_846.png	rim_923.png
+rim_000.png	rim_077.png	rim_154.png	rim_231.png	rim_308.png	rim_385.png	rim_462.png	rim_539.png	rim_616.png	rim_693.png	rim_770.png	rim_847.png	rim_924.png
+rim_001.png	rim_078.png	rim_155.png	rim_232.png	rim_309.png	rim_386.png	rim_463.png	rim_540.png	rim_617.png	rim_694.png	rim_771.png	rim_848.png	rim_925.png
+rim_002.png	rim_079.png	rim_156.png	rim_233.png	rim_310.png	rim_387.png	rim_464.png	rim_541.png	rim_618.png	rim_695.png	rim_772.png	rim_849.png	rim_926.png
+rim_003.png	rim_080.png	rim_157.png	rim_234.png	rim_311.png	rim_388.png	rim_465.png	rim_542.png	rim_619.png	rim_696.png	rim_773.png	rim_850.png	rim_927.png
+rim_004.png	rim_081.png	rim_158.png	rim_235.png	rim_312.png	rim_389.png	rim_466.png	rim_543.png	rim_620.png	rim_697.png	rim_774.png	rim_851.png	rim_928.png
+rim_005.png	rim_082.png	rim_159.png	rim_236.png	rim_313.png	rim_390.png	rim_467.png	rim_544.png	rim_621.png	rim_698.png	rim_775.png	rim_852.png	rim_929.png
+rim_006.png	rim_083.png	rim_160.png	rim_237.png	rim_314.png	rim_391.png	rim_468.png	rim_545.png	rim_622.png	rim_699.png	rim_776.png	rim_853.png	rim_930.png
+rim_007.png	rim_084.png	rim_161.png	rim_238.png	rim_315.png	rim_392.png	rim_469.png	rim_546.png	rim_623.png	rim_700.png	rim_777.png	rim_854.png	rim_931.png
+rim_008.png	rim_085.png	rim_162.png	rim_239.png	rim_316.png	rim_393.png	rim_470.png	rim_547.png	rim_624.png	rim_701.png	rim_778.png	rim_855.png	rim_932.png
+rim_009.png	rim_086.png	rim_163.png	rim_240.png	rim_317.png	rim_394.png	rim_471.png	rim_548.png	rim_625.png	rim_702.png	rim_779.png	rim_856.png	rim_933.png
+rim_010.png	rim_087.png	rim_164.png	rim_241.png	rim_318.png	rim_395.png	rim_472.png	rim_549.png	rim_626.png	rim_703.png	rim_780.png	rim_857.png	rim_934.png
+rim_011.png	rim_088.png	rim_165.png	rim_242.png	rim_319.png	rim_396.png	rim_473.png	rim_550.png	rim_627.png	rim_704.png	rim_781.png	rim_858.png	rim_935.png
+rim_012.png	rim_089.png	rim_166.png	rim_243.png	rim_320.png	rim_397.png	rim_474.png	rim_551.png	rim_628.png	rim_705.png	rim_782.png	rim_859.png	rim_936.png
+rim_013.png	rim_090.png	rim_167.png	rim_244.png	rim_321.png	rim_398.png	rim_475.png	rim_552.png	rim_629.png	rim_706.png	rim_783.png	rim_860.png	rim_937.png
+rim_014.png	rim_091.png	rim_168.png	rim_245.png	rim_322.png	rim_399.png	rim_476.png	rim_553.png	rim_630.png	rim_707.png	rim_784.png	rim_861.png	rim_938.png
+rim_015.png	rim_092.png	rim_169.png	rim_246.png	rim_323.png	rim_400.png	rim_477.png	rim_554.png	rim_631.png	rim_708.png	rim_785.png	rim_862.png	rim_939.png
+rim_016.png	rim_093.png	rim_170.png	rim_247.png	rim_324.png	rim_401.png	rim_478.png	rim_555.png	rim_632.png	rim_709.png	rim_786.png	rim_863.png	rim_940.png
+rim_017.png	rim_094.png	rim_171.png	rim_248.png	rim_325.png	rim_402.png	rim_479.png	rim_556.png	rim_633.png	rim_710.png	rim_787.png	rim_864.png	rim_941.png
+rim_018.png	rim_095.png	rim_172.png	rim_249.png	rim_326.png	rim_403.png	rim_480.png	rim_557.png	rim_634.png	rim_711.png	rim_788.png	rim_865.png	rim_942.png
+rim_019.png	rim_096.png	rim_173.png	rim_250.png	rim_327.png	rim_404.png	rim_481.png	rim_558.png	rim_635.png	rim_712.png	rim_789.png	rim_866.png	rim_943.png
+rim_020.png	rim_097.png	rim_174.png	rim_251.png	rim_328.png	rim_405.png	rim_482.png	rim_559.png	rim_636.png	rim_713.png	rim_790.png	rim_867.png	rim_944.png
+rim_021.png	rim_098.png	rim_175.png	rim_252.png	rim_329.png	rim_406.png	rim_483.png	rim_560.png	rim_637.png	rim_714.png	rim_791.png	rim_868.png	rim_945.png
+rim_022.png	rim_099.png	rim_176.png	rim_253.png	rim_330.png	rim_407.png	rim_484.png	rim_561.png	rim_638.png	rim_715.png	rim_792.png	rim_869.png	rim_946.png
+rim_023.png	rim_100.png	rim_177.png	rim_254.png	rim_331.png	rim_408.png	rim_485.png	rim_562.png	rim_639.png	rim_716.png	rim_793.png	rim_870.png	rim_947.png
+rim_024.png	rim_101.png	rim_178.png	rim_255.png	rim_332.png	rim_409.png	rim_486.png	rim_563.png	rim_640.png	rim_717.png	rim_794.png	rim_871.png	rim_948.png
+rim_025.png	rim_102.png	rim_179.png	rim_256.png	rim_333.png	rim_410.png	rim_487.png	rim_564.png	rim_641.png	rim_718.png	rim_795.png	rim_872.png	rim_949.png
+rim_026.png	rim_103.png	rim_180.png	rim_257.png	rim_334.png	rim_411.png	rim_488.png	rim_565.png	rim_642.png	rim_719.png	rim_796.png	rim_873.png	rim_950.png
+rim_027.png	rim_104.png	rim_181.png	rim_258.png	rim_335.png	rim_412.png	rim_489.png	rim_566.png	rim_643.png	rim_720.png	rim_797.png	rim_874.png	rim_951.png
+rim_028.png	rim_105.png	rim_182.png	rim_259.png	rim_336.png	rim_413.png	rim_490.png	rim_567.png	rim_644.png	rim_721.png	rim_798.png	rim_875.png	rim_952.png
+rim_029.png	rim_106.png	rim_183.png	rim_260.png	rim_337.png	rim_414.png	rim_491.png	rim_568.png	rim_645.png	rim_722.png	rim_799.png	rim_876.png	rim_953.png
+rim_030.png	rim_107.png	rim_184.png	rim_261.png	rim_338.png	rim_415.png	rim_492.png	rim_569.png	rim_646.png	rim_723.png	rim_800.png	rim_877.png	rim_954.png
+rim_031.png	rim_108.png	rim_185.png	rim_262.png	rim_339.png	rim_416.png	rim_493.png	rim_570.png	rim_647.png	rim_724.png	rim_801.png	rim_878.png	rim_955.png
+rim_032.png	rim_109.png	rim_186.png	rim_263.png	rim_340.png	rim_417.png	rim_494.png	rim_571.png	rim_648.png	rim_725.png	rim_802.png	rim_879.png	rim_956.png
+rim_033.png	rim_110.png	rim_187.png	rim_264.png	rim_341.png	rim_418.png	rim_495.png	rim_572.png	rim_649.png	rim_726.png	rim_803.png	rim_880.png	rim_957.png
+rim_034.png	rim_111.png	rim_188.png	rim_265.png	rim_342.png	rim_419.png	rim_496.png	rim_573.png	rim_650.png	rim_727.png	rim_804.png	rim_881.png	rim_958.png
+rim_035.png	rim_112.png	rim_189.png	rim_266.png	rim_343.png	rim_420.png	rim_497.png	rim_574.png	rim_651.png	rim_728.png	rim_805.png	rim_882.png	rim_959.png
+rim_036.png	rim_113.png	rim_190.png	rim_267.png	rim_344.png	rim_421.png	rim_498.png	rim_575.png	rim_652.png	rim_729.png	rim_806.png	rim_883.png	rim_960.png
+rim_037.png	rim_114.png	rim_191.png	rim_268.png	rim_345.png	rim_422.png	rim_499.png	rim_576.png	rim_653.png	rim_730.png	rim_807.png	rim_884.png	rim_961.png
+rim_038.png	rim_115.png	rim_192.png	rim_269.png	rim_346.png	rim_423.png	rim_500.png	rim_577.png	rim_654.png	rim_731.png	rim_808.png	rim_885.png	rim_962.png
+rim_039.png	rim_116.png	rim_193.png	rim_270.png	rim_347.png	rim_424.png	rim_501.png	rim_578.png	rim_655.png	rim_732.png	rim_809.png	rim_886.png	rim_963.png
+rim_040.png	rim_117.png	rim_194.png	rim_271.png	rim_348.png	rim_425.png	rim_502.png	rim_579.png	rim_656.png	rim_733.png	rim_810.png	rim_887.png	rim_964.png
+rim_041.png	rim_118.png	rim_195.png	rim_272.png	rim_349.png	rim_426.png	rim_503.png	rim_580.png	rim_657.png	rim_734.png	rim_811.png	rim_888.png	rim_965.png
+rim_042.png	rim_119.png	rim_196.png	rim_273.png	rim_350.png	rim_427.png	rim_504.png	rim_581.png	rim_658.png	rim_735.png	rim_812.png	rim_889.png	rim_966.png
+rim_043.png	rim_120.png	rim_197.png	rim_274.png	rim_351.png	rim_428.png	rim_505.png	rim_582.png	rim_659.png	rim_736.png	rim_813.png	rim_890.png	rim_967.png
+rim_044.png	rim_121.png	rim_198.png	rim_275.png	rim_352.png	rim_429.png	rim_506.png	rim_583.png	rim_660.png	rim_737.png	rim_814.png	rim_891.png	rim_968.png
+rim_045.png	rim_122.png	rim_199.png	rim_276.png	rim_353.png	rim_430.png	rim_507.png	rim_584.png	rim_661.png	rim_738.png	rim_815.png	rim_892.png	rim_969.png
+rim_046.png	rim_123.png	rim_200.png	rim_277.png	rim_354.png	rim_431.png	rim_508.png	rim_585.png	rim_662.png	rim_739.png	rim_816.png	rim_893.png	rim_970.png
+rim_047.png	rim_124.png	rim_201.png	rim_278.png	rim_355.png	rim_432.png	rim_509.png	rim_586.png	rim_663.png	rim_740.png	rim_817.png	rim_894.png	rim_971.png
+rim_048.png	rim_125.png	rim_202.png	rim_279.png	rim_356.png	rim_433.png	rim_510.png	rim_587.png	rim_664.png	rim_741.png	rim_818.png	rim_895.png	rim_972.png
+rim_049.png	rim_126.png	rim_203.png	rim_280.png	rim_357.png	rim_434.png	rim_511.png	rim_588.png	rim_665.png	rim_742.png	rim_819.png	rim_896.png	rim_973.png
+rim_050.png	rim_127.png	rim_204.png	rim_281.png	rim_358.png	rim_435.png	rim_512.png	rim_589.png	rim_666.png	rim_743.png	rim_820.png	rim_897.png	rim_974.png
+rim_051.png	rim_128.png	rim_205.png	rim_282.png	rim_359.png	rim_436.png	rim_513.png	rim_590.png	rim_667.png	rim_744.png	rim_821.png	rim_898.png	rim_975.png
+rim_052.png	rim_129.png	rim_206.png	rim_283.png	rim_360.png	rim_437.png	rim_514.png	rim_591.png	rim_668.png	rim_745.png	rim_822.png	rim_899.png	rim_976.png
+rim_053.png	rim_130.png	rim_207.png	rim_284.png	rim_361.png	rim_438.png	rim_515.png	rim_592.png	rim_669.png	rim_746.png	rim_823.png	rim_900.png	rim_977.png
+rim_054.png	rim_131.png	rim_208.png	rim_285.png	rim_362.png	rim_439.png	rim_516.png	rim_593.png	rim_670.png	rim_747.png	rim_824.png	rim_901.png	rim_978.png
+rim_055.png	rim_132.png	rim_209.png	rim_286.png	rim_363.png	rim_440.png	rim_517.png	rim_594.png	rim_671.png	rim_748.png	rim_825.png	rim_902.png	rim_979.png
+rim_056.png	rim_133.png	rim_210.png	rim_287.png	rim_364.png	rim_441.png	rim_518.png	rim_595.png	rim_672.png	rim_749.png	rim_826.png	rim_903.png	rim_980.png
+rim_057.png	rim_134.png	rim_211.png	rim_288.png	rim_365.png	rim_442.png	rim_519.png	rim_596.png	rim_673.png	rim_750.png	rim_827.png	rim_904.png	rim_981.png
+rim_058.png	rim_135.png	rim_212.png	rim_289.png	rim_366.png	rim_443.png	rim_520.png	rim_597.png	rim_674.png	rim_751.png	rim_828.png	rim_905.png	rim_982.png
+rim_059.png	rim_136.png	rim_213.png	rim_290.png	rim_367.png	rim_444.png	rim_521.png	rim_598.png	rim_675.png	rim_752.png	rim_829.png	rim_906.png	rim_983.png
+rim_060.png	rim_137.png	rim_214.png	rim_291.png	rim_368.png	rim_445.png	rim_522.png	rim_599.png	rim_676.png	rim_753.png	rim_830.png	rim_907.png	rim_984.png
+rim_061.png	rim_138.png	rim_215.png	rim_292.png	rim_369.png	rim_446.png	rim_523.png	rim_600.png	rim_677.png	rim_754.png	rim_831.png	rim_908.png	rim_985.png
+rim_062.png	rim_139.png	rim_216.png	rim_293.png	rim_370.png	rim_447.png	rim_524.png	rim_601.png	rim_678.png	rim_755.png	rim_832.png	rim_909.png	rim_986.png
+rim_063.png	rim_140.png	rim_217.png	rim_294.png	rim_371.png	rim_448.png	rim_525.png	rim_602.png	rim_679.png	rim_756.png	rim_833.png	rim_910.png	rim_987.png
+rim_064.png	rim_141.png	rim_218.png	rim_295.png	rim_372.png	rim_449.png	rim_526.png	rim_603.png	rim_680.png	rim_757.png	rim_834.png	rim_911.png	rim_988.png
+rim_065.png	rim_142.png	rim_219.png	rim_296.png	rim_373.png	rim_450.png	rim_527.png	rim_604.png	rim_681.png	rim_758.png	rim_835.png	rim_912.png	rim_989.png
+rim_066.png	rim_143.png	rim_220.png	rim_297.png	rim_374.png	rim_451.png	rim_528.png	rim_605.png	rim_682.png	rim_759.png	rim_836.png	rim_913.png	rim_990.png
+rim_067.png	rim_144.png	rim_221.png	rim_298.png	rim_375.png	rim_452.png	rim_529.png	rim_606.png	rim_683.png	rim_760.png	rim_837.png	rim_914.png	rim_991.png
+rim_068.png	rim_145.png	rim_222.png	rim_299.png	rim_376.png	rim_453.png	rim_530.png	rim_607.png	rim_684.png	rim_761.png	rim_838.png	rim_915.png	rim_992.png
+rim_069.png	rim_146.png	rim_223.png	rim_300.png	rim_377.png	rim_454.png	rim_531.png	rim_608.png	rim_685.png	rim_762.png	rim_839.png	rim_916.png	rim_993.png
+rim_070.png	rim_147.png	rim_224.png	rim_301.png	rim_378.png	rim_455.png	rim_532.png	rim_609.png	rim_686.png	rim_763.png	rim_840.png	rim_917.png	rim_994.png
+rim_071.png	rim_148.png	rim_225.png	rim_302.png	rim_379.png	rim_456.png	rim_533.png	rim_610.png	rim_687.png	rim_764.png	rim_841.png	rim_918.png	rim_995.png
+rim_072.png	rim_149.png	rim_226.png	rim_303.png	rim_380.png	rim_457.png	rim_534.png	rim_611.png	rim_688.png	rim_765.png	rim_842.png	rim_919.png	rim_996.png
+rim_073.png	rim_150.png	rim_227.png	rim_304.png	rim_381.png	rim_458.png	rim_535.png	rim_612.png	rim_689.png	rim_766.png	rim_843.png	rim_920.png	rim_997.png
+rim_074.png	rim_151.png	rim_228.png	rim_305.png	rim_382.png	rim_459.png	rim_536.png	rim_613.png	rim_690.png	rim_767.png	rim_844.png	rim_921.png	rim_998.png
+rim_075.png	rim_152.png	rim_229.png	rim_306.png	rim_383.png	rim_460.png	rim_537.png	rim_614.png	rim_691.png	rim_768.png	rim_845.png	rim_922.png	rim_999.png
+(.venv) Amrs-MacBook-Air:labeled_example_data amrattia$ 'tree
+> 
+(.venv) Amrs-MacBook-Air:labeled_example_data amrattia$ cd ..
+(.venv) Amrs-MacBook-Air:Challenge 1 - Rim Center Location amrattia$ tree
+.
+├── ATI Perception Challenge - Rim Center.pdf
+├── detection_vs_gt.csv
+├── gt_centers_pixels.csv
+├── Heatmaps Beat Direct Regression_1.3.ipynb
+├── Heatmaps Beat Direct Regression_1.4.ipynb
+├── labeled_example_data
+│   ├── labels.json
+│   ├── rim_000.png
+│   ├── rim_001.png
+│   ├── rim_002.png
+│   ├── rim_003.png
+│   ├── rim_004.png
+│   ├── rim_005.png
+│   ├── rim_006.png
+│   ├── rim_007.png
+│   ├── rim_008.png
+│   ├── rim_009.png
+│   ├── rim_010.png
+│   ├── rim_011.png
+│   ├── rim_012.png
+│   ├── rim_013.png
+│   ├── rim_014.png
+│   ├── rim_015.png
+│   ├── rim_016.png
+│   ├── rim_017.png
+│   ├── rim_018.png
+│   ├── rim_019.png
+│   ├── rim_020.png
+│   ├── rim_021.png
+│   ├── rim_022.png
+│   ├── rim_023.png
+│   ├── rim_024.png
+│   ├── rim_025.png
+│   ├── rim_026.png
+│   ├── rim_027.png
+│   ├── rim_028.png
+│   ├── rim_029.png
+│   ├── rim_030.png
+│   ├── rim_031.png
+│   ├── rim_032.png
+│   ├── rim_033.png
+│   ├── rim_034.png
+│   ├── rim_035.png
+│   ├── rim_036.png
+│   ├── rim_037.png
+│   ├── rim_038.png
+│   ├── rim_039.png
+│   ├── rim_040.png
+│   ├── rim_041.png
+│   ├── rim_042.png
+│   ├── rim_043.png
+│   ├── rim_044.png
+│   ├── rim_045.png
+│   ├── rim_046.png
+│   ├── rim_047.png
+│   ├── rim_048.png
+│   ├── rim_049.png
+│   ├── rim_050.png
+│   ├── rim_051.png
+│   ├── rim_052.png
+│   ├── rim_053.png
+│   ├── rim_054.png
+│   ├── rim_055.png
+│   ├── rim_056.png
+│   ├── rim_057.png
+│   ├── rim_058.png
+│   ├── rim_059.png
+│   ├── rim_060.png
+│   ├── rim_061.png
+│   ├── rim_062.png
+│   ├── rim_063.png
+│   ├── rim_064.png
+│   ├── rim_065.png
+│   ├── rim_066.png
+│   ├── rim_067.png
+│   ├── rim_068.png
+│   ├── rim_069.png
+│   ├── rim_070.png
+│   ├── rim_071.png
+│   ├── rim_072.png
+│   ├── rim_073.png
+│   ├── rim_074.png
+│   ├── rim_075.png
+│   ├── rim_076.png
+│   ├── rim_077.png
+│   ├── rim_078.png
+│   ├── rim_079.png
+│   ├── rim_080.png
+│   ├── rim_081.png
+│   ├── rim_082.png
+│   ├── rim_083.png
+│   ├── rim_084.png
+│   ├── rim_085.png
+│   ├── rim_086.png
+│   ├── rim_087.png
+│   ├── rim_088.png
+│   ├── rim_089.png
+│   ├── rim_090.png
+│   ├── rim_091.png
+│   ├── rim_092.png
+│   ├── rim_093.png
+│   ├── rim_094.png
+│   ├── rim_095.png
+│   ├── rim_096.png
+│   ├── rim_097.png
+│   ├── rim_098.png
+│   ├── rim_099.png
+│   ├── rim_100.png
+│   ├── rim_101.png
+│   ├── rim_102.png
+│   ├── rim_103.png
+│   ├── rim_104.png
+│   ├── rim_105.png
+│   ├── rim_106.png
+│   ├── rim_107.png
+│   ├── rim_108.png
+│   ├── rim_109.png
+│   ├── rim_110.png
+│   ├── rim_111.png
+│   ├── rim_112.png
+│   ├── rim_113.png
+│   ├── rim_114.png
+│   ├── rim_115.png
+│   ├── rim_116.png
+│   ├── rim_117.png
+│   ├── rim_118.png
+│   ├── rim_119.png
+│   ├── rim_120.png
+│   ├── rim_121.png
+│   ├── rim_122.png
+│   ├── rim_123.png
+│   ├── rim_124.png
+│   ├── rim_125.png
+│   ├── rim_126.png
+│   ├── rim_127.png
+│   ├── rim_128.png
+│   ├── rim_129.png
+│   ├── rim_130.png
+│   ├── rim_131.png
+│   ├── rim_132.png
+│   ├── rim_133.png
+│   ├── rim_134.png
+│   ├── rim_135.png
+│   ├── rim_136.png
+│   ├── rim_137.png
+│   ├── rim_138.png
+│   ├── rim_139.png
+│   ├── rim_140.png
+│   ├── rim_141.png
+│   ├── rim_142.png
+│   ├── rim_143.png
+│   ├── rim_144.png
+│   ├── rim_145.png
+│   ├── rim_146.png
+│   ├── rim_147.png
+│   ├── rim_148.png
+│   ├── rim_149.png
+│   ├── rim_150.png
+│   ├── rim_151.png
+│   ├── rim_152.png
+│   ├── rim_153.png
+│   ├── rim_154.png
+│   ├── rim_155.png
+│   ├── rim_156.png
+│   ├── rim_157.png
+│   ├── rim_158.png
+│   ├── rim_159.png
+│   ├── rim_160.png
+│   ├── rim_161.png
+│   ├── rim_162.png
+│   ├── rim_163.png
+│   ├── rim_164.png
+│   ├── rim_165.png
+│   ├── rim_166.png
+│   ├── rim_167.png
+│   ├── rim_168.png
+│   ├── rim_169.png
+│   ├── rim_170.png
+│   ├── rim_171.png
+│   ├── rim_172.png
+│   ├── rim_173.png
+│   ├── rim_174.png
+│   ├── rim_175.png
+│   ├── rim_176.png
+│   ├── rim_177.png
+│   ├── rim_178.png
+│   ├── rim_179.png
+│   ├── rim_180.png
+│   ├── rim_181.png
+│   ├── rim_182.png
+│   ├── rim_183.png
+│   ├── rim_184.png
+│   ├── rim_185.png
+│   ├── rim_186.png
+│   ├── rim_187.png
+│   ├── rim_188.png
+│   ├── rim_189.png
+│   ├── rim_190.png
+│   ├── rim_191.png
+│   ├── rim_192.png
+│   ├── rim_193.png
+│   ├── rim_194.png
+│   ├── rim_195.png
+│   ├── rim_196.png
+│   ├── rim_197.png
+│   ├── rim_198.png
+│   ├── rim_199.png
+│   ├── rim_200.png
+│   ├── rim_201.png
+│   ├── rim_202.png
+│   ├── rim_203.png
+│   ├── rim_204.png
+│   ├── rim_205.png
+│   ├── rim_206.png
+│   ├── rim_207.png
+│   ├── rim_208.png
+│   ├── rim_209.png
+│   ├── rim_210.png
+│   ├── rim_211.png
+│   ├── rim_212.png
+│   ├── rim_213.png
+│   ├── rim_214.png
+│   ├── rim_215.png
+│   ├── rim_216.png
+│   ├── rim_217.png
+│   ├── rim_218.png
+│   ├── rim_219.png
+│   ├── rim_220.png
+│   ├── rim_221.png
+│   ├── rim_222.png
+│   ├── rim_223.png
+│   ├── rim_224.png
+│   ├── rim_225.png
+│   ├── rim_226.png
+│   ├── rim_227.png
+│   ├── rim_228.png
+│   ├── rim_229.png
+│   ├── rim_230.png
+│   ├── rim_231.png
+│   ├── rim_232.png
+│   ├── rim_233.png
+│   ├── rim_234.png
+│   ├── rim_235.png
+│   ├── rim_236.png
+│   ├── rim_237.png
+│   ├── rim_238.png
+│   ├── rim_239.png
+│   ├── rim_240.png
+│   ├── rim_241.png
+│   ├── rim_242.png
+│   ├── rim_243.png
+│   ├── rim_244.png
+│   ├── rim_245.png
+│   ├── rim_246.png
+│   ├── rim_247.png
+│   ├── rim_248.png
+│   ├── rim_249.png
+│   ├── rim_250.png
+│   ├── rim_251.png
+│   ├── rim_252.png
+│   ├── rim_253.png
+│   ├── rim_254.png
+│   ├── rim_255.png
+│   ├── rim_256.png
+│   ├── rim_257.png
+│   ├── rim_258.png
+│   ├── rim_259.png
+│   ├── rim_260.png
+│   ├── rim_261.png
+│   ├── rim_262.png
+│   ├── rim_263.png
+│   ├── rim_264.png
+│   ├── rim_265.png
+│   ├── rim_266.png
+│   ├── rim_267.png
+│   ├── rim_268.png
+│   ├── rim_269.png
+│   ├── rim_270.png
+│   ├── rim_271.png
+│   ├── rim_272.png
+│   ├── rim_273.png
+│   ├── rim_274.png
+│   ├── rim_275.png
+│   ├── rim_276.png
+│   ├── rim_277.png
+│   ├── rim_278.png
+│   ├── rim_279.png
+│   ├── rim_280.png
+│   ├── rim_281.png
+│   ├── rim_282.png
+│   ├── rim_283.png
+│   ├── rim_284.png
+│   ├── rim_285.png
+│   ├── rim_286.png
+│   ├── rim_287.png
+│   ├── rim_288.png
+│   ├── rim_289.png
+│   ├── rim_290.png
+│   ├── rim_291.png
+│   ├── rim_292.png
+│   ├── rim_293.png
+│   ├── rim_294.png
+│   ├── rim_295.png
+│   ├── rim_296.png
+│   ├── rim_297.png
+│   ├── rim_298.png
+│   ├── rim_299.png
+│   ├── rim_300.png
+│   ├── rim_301.png
+│   ├── rim_302.png
+│   ├── rim_303.png
+│   ├── rim_304.png
+│   ├── rim_305.png
+│   ├── rim_306.png
+│   ├── rim_307.png
+│   ├── rim_308.png
+│   ├── rim_309.png
+│   ├── rim_310.png
+│   ├── rim_311.png
+│   ├── rim_312.png
+│   ├── rim_313.png
+│   ├── rim_314.png
+│   ├── rim_315.png
+│   ├── rim_316.png
+│   ├── rim_317.png
+│   ├── rim_318.png
+│   ├── rim_319.png
+│   ├── rim_320.png
+│   ├── rim_321.png
+│   ├── rim_322.png
+│   ├── rim_323.png
+│   ├── rim_324.png
+│   ├── rim_325.png
+│   ├── rim_326.png
+│   ├── rim_327.png
+│   ├── rim_328.png
+│   ├── rim_329.png
+│   ├── rim_330.png
+│   ├── rim_331.png
+│   ├── rim_332.png
+│   ├── rim_333.png
+│   ├── rim_334.png
+│   ├── rim_335.png
+│   ├── rim_336.png
+│   ├── rim_337.png
+│   ├── rim_338.png
+│   ├── rim_339.png
+│   ├── rim_340.png
+│   ├── rim_341.png
+│   ├── rim_342.png
+│   ├── rim_343.png
+│   ├── rim_344.png
+│   ├── rim_345.png
+│   ├── rim_346.png
+│   ├── rim_347.png
+│   ├── rim_348.png
+│   ├── rim_349.png
+│   ├── rim_350.png
+│   ├── rim_351.png
+│   ├── rim_352.png
+│   ├── rim_353.png
+│   ├── rim_354.png
+│   ├── rim_355.png
+│   ├── rim_356.png
+│   ├── rim_357.png
+│   ├── rim_358.png
+│   ├── rim_359.png
+│   ├── rim_360.png
+│   ├── rim_361.png
+│   ├── rim_362.png
+│   ├── rim_363.png
+│   ├── rim_364.png
+│   ├── rim_365.png
+│   ├── rim_366.png
+│   ├── rim_367.png
+│   ├── rim_368.png
+│   ├── rim_369.png
+│   ├── rim_370.png
+│   ├── rim_371.png
+│   ├── rim_372.png
+│   ├── rim_373.png
+│   ├── rim_374.png
+│   ├── rim_375.png
+│   ├── rim_376.png
+│   ├── rim_377.png
+│   ├── rim_378.png
+│   ├── rim_379.png
+│   ├── rim_380.png
+│   ├── rim_381.png
+│   ├── rim_382.png
+│   ├── rim_383.png
+│   ├── rim_384.png
+│   ├── rim_385.png
+│   ├── rim_386.png
+│   ├── rim_387.png
+│   ├── rim_388.png
+│   ├── rim_389.png
+│   ├── rim_390.png
+│   ├── rim_391.png
+│   ├── rim_392.png
+│   ├── rim_393.png
+│   ├── rim_394.png
+│   ├── rim_395.png
+│   ├── rim_396.png
+│   ├── rim_397.png
+│   ├── rim_398.png
+│   ├── rim_399.png
+│   ├── rim_400.png
+│   ├── rim_401.png
+│   ├── rim_402.png
+│   ├── rim_403.png
+│   ├── rim_404.png
+│   ├── rim_405.png
+│   ├── rim_406.png
+│   ├── rim_407.png
+│   ├── rim_408.png
+│   ├── rim_409.png
+│   ├── rim_410.png
+│   ├── rim_411.png
+│   ├── rim_412.png
+│   ├── rim_413.png
+│   ├── rim_414.png
+│   ├── rim_415.png
+│   ├── rim_416.png
+│   ├── rim_417.png
+│   ├── rim_418.png
+│   ├── rim_419.png
+│   ├── rim_420.png
+│   ├── rim_421.png
+│   ├── rim_422.png
+│   ├── rim_423.png
+│   ├── rim_424.png
+│   ├── rim_425.png
+│   ├── rim_426.png
+│   ├── rim_427.png
+│   ├── rim_428.png
+│   ├── rim_429.png
+│   ├── rim_430.png
+│   ├── rim_431.png
+│   ├── rim_432.png
+│   ├── rim_433.png
+│   ├── rim_434.png
+│   ├── rim_435.png
+│   ├── rim_436.png
+│   ├── rim_437.png
+│   ├── rim_438.png
+│   ├── rim_439.png
+│   ├── rim_440.png
+│   ├── rim_441.png
+│   ├── rim_442.png
+│   ├── rim_443.png
+│   ├── rim_444.png
+│   ├── rim_445.png
+│   ├── rim_446.png
+│   ├── rim_447.png
+│   ├── rim_448.png
+│   ├── rim_449.png
+│   ├── rim_450.png
+│   ├── rim_451.png
+│   ├── rim_452.png
+│   ├── rim_453.png
+│   ├── rim_454.png
+│   ├── rim_455.png
+│   ├── rim_456.png
+│   ├── rim_457.png
+│   ├── rim_458.png
+│   ├── rim_459.png
+│   ├── rim_460.png
+│   ├── rim_461.png
+│   ├── rim_462.png
+│   ├── rim_463.png
+│   ├── rim_464.png
+│   ├── rim_465.png
+│   ├── rim_466.png
+│   ├── rim_467.png
+│   ├── rim_468.png
+│   ├── rim_469.png
+│   ├── rim_470.png
+│   ├── rim_471.png
+│   ├── rim_472.png
+│   ├── rim_473.png
+│   ├── rim_474.png
+│   ├── rim_475.png
+│   ├── rim_476.png
+│   ├── rim_477.png
+│   ├── rim_478.png
+│   ├── rim_479.png
+│   ├── rim_480.png
+│   ├── rim_481.png
+│   ├── rim_482.png
+│   ├── rim_483.png
+│   ├── rim_484.png
+│   ├── rim_485.png
+│   ├── rim_486.png
+│   ├── rim_487.png
+│   ├── rim_488.png
+│   ├── rim_489.png
+│   ├── rim_490.png
+│   ├── rim_491.png
+│   ├── rim_492.png
+│   ├── rim_493.png
+│   ├── rim_494.png
+│   ├── rim_495.png
+│   ├── rim_496.png
+│   ├── rim_497.png
+│   ├── rim_498.png
+│   ├── rim_499.png
+│   ├── rim_500.png
+│   ├── rim_501.png
+│   ├── rim_502.png
+│   ├── rim_503.png
+│   ├── rim_504.png
+│   ├── rim_505.png
+│   ├── rim_506.png
+│   ├── rim_507.png
+│   ├── rim_508.png
+│   ├── rim_509.png
+│   ├── rim_510.png
+│   ├── rim_511.png
+│   ├── rim_512.png
+│   ├── rim_513.png
+│   ├── rim_514.png
+│   ├── rim_515.png
+│   ├── rim_516.png
+│   ├── rim_517.png
+│   ├── rim_518.png
+│   ├── rim_519.png
+│   ├── rim_520.png
+│   ├── rim_521.png
+│   ├── rim_522.png
+│   ├── rim_523.png
+│   ├── rim_524.png
+│   ├── rim_525.png
+│   ├── rim_526.png
+│   ├── rim_527.png
+│   ├── rim_528.png
+│   ├── rim_529.png
+│   ├── rim_530.png
+│   ├── rim_531.png
+│   ├── rim_532.png
+│   ├── rim_533.png
+│   ├── rim_534.png
+│   ├── rim_535.png
+│   ├── rim_536.png
+│   ├── rim_537.png
+│   ├── rim_538.png
+│   ├── rim_539.png
+│   ├── rim_540.png
+│   ├── rim_541.png
+│   ├── rim_542.png
+│   ├── rim_543.png
+│   ├── rim_544.png
+│   ├── rim_545.png
+│   ├── rim_546.png
+│   ├── rim_547.png
+│   ├── rim_548.png
+│   ├── rim_549.png
+│   ├── rim_550.png
+│   ├── rim_551.png
+│   ├── rim_552.png
+│   ├── rim_553.png
+│   ├── rim_554.png
+│   ├── rim_555.png
+│   ├── rim_556.png
+│   ├── rim_557.png
+│   ├── rim_558.png
+│   ├── rim_559.png
+│   ├── rim_560.png
+│   ├── rim_561.png
+│   ├── rim_562.png
+│   ├── rim_563.png
+│   ├── rim_564.png
+│   ├── rim_565.png
+│   ├── rim_566.png
+│   ├── rim_567.png
+│   ├── rim_568.png
+│   ├── rim_569.png
+│   ├── rim_570.png
+│   ├── rim_571.png
+│   ├── rim_572.png
+│   ├── rim_573.png
+│   ├── rim_574.png
+│   ├── rim_575.png
+│   ├── rim_576.png
+│   ├── rim_577.png
+│   ├── rim_578.png
+│   ├── rim_579.png
+│   ├── rim_580.png
+│   ├── rim_581.png
+│   ├── rim_582.png
+│   ├── rim_583.png
+│   ├── rim_584.png
+│   ├── rim_585.png
+│   ├── rim_586.png
+│   ├── rim_587.png
+│   ├── rim_588.png
+│   ├── rim_589.png
+│   ├── rim_590.png
+│   ├── rim_591.png
+│   ├── rim_592.png
+│   ├── rim_593.png
+│   ├── rim_594.png
+│   ├── rim_595.png
+│   ├── rim_596.png
+│   ├── rim_597.png
+│   ├── rim_598.png
+│   ├── rim_599.png
+│   ├── rim_600.png
+│   ├── rim_601.png
+│   ├── rim_602.png
+│   ├── rim_603.png
+│   ├── rim_604.png
+│   ├── rim_605.png
+│   ├── rim_606.png
+│   ├── rim_607.png
+│   ├── rim_608.png
+│   ├── rim_609.png
+│   ├── rim_610.png
+│   ├── rim_611.png
+│   ├── rim_612.png
+│   ├── rim_613.png
+│   ├── rim_614.png
+│   ├── rim_615.png
+│   ├── rim_616.png
+│   ├── rim_617.png
+│   ├── rim_618.png
+│   ├── rim_619.png
+│   ├── rim_620.png
+│   ├── rim_621.png
+│   ├── rim_622.png
+│   ├── rim_623.png
+│   ├── rim_624.png
+│   ├── rim_625.png
+│   ├── rim_626.png
+│   ├── rim_627.png
+│   ├── rim_628.png
+│   ├── rim_629.png
+│   ├── rim_630.png
+│   ├── rim_631.png
+│   ├── rim_632.png
+│   ├── rim_633.png
+│   ├── rim_634.png
+│   ├── rim_635.png
+│   ├── rim_636.png
+│   ├── rim_637.png
+│   ├── rim_638.png
+│   ├── rim_639.png
+│   ├── rim_640.png
+│   ├── rim_641.png
+│   ├── rim_642.png
+│   ├── rim_643.png
+│   ├── rim_644.png
+│   ├── rim_645.png
+│   ├── rim_646.png
+│   ├── rim_647.png
+│   ├── rim_648.png
+│   ├── rim_649.png
+│   ├── rim_650.png
+│   ├── rim_651.png
+│   ├── rim_652.png
+│   ├── rim_653.png
+│   ├── rim_654.png
+│   ├── rim_655.png
+│   ├── rim_656.png
+│   ├── rim_657.png
+│   ├── rim_658.png
+│   ├── rim_659.png
+│   ├── rim_660.png
+│   ├── rim_661.png
+│   ├── rim_662.png
+│   ├── rim_663.png
+│   ├── rim_664.png
+│   ├── rim_665.png
+│   ├── rim_666.png
+│   ├── rim_667.png
+│   ├── rim_668.png
+│   ├── rim_669.png
+│   ├── rim_670.png
+│   ├── rim_671.png
+│   ├── rim_672.png
+│   ├── rim_673.png
+│   ├── rim_674.png
+│   ├── rim_675.png
+│   ├── rim_676.png
+│   ├── rim_677.png
+│   ├── rim_678.png
+│   ├── rim_679.png
+│   ├── rim_680.png
+│   ├── rim_681.png
+│   ├── rim_682.png
+│   ├── rim_683.png
+│   ├── rim_684.png
+│   ├── rim_685.png
+│   ├── rim_686.png
+│   ├── rim_687.png
+│   ├── rim_688.png
+│   ├── rim_689.png
+│   ├── rim_690.png
+│   ├── rim_691.png
+│   ├── rim_692.png
+│   ├── rim_693.png
+│   ├── rim_694.png
+│   ├── rim_695.png
+│   ├── rim_696.png
+│   ├── rim_697.png
+│   ├── rim_698.png
+│   ├── rim_699.png
+│   ├── rim_700.png
+│   ├── rim_701.png
+│   ├── rim_702.png
+│   ├── rim_703.png
+│   ├── rim_704.png
+│   ├── rim_705.png
+│   ├── rim_706.png
+│   ├── rim_707.png
+│   ├── rim_708.png
+│   ├── rim_709.png
+│   ├── rim_710.png
+│   ├── rim_711.png
+│   ├── rim_712.png
+│   ├── rim_713.png
+│   ├── rim_714.png
+│   ├── rim_715.png
+│   ├── rim_716.png
+│   ├── rim_717.png
+│   ├── rim_718.png
+│   ├── rim_719.png
+│   ├── rim_720.png
+│   ├── rim_721.png
+│   ├── rim_722.png
+│   ├── rim_723.png
+│   ├── rim_724.png
+│   ├── rim_725.png
+│   ├── rim_726.png
+│   ├── rim_727.png
+│   ├── rim_728.png
+│   ├── rim_729.png
+│   ├── rim_730.png
+│   ├── rim_731.png
+│   ├── rim_732.png
+│   ├── rim_733.png
+│   ├── rim_734.png
+│   ├── rim_735.png
+│   ├── rim_736.png
+│   ├── rim_737.png
+│   ├── rim_738.png
+│   ├── rim_739.png
+│   ├── rim_740.png
+│   ├── rim_741.png
+│   ├── rim_742.png
+│   ├── rim_743.png
+│   ├── rim_744.png
+│   ├── rim_745.png
+│   ├── rim_746.png
+│   ├── rim_747.png
+│   ├── rim_748.png
+│   ├── rim_749.png
+│   ├── rim_750.png
+│   ├── rim_751.png
+│   ├── rim_752.png
+│   ├── rim_753.png
+│   ├── rim_754.png
+│   ├── rim_755.png
+│   ├── rim_756.png
+│   ├── rim_757.png
+│   ├── rim_758.png
+│   ├── rim_759.png
+│   ├── rim_760.png
+│   ├── rim_761.png
+│   ├── rim_762.png
+│   ├── rim_763.png
+│   ├── rim_764.png
+│   ├── rim_765.png
+│   ├── rim_766.png
+│   ├── rim_767.png
+│   ├── rim_768.png
+│   ├── rim_769.png
+│   ├── rim_770.png
+│   ├── rim_771.png
+│   ├── rim_772.png
+│   ├── rim_773.png
+│   ├── rim_774.png
+│   ├── rim_775.png
+│   ├── rim_776.png
+│   ├── rim_777.png
+│   ├── rim_778.png
+│   ├── rim_779.png
+│   ├── rim_780.png
+│   ├── rim_781.png
+│   ├── rim_782.png
+│   ├── rim_783.png
+│   ├── rim_784.png
+│   ├── rim_785.png
+│   ├── rim_786.png
+│   ├── rim_787.png
+│   ├── rim_788.png
+│   ├── rim_789.png
+│   ├── rim_790.png
+│   ├── rim_791.png
+│   ├── rim_792.png
+│   ├── rim_793.png
+│   ├── rim_794.png
+│   ├── rim_795.png
+│   ├── rim_796.png
+│   ├── rim_797.png
+│   ├── rim_798.png
+│   ├── rim_799.png
+│   ├── rim_800.png
+│   ├── rim_801.png
+│   ├── rim_802.png
+│   ├── rim_803.png
+│   ├── rim_804.png
+│   ├── rim_805.png
+│   ├── rim_806.png
+│   ├── rim_807.png
+│   ├── rim_808.png
+│   ├── rim_809.png
+│   ├── rim_810.png
+│   ├── rim_811.png
+│   ├── rim_812.png
+│   ├── rim_813.png
+│   ├── rim_814.png
+│   ├── rim_815.png
+│   ├── rim_816.png
+│   ├── rim_817.png
+│   ├── rim_818.png
+│   ├── rim_819.png
+│   ├── rim_820.png
+│   ├── rim_821.png
+│   ├── rim_822.png
+│   ├── rim_823.png
+│   ├── rim_824.png
+│   ├── rim_825.png
+│   ├── rim_826.png
+│   ├── rim_827.png
+│   ├── rim_828.png
+│   ├── rim_829.png
+│   ├── rim_830.png
+│   ├── rim_831.png
+│   ├── rim_832.png
+│   ├── rim_833.png
+│   ├── rim_834.png
+│   ├── rim_835.png
+│   ├── rim_836.png
+│   ├── rim_837.png
+│   ├── rim_838.png
+│   ├── rim_839.png
+│   ├── rim_840.png
+│   ├── rim_841.png
+│   ├── rim_842.png
+│   ├── rim_843.png
+│   ├── rim_844.png
+│   ├── rim_845.png
+│   ├── rim_846.png
+│   ├── rim_847.png
+│   ├── rim_848.png
+│   ├── rim_849.png
+│   ├── rim_850.png
+│   ├── rim_851.png
+│   ├── rim_852.png
+│   ├── rim_853.png
+│   ├── rim_854.png
+│   ├── rim_855.png
+│   ├── rim_856.png
+│   ├── rim_857.png
+│   ├── rim_858.png
+│   ├── rim_859.png
+│   ├── rim_860.png
+│   ├── rim_861.png
+│   ├── rim_862.png
+│   ├── rim_863.png
+│   ├── rim_864.png
+│   ├── rim_865.png
+│   ├── rim_866.png
+│   ├── rim_867.png
+│   ├── rim_868.png
+│   ├── rim_869.png
+│   ├── rim_870.png
+│   ├── rim_871.png
+│   ├── rim_872.png
+│   ├── rim_873.png
+│   ├── rim_874.png
+│   ├── rim_875.png
+│   ├── rim_876.png
+│   ├── rim_877.png
+│   ├── rim_878.png
+│   ├── rim_879.png
+│   ├── rim_880.png
+│   ├── rim_881.png
+│   ├── rim_882.png
+│   ├── rim_883.png
+│   ├── rim_884.png
+│   ├── rim_885.png
+│   ├── rim_886.png
+│   ├── rim_887.png
+│   ├── rim_888.png
+│   ├── rim_889.png
+│   ├── rim_890.png
+│   ├── rim_891.png
+│   ├── rim_892.png
+│   ├── rim_893.png
+│   ├── rim_894.png
+│   ├── rim_895.png
+│   ├── rim_896.png
+│   ├── rim_897.png
+│   ├── rim_898.png
+│   ├── rim_899.png
+│   ├── rim_900.png
+│   ├── rim_901.png
+│   ├── rim_902.png
+│   ├── rim_903.png
+│   ├── rim_904.png
+│   ├── rim_905.png
+│   ├── rim_906.png
+│   ├── rim_907.png
+│   ├── rim_908.png
+│   ├── rim_909.png
+│   ├── rim_910.png
+│   ├── rim_911.png
+│   ├── rim_912.png
+│   ├── rim_913.png
+│   ├── rim_914.png
+│   ├── rim_915.png
+│   ├── rim_916.png
+│   ├── rim_917.png
+│   ├── rim_918.png
+│   ├── rim_919.png
+│   ├── rim_920.png
+│   ├── rim_921.png
+│   ├── rim_922.png
+│   ├── rim_923.png
+│   ├── rim_924.png
+│   ├── rim_925.png
+│   ├── rim_926.png
+│   ├── rim_927.png
+│   ├── rim_928.png
+│   ├── rim_929.png
+│   ├── rim_930.png
+│   ├── rim_931.png
+│   ├── rim_932.png
+│   ├── rim_933.png
+│   ├── rim_934.png
+│   ├── rim_935.png
+│   ├── rim_936.png
+│   ├── rim_937.png
+│   ├── rim_938.png
+│   ├── rim_939.png
+│   ├── rim_940.png
+│   ├── rim_941.png
+│   ├── rim_942.png
+│   ├── rim_943.png
+│   ├── rim_944.png
+│   ├── rim_945.png
+│   ├── rim_946.png
+│   ├── rim_947.png
+│   ├── rim_948.png
+│   ├── rim_949.png
+│   ├── rim_950.png
+│   ├── rim_951.png
+│   ├── rim_952.png
+│   ├── rim_953.png
+│   ├── rim_954.png
+│   ├── rim_955.png
+│   ├── rim_956.png
+│   ├── rim_957.png
+│   ├── rim_958.png
+│   ├── rim_959.png
+│   ├── rim_960.png
+│   ├── rim_961.png
+│   ├── rim_962.png
+│   ├── rim_963.png
+│   ├── rim_964.png
+│   ├── rim_965.png
+│   ├── rim_966.png
+│   ├── rim_967.png
+│   ├── rim_968.png
+│   ├── rim_969.png
+│   ├── rim_970.png
+│   ├── rim_971.png
+│   ├── rim_972.png
+│   ├── rim_973.png
+│   ├── rim_974.png
+│   ├── rim_975.png
+│   ├── rim_976.png
+│   ├── rim_977.png
+│   ├── rim_978.png
+│   ├── rim_979.png
+│   ├── rim_980.png
+│   ├── rim_981.png
+│   ├── rim_982.png
+│   ├── rim_983.png
+│   ├── rim_984.png
+│   ├── rim_985.png
+│   ├── rim_986.png
+│   ├── rim_987.png
+│   ├── rim_988.png
+│   ├── rim_989.png
+│   ├── rim_990.png
+│   ├── rim_991.png
+│   ├── rim_992.png
+│   ├── rim_993.png
+│   ├── rim_994.png
+│   ├── rim_995.png
+│   ├── rim_996.png
+│   ├── rim_997.png
+│   ├── rim_998.png
+│   └── rim_999.png
+├── labeled_example_data.zip
+├── labeled_with_red_dot
+│   ├── rim_000.png
+│   ├── rim_001.png
+│   ├── rim_002.png
+│   ├── rim_003.png
+│   ├── rim_004.png
+│   ├── rim_005.png
+│   ├── rim_006.png
+│   ├── rim_007.png
+│   ├── rim_008.png
+│   ├── rim_009.png
+│   ├── rim_010.png
+│   ├── rim_011.png
+│   ├── rim_012.png
+│   ├── rim_013.png
+│   ├── rim_014.png
+│   ├── rim_015.png
+│   ├── rim_016.png
+│   ├── rim_017.png
+│   ├── rim_018.png
+│   ├── rim_019.png
+│   ├── rim_020.png
+│   ├── rim_021.png
+│   ├── rim_022.png
+│   ├── rim_023.png
+│   ├── rim_024.png
+│   ├── rim_025.png
+│   ├── rim_026.png
+│   ├── rim_027.png
+│   ├── rim_028.png
+│   ├── rim_029.png
+│   ├── rim_030.png
+│   ├── rim_031.png
+│   ├── rim_032.png
+│   ├── rim_033.png
+│   ├── rim_034.png
+│   ├── rim_035.png
+│   ├── rim_036.png
+│   ├── rim_037.png
+│   ├── rim_038.png
+│   ├── rim_039.png
+│   ├── rim_040.png
+│   ├── rim_041.png
+│   ├── rim_042.png
+│   ├── rim_043.png
+│   ├── rim_044.png
+│   ├── rim_045.png
+│   ├── rim_046.png
+│   ├── rim_047.png
+│   ├── rim_048.png
+│   ├── rim_049.png
+│   ├── rim_050.png
+│   ├── rim_051.png
+│   ├── rim_052.png
+│   ├── rim_053.png
+│   ├── rim_054.png
+│   ├── rim_055.png
+│   ├── rim_056.png
+│   ├── rim_057.png
+│   ├── rim_058.png
+│   ├── rim_059.png
+│   ├── rim_060.png
+│   ├── rim_061.png
+│   ├── rim_062.png
+│   ├── rim_063.png
+│   ├── rim_064.png
+│   ├── rim_065.png
+│   ├── rim_066.png
+│   ├── rim_067.png
+│   ├── rim_068.png
+│   ├── rim_069.png
+│   ├── rim_070.png
+│   ├── rim_071.png
+│   ├── rim_072.png
+│   ├── rim_073.png
+│   ├── rim_074.png
+│   ├── rim_075.png
+│   ├── rim_076.png
+│   ├── rim_077.png
+│   ├── rim_078.png
+│   ├── rim_079.png
+│   ├── rim_080.png
+│   ├── rim_081.png
+│   ├── rim_082.png
+│   ├── rim_083.png
+│   ├── rim_084.png
+│   ├── rim_085.png
+│   ├── rim_086.png
+│   ├── rim_087.png
+│   ├── rim_088.png
+│   ├── rim_089.png
+│   ├── rim_090.png
+│   ├── rim_091.png
+│   ├── rim_092.png
+│   ├── rim_093.png
+│   ├── rim_094.png
+│   ├── rim_095.png
+│   ├── rim_096.png
+│   ├── rim_097.png
+│   ├── rim_098.png
+│   ├── rim_099.png
+│   ├── rim_100.png
+│   ├── rim_101.png
+│   ├── rim_102.png
+│   ├── rim_103.png
+│   ├── rim_104.png
+│   ├── rim_105.png
+│   ├── rim_106.png
+│   ├── rim_107.png
+│   ├── rim_108.png
+│   ├── rim_109.png
+│   ├── rim_110.png
+│   ├── rim_111.png
+│   ├── rim_112.png
+│   ├── rim_113.png
+│   ├── rim_114.png
+│   ├── rim_115.png
+│   ├── rim_116.png
+│   ├── rim_117.png
+│   ├── rim_118.png
+│   ├── rim_119.png
+│   ├── rim_120.png
+│   ├── rim_121.png
+│   ├── rim_122.png
+│   ├── rim_123.png
+│   ├── rim_124.png
+│   ├── rim_125.png
+│   ├── rim_126.png
+│   ├── rim_127.png
+│   ├── rim_128.png
+│   ├── rim_129.png
+│   ├── rim_130.png
+│   ├── rim_131.png
+│   ├── rim_132.png
+│   ├── rim_133.png
+│   ├── rim_134.png
+│   ├── rim_135.png
+│   ├── rim_136.png
+│   ├── rim_137.png
+│   ├── rim_138.png
+│   ├── rim_139.png
+│   ├── rim_140.png
+│   ├── rim_141.png
+│   ├── rim_142.png
+│   ├── rim_143.png
+│   ├── rim_144.png
+│   ├── rim_145.png
+│   ├── rim_146.png
+│   ├── rim_147.png
+│   ├── rim_148.png
+│   ├── rim_149.png
+│   ├── rim_150.png
+│   ├── rim_151.png
+│   ├── rim_152.png
+│   ├── rim_153.png
+│   ├── rim_154.png
+│   ├── rim_155.png
+│   ├── rim_156.png
+│   ├── rim_157.png
+│   ├── rim_158.png
+│   ├── rim_159.png
+│   ├── rim_160.png
+│   ├── rim_161.png
+│   ├── rim_162.png
+│   ├── rim_163.png
+│   ├── rim_164.png
+│   ├── rim_165.png
+│   ├── rim_166.png
+│   ├── rim_167.png
+│   ├── rim_168.png
+│   ├── rim_169.png
+│   ├── rim_170.png
+│   ├── rim_171.png
+│   ├── rim_172.png
+│   ├── rim_173.png
+│   ├── rim_174.png
+│   ├── rim_175.png
+│   ├── rim_176.png
+│   ├── rim_177.png
+│   ├── rim_178.png
+│   ├── rim_179.png
+│   ├── rim_180.png
+│   ├── rim_181.png
+│   ├── rim_182.png
+│   ├── rim_183.png
+│   ├── rim_184.png
+│   ├── rim_185.png
+│   ├── rim_186.png
+│   ├── rim_187.png
+│   ├── rim_188.png
+│   ├── rim_189.png
+│   ├── rim_190.png
+│   ├── rim_191.png
+│   ├── rim_192.png
+│   ├── rim_193.png
+│   ├── rim_194.png
+│   ├── rim_195.png
+│   ├── rim_196.png
+│   ├── rim_197.png
+│   ├── rim_198.png
+│   ├── rim_199.png
+│   ├── rim_200.png
+│   ├── rim_201.png
+│   ├── rim_202.png
+│   ├── rim_203.png
+│   ├── rim_204.png
+│   ├── rim_205.png
+│   ├── rim_206.png
+│   ├── rim_207.png
+│   ├── rim_208.png
+│   ├── rim_209.png
+│   ├── rim_210.png
+│   ├── rim_211.png
+│   ├── rim_212.png
+│   ├── rim_213.png
+│   ├── rim_214.png
+│   ├── rim_215.png
+│   ├── rim_216.png
+│   ├── rim_217.png
+│   ├── rim_218.png
+│   ├── rim_219.png
+│   ├── rim_220.png
+│   ├── rim_221.png
+│   ├── rim_222.png
+│   ├── rim_223.png
+│   ├── rim_224.png
+│   ├── rim_225.png
+│   ├── rim_226.png
+│   ├── rim_227.png
+│   ├── rim_228.png
+│   ├── rim_229.png
+│   ├── rim_230.png
+│   ├── rim_231.png
+│   ├── rim_232.png
+│   ├── rim_233.png
+│   ├── rim_234.png
+│   ├── rim_235.png
+│   ├── rim_236.png
+│   ├── rim_237.png
+│   ├── rim_238.png
+│   ├── rim_239.png
+│   ├── rim_240.png
+│   ├── rim_241.png
+│   ├── rim_242.png
+│   ├── rim_243.png
+│   ├── rim_244.png
+│   ├── rim_245.png
+│   ├── rim_246.png
+│   ├── rim_247.png
+│   ├── rim_248.png
+│   ├── rim_249.png
+│   ├── rim_250.png
+│   ├── rim_251.png
+│   ├── rim_252.png
+│   ├── rim_253.png
+│   ├── rim_254.png
+│   ├── rim_255.png
+│   ├── rim_256.png
+│   ├── rim_257.png
+│   ├── rim_258.png
+│   ├── rim_259.png
+│   ├── rim_260.png
+│   ├── rim_261.png
+│   ├── rim_262.png
+│   ├── rim_263.png
+│   ├── rim_264.png
+│   ├── rim_265.png
+│   ├── rim_266.png
+│   ├── rim_267.png
+│   ├── rim_268.png
+│   ├── rim_269.png
+│   ├── rim_270.png
+│   ├── rim_271.png
+│   ├── rim_272.png
+│   ├── rim_273.png
+│   ├── rim_274.png
+│   ├── rim_275.png
+│   ├── rim_276.png
+│   ├── rim_277.png
+│   ├── rim_278.png
+│   ├── rim_279.png
+│   ├── rim_280.png
+│   ├── rim_281.png
+│   ├── rim_282.png
+│   ├── rim_283.png
+│   ├── rim_284.png
+│   ├── rim_285.png
+│   ├── rim_286.png
+│   ├── rim_287.png
+│   ├── rim_288.png
+│   ├── rim_289.png
+│   ├── rim_290.png
+│   ├── rim_291.png
+│   ├── rim_292.png
+│   ├── rim_293.png
+│   ├── rim_294.png
+│   ├── rim_295.png
+│   ├── rim_296.png
+│   ├── rim_297.png
+│   ├── rim_298.png
+│   ├── rim_299.png
+│   ├── rim_300.png
+│   ├── rim_301.png
+│   ├── rim_302.png
+│   ├── rim_303.png
+│   ├── rim_304.png
+│   ├── rim_305.png
+│   ├── rim_306.png
+│   ├── rim_307.png
+│   ├── rim_308.png
+│   ├── rim_309.png
+│   ├── rim_310.png
+│   ├── rim_311.png
+│   ├── rim_312.png
+│   ├── rim_313.png
+│   ├── rim_314.png
+│   ├── rim_315.png
+│   ├── rim_316.png
+│   ├── rim_317.png
+│   ├── rim_318.png
+│   ├── rim_319.png
+│   ├── rim_320.png
+│   ├── rim_321.png
+│   ├── rim_322.png
+│   ├── rim_323.png
+│   ├── rim_324.png
+│   ├── rim_325.png
+│   ├── rim_326.png
+│   ├── rim_327.png
+│   ├── rim_328.png
+│   ├── rim_329.png
+│   ├── rim_330.png
+│   ├── rim_331.png
+│   ├── rim_332.png
+│   ├── rim_333.png
+│   ├── rim_334.png
+│   ├── rim_335.png
+│   ├── rim_336.png
+│   ├── rim_337.png
+│   ├── rim_338.png
+│   ├── rim_339.png
+│   ├── rim_340.png
+│   ├── rim_341.png
+│   ├── rim_342.png
+│   ├── rim_343.png
+│   ├── rim_344.png
+│   ├── rim_345.png
+│   ├── rim_346.png
+│   ├── rim_347.png
+│   ├── rim_348.png
+│   ├── rim_349.png
+│   ├── rim_350.png
+│   ├── rim_351.png
+│   ├── rim_352.png
+│   ├── rim_353.png
+│   ├── rim_354.png
+│   ├── rim_355.png
+│   ├── rim_356.png
+│   ├── rim_357.png
+│   ├── rim_358.png
+│   ├── rim_359.png
+│   ├── rim_360.png
+│   ├── rim_361.png
+│   ├── rim_362.png
+│   ├── rim_363.png
+│   ├── rim_364.png
+│   ├── rim_365.png
+│   ├── rim_366.png
+│   ├── rim_367.png
+│   ├── rim_368.png
+│   ├── rim_369.png
+│   ├── rim_370.png
+│   ├── rim_371.png
+│   ├── rim_372.png
+│   ├── rim_373.png
+│   ├── rim_374.png
+│   ├── rim_375.png
+│   ├── rim_376.png
+│   ├── rim_377.png
+│   ├── rim_378.png
+│   ├── rim_379.png
+│   ├── rim_380.png
+│   ├── rim_381.png
+│   ├── rim_382.png
+│   ├── rim_383.png
+│   ├── rim_384.png
+│   ├── rim_385.png
+│   ├── rim_386.png
+│   ├── rim_387.png
+│   ├── rim_388.png
+│   ├── rim_389.png
+│   ├── rim_390.png
+│   ├── rim_391.png
+│   ├── rim_392.png
+│   ├── rim_393.png
+│   ├── rim_394.png
+│   ├── rim_395.png
+│   ├── rim_396.png
+│   ├── rim_397.png
+│   ├── rim_398.png
+│   ├── rim_399.png
+│   ├── rim_400.png
+│   ├── rim_401.png
+│   ├── rim_402.png
+│   ├── rim_403.png
+│   ├── rim_404.png
+│   ├── rim_405.png
+│   ├── rim_406.png
+│   ├── rim_407.png
+│   ├── rim_408.png
+│   ├── rim_409.png
+│   ├── rim_410.png
+│   ├── rim_411.png
+│   ├── rim_412.png
+│   ├── rim_413.png
+│   ├── rim_414.png
+│   ├── rim_415.png
+│   ├── rim_416.png
+│   ├── rim_417.png
+│   ├── rim_418.png
+│   ├── rim_419.png
+│   ├── rim_420.png
+│   ├── rim_421.png
+│   ├── rim_422.png
+│   ├── rim_423.png
+│   ├── rim_424.png
+│   ├── rim_425.png
+│   ├── rim_426.png
+│   ├── rim_427.png
+│   ├── rim_428.png
+│   ├── rim_429.png
+│   ├── rim_430.png
+│   ├── rim_431.png
+│   ├── rim_432.png
+│   ├── rim_433.png
+│   ├── rim_434.png
+│   ├── rim_435.png
+│   ├── rim_436.png
+│   ├── rim_437.png
+│   ├── rim_438.png
+│   ├── rim_439.png
+│   ├── rim_440.png
+│   ├── rim_441.png
+│   ├── rim_442.png
+│   ├── rim_443.png
+│   ├── rim_444.png
+│   ├── rim_445.png
+│   ├── rim_446.png
+│   ├── rim_447.png
+│   ├── rim_448.png
+│   ├── rim_449.png
+│   ├── rim_450.png
+│   ├── rim_451.png
+│   ├── rim_452.png
+│   ├── rim_453.png
+│   ├── rim_454.png
+│   ├── rim_455.png
+│   ├── rim_456.png
+│   ├── rim_457.png
+│   ├── rim_458.png
+│   ├── rim_459.png
+│   ├── rim_460.png
+│   ├── rim_461.png
+│   ├── rim_462.png
+│   ├── rim_463.png
+│   ├── rim_464.png
+│   ├── rim_465.png
+│   ├── rim_466.png
+│   ├── rim_467.png
+│   ├── rim_468.png
+│   ├── rim_469.png
+│   ├── rim_470.png
+│   ├── rim_471.png
+│   ├── rim_472.png
+│   ├── rim_473.png
+│   ├── rim_474.png
+│   ├── rim_475.png
+│   ├── rim_476.png
+│   ├── rim_477.png
+│   ├── rim_478.png
+│   ├── rim_479.png
+│   ├── rim_480.png
+│   ├── rim_481.png
+│   ├── rim_482.png
+│   ├── rim_483.png
+│   ├── rim_484.png
+│   ├── rim_485.png
+│   ├── rim_486.png
+│   ├── rim_487.png
+│   ├── rim_488.png
+│   ├── rim_489.png
+│   ├── rim_490.png
+│   ├── rim_491.png
+│   ├── rim_492.png
+│   ├── rim_493.png
+│   ├── rim_494.png
+│   ├── rim_495.png
+│   ├── rim_496.png
+│   ├── rim_497.png
+│   ├── rim_498.png
+│   ├── rim_499.png
+│   ├── rim_500.png
+│   ├── rim_501.png
+│   ├── rim_502.png
+│   ├── rim_503.png
+│   ├── rim_504.png
+│   ├── rim_505.png
+│   ├── rim_506.png
+│   ├── rim_507.png
+│   ├── rim_508.png
+│   ├── rim_509.png
+│   ├── rim_510.png
+│   ├── rim_511.png
+│   ├── rim_512.png
+│   ├── rim_513.png
+│   ├── rim_514.png
+│   ├── rim_515.png
+│   ├── rim_516.png
+│   ├── rim_517.png
+│   ├── rim_518.png
+│   ├── rim_519.png
+│   ├── rim_520.png
+│   ├── rim_521.png
+│   ├── rim_522.png
+│   ├── rim_523.png
+│   ├── rim_524.png
+│   ├── rim_525.png
+│   ├── rim_526.png
+│   ├── rim_527.png
+│   ├── rim_528.png
+│   ├── rim_529.png
+│   ├── rim_530.png
+│   ├── rim_531.png
+│   ├── rim_532.png
+│   ├── rim_533.png
+│   ├── rim_534.png
+│   ├── rim_535.png
+│   ├── rim_536.png
+│   ├── rim_537.png
+│   ├── rim_538.png
+│   ├── rim_539.png
+│   ├── rim_540.png
+│   ├── rim_541.png
+│   ├── rim_542.png
+│   ├── rim_543.png
+│   ├── rim_544.png
+│   ├── rim_545.png
+│   ├── rim_546.png
+│   ├── rim_547.png
+│   ├── rim_548.png
+│   ├── rim_549.png
+│   ├── rim_550.png
+│   ├── rim_551.png
+│   ├── rim_552.png
+│   ├── rim_553.png
+│   ├── rim_554.png
+│   ├── rim_555.png
+│   ├── rim_556.png
+│   ├── rim_557.png
+│   ├── rim_558.png
+│   ├── rim_559.png
+│   ├── rim_560.png
+│   ├── rim_561.png
+│   ├── rim_562.png
+│   ├── rim_563.png
+│   ├── rim_564.png
+│   ├── rim_565.png
+│   ├── rim_566.png
+│   ├── rim_567.png
+│   ├── rim_568.png
+│   ├── rim_569.png
+│   ├── rim_570.png
+│   ├── rim_571.png
+│   ├── rim_572.png
+│   ├── rim_573.png
+│   ├── rim_574.png
+│   ├── rim_575.png
+│   ├── rim_576.png
+│   ├── rim_577.png
+│   ├── rim_578.png
+│   ├── rim_579.png
+│   ├── rim_580.png
+│   ├── rim_581.png
+│   ├── rim_582.png
+│   ├── rim_583.png
+│   ├── rim_584.png
+│   ├── rim_585.png
+│   ├── rim_586.png
+│   ├── rim_587.png
+│   ├── rim_588.png
+│   ├── rim_589.png
+│   ├── rim_590.png
+│   ├── rim_591.png
+│   ├── rim_592.png
+│   ├── rim_593.png
+│   ├── rim_594.png
+│   ├── rim_595.png
+│   ├── rim_596.png
+│   ├── rim_597.png
+│   ├── rim_598.png
+│   ├── rim_599.png
+│   ├── rim_600.png
+│   ├── rim_601.png
+│   ├── rim_602.png
+│   ├── rim_603.png
+│   ├── rim_604.png
+│   ├── rim_605.png
+│   ├── rim_606.png
+│   ├── rim_607.png
+│   ├── rim_608.png
+│   ├── rim_609.png
+│   ├── rim_610.png
+│   ├── rim_611.png
+│   ├── rim_612.png
+│   ├── rim_613.png
+│   ├── rim_614.png
+│   ├── rim_615.png
+│   ├── rim_616.png
+│   ├── rim_617.png
+│   ├── rim_618.png
+│   ├── rim_619.png
+│   ├── rim_620.png
+│   ├── rim_621.png
+│   ├── rim_622.png
+│   ├── rim_623.png
+│   ├── rim_624.png
+│   ├── rim_625.png
+│   ├── rim_626.png
+│   ├── rim_627.png
+│   ├── rim_628.png
+│   ├── rim_629.png
+│   ├── rim_630.png
+│   ├── rim_631.png
+│   ├── rim_632.png
+│   ├── rim_633.png
+│   ├── rim_634.png
+│   ├── rim_635.png
+│   ├── rim_636.png
+│   ├── rim_637.png
+│   ├── rim_638.png
+│   ├── rim_639.png
+│   ├── rim_640.png
+│   ├── rim_641.png
+│   ├── rim_642.png
+│   ├── rim_643.png
+│   ├── rim_644.png
+│   ├── rim_645.png
+│   ├── rim_646.png
+│   ├── rim_647.png
+│   ├── rim_648.png
+│   ├── rim_649.png
+│   ├── rim_650.png
+│   ├── rim_651.png
+│   ├── rim_652.png
+│   ├── rim_653.png
+│   ├── rim_654.png
+│   ├── rim_655.png
+│   ├── rim_656.png
+│   ├── rim_657.png
+│   ├── rim_658.png
+│   ├── rim_659.png
+│   ├── rim_660.png
+│   ├── rim_661.png
+│   ├── rim_662.png
+│   ├── rim_663.png
+│   ├── rim_664.png
+│   ├── rim_665.png
+│   ├── rim_666.png
+│   ├── rim_667.png
+│   ├── rim_668.png
+│   ├── rim_669.png
+│   ├── rim_670.png
+│   ├── rim_671.png
+│   ├── rim_672.png
+│   ├── rim_673.png
+│   ├── rim_674.png
+│   ├── rim_675.png
+│   ├── rim_676.png
+│   ├── rim_677.png
+│   ├── rim_678.png
+│   ├── rim_679.png
+│   ├── rim_680.png
+│   ├── rim_681.png
+│   ├── rim_682.png
+│   ├── rim_683.png
+│   ├── rim_684.png
+│   ├── rim_685.png
+│   ├── rim_686.png
+│   ├── rim_687.png
+│   ├── rim_688.png
+│   ├── rim_689.png
+│   ├── rim_690.png
+│   ├── rim_691.png
+│   ├── rim_692.png
+│   ├── rim_693.png
+│   ├── rim_694.png
+│   ├── rim_695.png
+│   ├── rim_696.png
+│   ├── rim_697.png
+│   ├── rim_698.png
+│   ├── rim_699.png
+│   ├── rim_700.png
+│   ├── rim_701.png
+│   ├── rim_702.png
+│   ├── rim_703.png
+│   ├── rim_704.png
+│   ├── rim_705.png
+│   ├── rim_706.png
+│   ├── rim_707.png
+│   ├── rim_708.png
+│   ├── rim_709.png
+│   ├── rim_710.png
+│   ├── rim_711.png
+│   ├── rim_712.png
+│   ├── rim_713.png
+│   ├── rim_714.png
+│   ├── rim_715.png
+│   ├── rim_716.png
+│   ├── rim_717.png
+│   ├── rim_718.png
+│   ├── rim_719.png
+│   ├── rim_720.png
+│   ├── rim_721.png
+│   ├── rim_722.png
+│   ├── rim_723.png
+│   ├── rim_724.png
+│   ├── rim_725.png
+│   ├── rim_726.png
+│   ├── rim_727.png
+│   ├── rim_728.png
+│   ├── rim_729.png
+│   ├── rim_730.png
+│   ├── rim_731.png
+│   ├── rim_732.png
+│   ├── rim_733.png
+│   ├── rim_734.png
+│   ├── rim_735.png
+│   ├── rim_736.png
+│   ├── rim_737.png
+│   ├── rim_738.png
+│   ├── rim_739.png
+│   ├── rim_740.png
+│   ├── rim_741.png
+│   ├── rim_742.png
+│   ├── rim_743.png
+│   ├── rim_744.png
+│   ├── rim_745.png
+│   ├── rim_746.png
+│   ├── rim_747.png
+│   ├── rim_748.png
+│   ├── rim_749.png
+│   ├── rim_750.png
+│   ├── rim_751.png
+│   ├── rim_752.png
+│   ├── rim_753.png
+│   ├── rim_754.png
+│   ├── rim_755.png
+│   ├── rim_756.png
+│   ├── rim_757.png
+│   ├── rim_758.png
+│   ├── rim_759.png
+│   ├── rim_760.png
+│   ├── rim_761.png
+│   ├── rim_762.png
+│   ├── rim_763.png
+│   ├── rim_764.png
+│   ├── rim_765.png
+│   ├── rim_766.png
+│   ├── rim_767.png
+│   ├── rim_768.png
+│   ├── rim_769.png
+│   ├── rim_770.png
+│   ├── rim_771.png
+│   ├── rim_772.png
+│   ├── rim_773.png
+│   ├── rim_774.png
+│   ├── rim_775.png
+│   ├── rim_776.png
+│   ├── rim_777.png
+│   ├── rim_778.png
+│   ├── rim_779.png
+│   ├── rim_780.png
+│   ├── rim_781.png
+│   ├── rim_782.png
+│   ├── rim_783.png
+│   ├── rim_784.png
+│   ├── rim_785.png
+│   ├── rim_786.png
+│   ├── rim_787.png
+│   ├── rim_788.png
+│   ├── rim_789.png
+│   ├── rim_790.png
+│   ├── rim_791.png
+│   ├── rim_792.png
+│   ├── rim_793.png
+│   ├── rim_794.png
+│   ├── rim_795.png
+│   ├── rim_796.png
+│   ├── rim_797.png
+│   ├── rim_798.png
+│   ├── rim_799.png
+│   ├── rim_800.png
+│   ├── rim_801.png
+│   ├── rim_802.png
+│   ├── rim_803.png
+│   ├── rim_804.png
+│   ├── rim_805.png
+│   ├── rim_806.png
+│   ├── rim_807.png
+│   ├── rim_808.png
+│   ├── rim_809.png
+│   ├── rim_810.png
+│   ├── rim_811.png
+│   ├── rim_812.png
+│   ├── rim_813.png
+│   ├── rim_814.png
+│   ├── rim_815.png
+│   ├── rim_816.png
+│   ├── rim_817.png
+│   ├── rim_818.png
+│   ├── rim_819.png
+│   ├── rim_820.png
+│   ├── rim_821.png
+│   ├── rim_822.png
+│   ├── rim_823.png
+│   ├── rim_824.png
+│   ├── rim_825.png
+│   ├── rim_826.png
+│   ├── rim_827.png
+│   ├── rim_828.png
+│   ├── rim_829.png
+│   ├── rim_830.png
+│   ├── rim_831.png
+│   ├── rim_832.png
+│   ├── rim_833.png
+│   ├── rim_834.png
+│   ├── rim_835.png
+│   ├── rim_836.png
+│   ├── rim_837.png
+│   ├── rim_838.png
+│   ├── rim_839.png
+│   ├── rim_840.png
+│   ├── rim_841.png
+│   ├── rim_842.png
+│   ├── rim_843.png
+│   ├── rim_844.png
+│   ├── rim_845.png
+│   ├── rim_846.png
+│   ├── rim_847.png
+│   ├── rim_848.png
+│   ├── rim_849.png
+│   ├── rim_850.png
+│   ├── rim_851.png
+│   ├── rim_852.png
+│   ├── rim_853.png
+│   ├── rim_854.png
+│   ├── rim_855.png
+│   ├── rim_856.png
+│   ├── rim_857.png
+│   ├── rim_858.png
+│   ├── rim_859.png
+│   ├── rim_860.png
+│   ├── rim_861.png
+│   ├── rim_862.png
+│   ├── rim_863.png
+│   ├── rim_864.png
+│   ├── rim_865.png
+│   ├── rim_866.png
+│   ├── rim_867.png
+│   ├── rim_868.png
+│   ├── rim_869.png
+│   ├── rim_870.png
+│   ├── rim_871.png
+│   ├── rim_872.png
+│   ├── rim_873.png
+│   ├── rim_874.png
+│   ├── rim_875.png
+│   ├── rim_876.png
+│   ├── rim_877.png
+│   ├── rim_878.png
+│   ├── rim_879.png
+│   ├── rim_880.png
+│   ├── rim_881.png
+│   ├── rim_882.png
+│   ├── rim_883.png
+│   ├── rim_884.png
+│   ├── rim_885.png
+│   ├── rim_886.png
+│   ├── rim_887.png
+│   ├── rim_888.png
+│   ├── rim_889.png
+│   ├── rim_890.png
+│   ├── rim_891.png
+│   ├── rim_892.png
+│   ├── rim_893.png
+│   ├── rim_894.png
+│   ├── rim_895.png
+│   ├── rim_896.png
+│   ├── rim_897.png
+│   ├── rim_898.png
+│   ├── rim_899.png
+│   ├── rim_900.png
+│   ├── rim_901.png
+│   ├── rim_902.png
+│   ├── rim_903.png
+│   ├── rim_904.png
+│   ├── rim_905.png
+│   ├── rim_906.png
+│   ├── rim_907.png
+│   ├── rim_908.png
+│   ├── rim_909.png
+│   ├── rim_910.png
+│   ├── rim_911.png
+│   ├── rim_912.png
+│   ├── rim_913.png
+│   ├── rim_914.png
+│   ├── rim_915.png
+│   ├── rim_916.png
+│   ├── rim_917.png
+│   ├── rim_918.png
+│   ├── rim_919.png
+│   ├── rim_920.png
+│   ├── rim_921.png
+│   ├── rim_922.png
+│   ├── rim_923.png
+│   ├── rim_924.png
+│   ├── rim_925.png
+│   ├── rim_926.png
+│   ├── rim_927.png
+│   ├── rim_928.png
+│   ├── rim_929.png
+│   ├── rim_930.png
+│   ├── rim_931.png
+│   ├── rim_932.png
+│   ├── rim_933.png
+│   ├── rim_934.png
+│   ├── rim_935.png
+│   ├── rim_936.png
+│   ├── rim_937.png
+│   ├── rim_938.png
+│   ├── rim_939.png
+│   ├── rim_940.png
+│   ├── rim_941.png
+│   ├── rim_942.png
+│   ├── rim_943.png
+│   ├── rim_944.png
+│   ├── rim_945.png
+│   ├── rim_946.png
+│   ├── rim_947.png
+│   ├── rim_948.png
+│   ├── rim_949.png
+│   ├── rim_950.png
+│   ├── rim_951.png
+│   ├── rim_952.png
+│   ├── rim_953.png
+│   ├── rim_954.png
+│   ├── rim_955.png
+│   ├── rim_956.png
+│   ├── rim_957.png
+│   ├── rim_958.png
+│   ├── rim_959.png
+│   ├── rim_960.png
+│   ├── rim_961.png
+│   ├── rim_962.png
+│   ├── rim_963.png
+│   ├── rim_964.png
+│   ├── rim_965.png
+│   ├── rim_966.png
+│   ├── rim_967.png
+│   ├── rim_968.png
+│   ├── rim_969.png
+│   ├── rim_970.png
+│   ├── rim_971.png
+│   ├── rim_972.png
+│   ├── rim_973.png
+│   ├── rim_974.png
+│   ├── rim_975.png
+│   ├── rim_976.png
+│   ├── rim_977.png
+│   ├── rim_978.png
+│   ├── rim_979.png
+│   ├── rim_980.png
+│   ├── rim_981.png
+│   ├── rim_982.png
+│   ├── rim_983.png
+│   ├── rim_984.png
+│   ├── rim_985.png
+│   ├── rim_986.png
+│   ├── rim_987.png
+│   ├── rim_988.png
+│   ├── rim_989.png
+│   ├── rim_990.png
+│   ├── rim_991.png
+│   ├── rim_992.png
+│   ├── rim_993.png
+│   ├── rim_994.png
+│   ├── rim_995.png
+│   ├── rim_996.png
+│   ├── rim_997.png
+│   ├── rim_998.png
+│   └── rim_999.png
+├── Old
+│   ├── CNN.ipynb
+│   ├── CNN+XGBOOST_1.0.ipynb
+│   ├── Heatmaps Beat Direct Regression_1.0.ipynb
+│   ├── Heatmaps Beat Direct Regression_1.1.ipynb
+│   ├── Heatmaps Beat Direct Regression_1.2.ipynb
+│   ├── Heatmaps Beat Direct Regression_1.2.txt
+│   ├── Heatmaps Beat Direct Regression_1.3.ipynb
+│   ├── Main_1.0.ipynb
+│   ├── Main_1.1.ipynb
+│   ├── Main_1.2.ipynb
+│   ├── Main_1.3.ipynb
+│   ├── Main_1.4.ipynb
+│   ├── out
+│   │   ├── best_model.pth
+│   │   └── eval
+│   │       ├── heatmaps
+│   │       │   ├── hm_rim_001.png
+│   │       │   ├── hm_rim_002.png
+│   │       │   ├── hm_rim_007.png
+│   │       │   ├── hm_rim_013.png
+│   │       │   ├── hm_rim_014.png
+│   │       │   ├── hm_rim_019.png
+│   │       │   ├── hm_rim_032.png
+│   │       │   ├── hm_rim_045.png
+│   │       │   ├── hm_rim_055.png
+│   │       │   ├── hm_rim_061.png
+│   │       │   ├── hm_rim_062.png
+│   │       │   ├── hm_rim_064.png
+│   │       │   ├── hm_rim_070.png
+│   │       │   ├── hm_rim_071.png
+│   │       │   ├── hm_rim_074.png
+│   │       │   ├── hm_rim_080.png
+│   │       │   ├── hm_rim_090.png
+│   │       │   ├── hm_rim_092.png
+│   │       │   ├── hm_rim_096.png
+│   │       │   ├── hm_rim_097.png
+│   │       │   ├── hm_rim_102.png
+│   │       │   ├── hm_rim_103.png
+│   │       │   ├── hm_rim_104.png
+│   │       │   ├── hm_rim_105.png
+│   │       │   ├── hm_rim_111.png
+│   │       │   ├── hm_rim_115.png
+│   │       │   ├── hm_rim_119.png
+│   │       │   ├── hm_rim_129.png
+│   │       │   ├── hm_rim_132.png
+│   │       │   ├── hm_rim_134.png
+│   │       │   ├── hm_rim_146.png
+│   │       │   ├── hm_rim_151.png
+│   │       │   ├── hm_rim_152.png
+│   │       │   ├── hm_rim_156.png
+│   │       │   ├── hm_rim_171.png
+│   │       │   ├── hm_rim_179.png
+│   │       │   ├── hm_rim_194.png
+│   │       │   ├── hm_rim_201.png
+│   │       │   ├── hm_rim_205.png
+│   │       │   ├── hm_rim_217.png
+│   │       │   ├── hm_rim_219.png
+│   │       │   ├── hm_rim_222.png
+│   │       │   ├── hm_rim_224.png
+│   │       │   ├── hm_rim_229.png
+│   │       │   ├── hm_rim_232.png
+│   │       │   ├── hm_rim_239.png
+│   │       │   ├── hm_rim_240.png
+│   │       │   ├── hm_rim_247.png
+│   │       │   ├── hm_rim_248.png
+│   │       │   ├── hm_rim_254.png
+│   │       │   ├── hm_rim_256.png
+│   │       │   ├── hm_rim_277.png
+│   │       │   ├── hm_rim_282.png
+│   │       │   ├── hm_rim_284.png
+│   │       │   ├── hm_rim_293.png
+│   │       │   ├── hm_rim_316.png
+│   │       │   ├── hm_rim_317.png
+│   │       │   ├── hm_rim_318.png
+│   │       │   ├── hm_rim_330.png
+│   │       │   ├── hm_rim_333.png
+│   │       │   ├── hm_rim_335.png
+│   │       │   ├── hm_rim_358.png
+│   │       │   ├── hm_rim_363.png
+│   │       │   ├── hm_rim_364.png
+│   │       │   ├── hm_rim_383.png
+│   │       │   ├── hm_rim_386.png
+│   │       │   ├── hm_rim_393.png
+│   │       │   ├── hm_rim_395.png
+│   │       │   ├── hm_rim_400.png
+│   │       │   ├── hm_rim_407.png
+│   │       │   ├── hm_rim_411.png
+│   │       │   ├── hm_rim_422.png
+│   │       │   ├── hm_rim_423.png
+│   │       │   ├── hm_rim_431.png
+│   │       │   ├── hm_rim_435.png
+│   │       │   ├── hm_rim_441.png
+│   │       │   ├── hm_rim_454.png
+│   │       │   ├── hm_rim_455.png
+│   │       │   ├── hm_rim_457.png
+│   │       │   ├── hm_rim_461.png
+│   │       │   ├── hm_rim_462.png
+│   │       │   ├── hm_rim_464.png
+│   │       │   ├── hm_rim_465.png
+│   │       │   ├── hm_rim_466.png
+│   │       │   ├── hm_rim_481.png
+│   │       │   ├── hm_rim_489.png
+│   │       │   ├── hm_rim_493.png
+│   │       │   ├── hm_rim_502.png
+│   │       │   ├── hm_rim_503.png
+│   │       │   ├── hm_rim_519.png
+│   │       │   ├── hm_rim_520.png
+│   │       │   ├── hm_rim_526.png
+│   │       │   ├── hm_rim_527.png
+│   │       │   ├── hm_rim_539.png
+│   │       │   ├── hm_rim_540.png
+│   │       │   ├── hm_rim_549.png
+│   │       │   ├── hm_rim_554.png
+│   │       │   ├── hm_rim_556.png
+│   │       │   ├── hm_rim_557.png
+│   │       │   ├── hm_rim_558.png
+│   │       │   ├── hm_rim_559.png
+│   │       │   ├── hm_rim_566.png
+│   │       │   ├── hm_rim_568.png
+│   │       │   ├── hm_rim_572.png
+│   │       │   ├── hm_rim_573.png
+│   │       │   ├── hm_rim_574.png
+│   │       │   ├── hm_rim_579.png
+│   │       │   ├── hm_rim_581.png
+│   │       │   ├── hm_rim_582.png
+│   │       │   ├── hm_rim_586.png
+│   │       │   ├── hm_rim_592.png
+│   │       │   ├── hm_rim_598.png
+│   │       │   ├── hm_rim_602.png
+│   │       │   ├── hm_rim_607.png
+│   │       │   ├── hm_rim_612.png
+│   │       │   ├── hm_rim_615.png
+│   │       │   ├── hm_rim_617.png
+│   │       │   ├── hm_rim_621.png
+│   │       │   ├── hm_rim_623.png
+│   │       │   ├── hm_rim_630.png
+│   │       │   ├── hm_rim_634.png
+│   │       │   ├── hm_rim_638.png
+│   │       │   ├── hm_rim_639.png
+│   │       │   ├── hm_rim_643.png
+│   │       │   ├── hm_rim_648.png
+│   │       │   ├── hm_rim_649.png
+│   │       │   ├── hm_rim_653.png
+│   │       │   ├── hm_rim_662.png
+│   │       │   ├── hm_rim_665.png
+│   │       │   ├── hm_rim_673.png
+│   │       │   ├── hm_rim_675.png
+│   │       │   ├── hm_rim_690.png
+│   │       │   ├── hm_rim_693.png
+│   │       │   ├── hm_rim_700.png
+│   │       │   ├── hm_rim_710.png
+│   │       │   ├── hm_rim_712.png
+│   │       │   ├── hm_rim_717.png
+│   │       │   ├── hm_rim_723.png
+│   │       │   ├── hm_rim_725.png
+│   │       │   ├── hm_rim_733.png
+│   │       │   ├── hm_rim_736.png
+│   │       │   ├── hm_rim_741.png
+│   │       │   ├── hm_rim_744.png
+│   │       │   ├── hm_rim_745.png
+│   │       │   ├── hm_rim_746.png
+│   │       │   ├── hm_rim_747.png
+│   │       │   ├── hm_rim_753.png
+│   │       │   ├── hm_rim_754.png
+│   │       │   ├── hm_rim_756.png
+│   │       │   ├── hm_rim_757.png
+│   │       │   ├── hm_rim_761.png
+│   │       │   ├── hm_rim_762.png
+│   │       │   ├── hm_rim_770.png
+│   │       │   ├── hm_rim_776.png
+│   │       │   ├── hm_rim_780.png
+│   │       │   ├── hm_rim_788.png
+│   │       │   ├── hm_rim_791.png
+│   │       │   ├── hm_rim_794.png
+│   │       │   ├── hm_rim_801.png
+│   │       │   ├── hm_rim_806.png
+│   │       │   ├── hm_rim_809.png
+│   │       │   ├── hm_rim_814.png
+│   │       │   ├── hm_rim_818.png
+│   │       │   ├── hm_rim_821.png
+│   │       │   ├── hm_rim_822.png
+│   │       │   ├── hm_rim_830.png
+│   │       │   ├── hm_rim_837.png
+│   │       │   ├── hm_rim_838.png
+│   │       │   ├── hm_rim_839.png
+│   │       │   ├── hm_rim_842.png
+│   │       │   ├── hm_rim_846.png
+│   │       │   ├── hm_rim_849.png
+│   │       │   ├── hm_rim_857.png
+│   │       │   ├── hm_rim_863.png
+│   │       │   ├── hm_rim_869.png
+│   │       │   ├── hm_rim_870.png
+│   │       │   ├── hm_rim_871.png
+│   │       │   ├── hm_rim_875.png
+│   │       │   ├── hm_rim_877.png
+│   │       │   ├── hm_rim_879.png
+│   │       │   ├── hm_rim_894.png
+│   │       │   ├── hm_rim_898.png
+│   │       │   ├── hm_rim_903.png
+│   │       │   ├── hm_rim_908.png
+│   │       │   ├── hm_rim_912.png
+│   │       │   ├── hm_rim_918.png
+│   │       │   ├── hm_rim_920.png
+│   │       │   ├── hm_rim_924.png
+│   │       │   ├── hm_rim_927.png
+│   │       │   ├── hm_rim_933.png
+│   │       │   ├── hm_rim_939.png
+│   │       │   ├── hm_rim_959.png
+│   │       │   ├── hm_rim_960.png
+│   │       │   ├── hm_rim_965.png
+│   │       │   ├── hm_rim_966.png
+│   │       │   ├── hm_rim_969.png
+│   │       │   ├── hm_rim_974.png
+│   │       │   ├── hm_rim_978.png
+│   │       │   ├── hm_rim_985.png
+│   │       │   └── hm_rim_992.png
+│   │       ├── overlays
+│   │       │   ├── overlay_rim_001.png
+│   │       │   ├── overlay_rim_002.png
+│   │       │   ├── overlay_rim_007.png
+│   │       │   ├── overlay_rim_013.png
+│   │       │   ├── overlay_rim_014.png
+│   │       │   ├── overlay_rim_019.png
+│   │       │   ├── overlay_rim_032.png
+│   │       │   ├── overlay_rim_045.png
+│   │       │   ├── overlay_rim_055.png
+│   │       │   ├── overlay_rim_061.png
+│   │       │   ├── overlay_rim_062.png
+│   │       │   ├── overlay_rim_064.png
+│   │       │   ├── overlay_rim_070.png
+│   │       │   ├── overlay_rim_071.png
+│   │       │   ├── overlay_rim_074.png
+│   │       │   ├── overlay_rim_080.png
+│   │       │   ├── overlay_rim_090.png
+│   │       │   ├── overlay_rim_092.png
+│   │       │   ├── overlay_rim_096.png
+│   │       │   ├── overlay_rim_097.png
+│   │       │   ├── overlay_rim_102.png
+│   │       │   ├── overlay_rim_103.png
+│   │       │   ├── overlay_rim_104.png
+│   │       │   ├── overlay_rim_105.png
+│   │       │   ├── overlay_rim_111.png
+│   │       │   ├── overlay_rim_115.png
+│   │       │   ├── overlay_rim_119.png
+│   │       │   ├── overlay_rim_129.png
+│   │       │   ├── overlay_rim_132.png
+│   │       │   ├── overlay_rim_134.png
+│   │       │   ├── overlay_rim_146.png
+│   │       │   ├── overlay_rim_151.png
+│   │       │   ├── overlay_rim_152.png
+│   │       │   ├── overlay_rim_156.png
+│   │       │   ├── overlay_rim_171.png
+│   │       │   ├── overlay_rim_179.png
+│   │       │   ├── overlay_rim_194.png
+│   │       │   ├── overlay_rim_201.png
+│   │       │   ├── overlay_rim_205.png
+│   │       │   ├── overlay_rim_217.png
+│   │       │   ├── overlay_rim_219.png
+│   │       │   ├── overlay_rim_222.png
+│   │       │   ├── overlay_rim_224.png
+│   │       │   ├── overlay_rim_229.png
+│   │       │   ├── overlay_rim_232.png
+│   │       │   ├── overlay_rim_239.png
+│   │       │   ├── overlay_rim_240.png
+│   │       │   ├── overlay_rim_247.png
+│   │       │   ├── overlay_rim_248.png
+│   │       │   ├── overlay_rim_254.png
+│   │       │   ├── overlay_rim_256.png
+│   │       │   ├── overlay_rim_277.png
+│   │       │   ├── overlay_rim_282.png
+│   │       │   ├── overlay_rim_284.png
+│   │       │   ├── overlay_rim_293.png
+│   │       │   ├── overlay_rim_316.png
+│   │       │   ├── overlay_rim_317.png
+│   │       │   ├── overlay_rim_318.png
+│   │       │   ├── overlay_rim_330.png
+│   │       │   ├── overlay_rim_333.png
+│   │       │   ├── overlay_rim_335.png
+│   │       │   ├── overlay_rim_358.png
+│   │       │   ├── overlay_rim_363.png
+│   │       │   ├── overlay_rim_364.png
+│   │       │   ├── overlay_rim_383.png
+│   │       │   ├── overlay_rim_386.png
+│   │       │   ├── overlay_rim_393.png
+│   │       │   ├── overlay_rim_395.png
+│   │       │   ├── overlay_rim_400.png
+│   │       │   ├── overlay_rim_407.png
+│   │       │   ├── overlay_rim_411.png
+│   │       │   ├── overlay_rim_422.png
+│   │       │   ├── overlay_rim_423.png
+│   │       │   ├── overlay_rim_431.png
+│   │       │   ├── overlay_rim_435.png
+│   │       │   ├── overlay_rim_441.png
+│   │       │   ├── overlay_rim_454.png
+│   │       │   ├── overlay_rim_455.png
+│   │       │   ├── overlay_rim_457.png
+│   │       │   ├── overlay_rim_461.png
+│   │       │   ├── overlay_rim_462.png
+│   │       │   ├── overlay_rim_464.png
+│   │       │   ├── overlay_rim_465.png
+│   │       │   ├── overlay_rim_466.png
+│   │       │   ├── overlay_rim_481.png
+│   │       │   ├── overlay_rim_489.png
+│   │       │   ├── overlay_rim_493.png
+│   │       │   ├── overlay_rim_502.png
+│   │       │   ├── overlay_rim_503.png
+│   │       │   ├── overlay_rim_519.png
+│   │       │   ├── overlay_rim_520.png
+│   │       │   ├── overlay_rim_526.png
+│   │       │   ├── overlay_rim_527.png
+│   │       │   ├── overlay_rim_539.png
+│   │       │   ├── overlay_rim_540.png
+│   │       │   ├── overlay_rim_549.png
+│   │       │   ├── overlay_rim_554.png
+│   │       │   ├── overlay_rim_556.png
+│   │       │   ├── overlay_rim_557.png
+│   │       │   ├── overlay_rim_558.png
+│   │       │   ├── overlay_rim_559.png
+│   │       │   ├── overlay_rim_566.png
+│   │       │   ├── overlay_rim_568.png
+│   │       │   ├── overlay_rim_572.png
+│   │       │   ├── overlay_rim_573.png
+│   │       │   ├── overlay_rim_574.png
+│   │       │   ├── overlay_rim_579.png
+│   │       │   ├── overlay_rim_581.png
+│   │       │   ├── overlay_rim_582.png
+│   │       │   ├── overlay_rim_586.png
+│   │       │   ├── overlay_rim_592.png
+│   │       │   ├── overlay_rim_598.png
+│   │       │   ├── overlay_rim_602.png
+│   │       │   ├── overlay_rim_607.png
+│   │       │   ├── overlay_rim_612.png
+│   │       │   ├── overlay_rim_615.png
+│   │       │   ├── overlay_rim_617.png
+│   │       │   ├── overlay_rim_621.png
+│   │       │   ├── overlay_rim_623.png
+│   │       │   ├── overlay_rim_630.png
+│   │       │   ├── overlay_rim_634.png
+│   │       │   ├── overlay_rim_638.png
+│   │       │   ├── overlay_rim_639.png
+│   │       │   ├── overlay_rim_643.png
+│   │       │   ├── overlay_rim_648.png
+│   │       │   ├── overlay_rim_649.png
+│   │       │   ├── overlay_rim_653.png
+│   │       │   ├── overlay_rim_662.png
+│   │       │   ├── overlay_rim_665.png
+│   │       │   ├── overlay_rim_673.png
+│   │       │   ├── overlay_rim_675.png
+│   │       │   ├── overlay_rim_690.png
+│   │       │   ├── overlay_rim_693.png
+│   │       │   ├── overlay_rim_700.png
+│   │       │   ├── overlay_rim_710.png
+│   │       │   ├── overlay_rim_712.png
+│   │       │   ├── overlay_rim_717.png
+│   │       │   ├── overlay_rim_723.png
+│   │       │   ├── overlay_rim_725.png
+│   │       │   ├── overlay_rim_733.png
+│   │       │   ├── overlay_rim_736.png
+│   │       │   ├── overlay_rim_741.png
+│   │       │   ├── overlay_rim_744.png
+│   │       │   ├── overlay_rim_745.png
+│   │       │   ├── overlay_rim_746.png
+│   │       │   ├── overlay_rim_747.png
+│   │       │   ├── overlay_rim_753.png
+│   │       │   ├── overlay_rim_754.png
+│   │       │   ├── overlay_rim_756.png
+│   │       │   ├── overlay_rim_757.png
+│   │       │   ├── overlay_rim_761.png
+│   │       │   ├── overlay_rim_762.png
+│   │       │   ├── overlay_rim_770.png
+│   │       │   ├── overlay_rim_776.png
+│   │       │   ├── overlay_rim_780.png
+│   │       │   ├── overlay_rim_788.png
+│   │       │   ├── overlay_rim_791.png
+│   │       │   ├── overlay_rim_794.png
+│   │       │   ├── overlay_rim_801.png
+│   │       │   ├── overlay_rim_806.png
+│   │       │   ├── overlay_rim_809.png
+│   │       │   ├── overlay_rim_814.png
+│   │       │   ├── overlay_rim_818.png
+│   │       │   ├── overlay_rim_821.png
+│   │       │   ├── overlay_rim_822.png
+│   │       │   ├── overlay_rim_830.png
+│   │       │   ├── overlay_rim_837.png
+│   │       │   ├── overlay_rim_838.png
+│   │       │   ├── overlay_rim_839.png
+│   │       │   ├── overlay_rim_842.png
+│   │       │   ├── overlay_rim_846.png
+│   │       │   ├── overlay_rim_849.png
+│   │       │   ├── overlay_rim_857.png
+│   │       │   ├── overlay_rim_863.png
+│   │       │   ├── overlay_rim_869.png
+│   │       │   ├── overlay_rim_870.png
+│   │       │   ├── overlay_rim_871.png
+│   │       │   ├── overlay_rim_875.png
+│   │       │   ├── overlay_rim_877.png
+│   │       │   ├── overlay_rim_879.png
+│   │       │   ├── overlay_rim_894.png
+│   │       │   ├── overlay_rim_898.png
+│   │       │   ├── overlay_rim_903.png
+│   │       │   ├── overlay_rim_908.png
+│   │       │   ├── overlay_rim_912.png
+│   │       │   ├── overlay_rim_918.png
+│   │       │   ├── overlay_rim_920.png
+│   │       │   ├── overlay_rim_924.png
+│   │       │   ├── overlay_rim_927.png
+│   │       │   ├── overlay_rim_933.png
+│   │       │   ├── overlay_rim_939.png
+│   │       │   ├── overlay_rim_959.png
+│   │       │   ├── overlay_rim_960.png
+│   │       │   ├── overlay_rim_965.png
+│   │       │   ├── overlay_rim_966.png
+│   │       │   ├── overlay_rim_969.png
+│   │       │   ├── overlay_rim_974.png
+│   │       │   ├── overlay_rim_978.png
+│   │       │   ├── overlay_rim_985.png
+│   │       │   └── overlay_rim_992.png
+│   │       └── worst_overlays
+│   │           ├── 0.05px__rim_152.png
+│   │           ├── 0.05px__rim_675.png
+│   │           ├── 0.05px__rim_753.png
+│   │           ├── 0.05px__rim_898.png
+│   │           ├── 0.05px__rim_927.png
+│   │           ├── 0.06px__rim_007.png
+│   │           ├── 0.06px__rim_071.png
+│   │           ├── 0.06px__rim_111.png
+│   │           ├── 0.06px__rim_423.png
+│   │           ├── 0.06px__rim_573.png
+│   │           ├── 0.06px__rim_579.png
+│   │           ├── 0.06px__rim_662.png
+│   │           ├── 0.06px__rim_801.png
+│   │           ├── 0.06px__rim_969.png
+│   │           ├── 0.07px__rim_013.png
+│   │           ├── 0.07px__rim_520.png
+│   │           ├── 0.07px__rim_863.png
+│   │           ├── 0.08px__rim_032.png
+│   │           ├── 0.08px__rim_254.png
+│   │           ├── 0.08px__rim_639.png
+│   │           ├── 0.09px__rim_869.png
+│   │           ├── 0.10px__rim_466.png
+│   │           ├── 0.10px__rim_693.png
+│   │           ├── 0.11px__rim_318.png
+│   │           ├── 0.12px__rim_431.png
+│   │           ├── 0.12px__rim_974.png
+│   │           ├── 0.17px__rim_649.png
+│   │           ├── 0.18px__rim_240.png
+│   │           ├── 0.19px__rim_830.png
+│   │           └── 0.22px__rim_194.png
+│   ├── Regression.ipynb
+│   ├── Relabeling pipeline for annotation drift_1.0.ipynb
+│   ├── Relabeling pipeline for annotation drift_1.0.txt
+│   ├── rim_center_detector_json-1.ipynb
+│   ├── rim_center_detector_json.txt
+│   ├── rim_center_ready_updated.ipynb
+│   ├── rim_center_ready.ipynb
+│   └── train_debug_rim.py
+├── out
+│   └── best_model.pth
+├── predictions_vis
+│   ├── rim_000_overlay.png
+│   ├── rim_001_overlay.png
+│   ├── rim_002_overlay.png
+│   ├── rim_003_overlay.png
+│   ├── rim_004_overlay.png
+│   ├── rim_005_overlay.png
+│   ├── rim_006_overlay.png
+│   ├── rim_007_overlay.png
+│   ├── rim_008_overlay.png
+│   ├── rim_009_overlay.png
+│   ├── rim_010_overlay.png
+│   ├── rim_011_overlay.png
+│   ├── rim_012_overlay.png
+│   ├── rim_013_overlay.png
+│   ├── rim_014_overlay.png
+│   ├── rim_015_overlay.png
+│   ├── rim_016_overlay.png
+│   ├── rim_017_overlay.png
+│   ├── rim_018_overlay.png
+│   ├── rim_019_overlay.png
+│   ├── rim_020_overlay.png
+│   ├── rim_021_overlay.png
+│   ├── rim_022_overlay.png
+│   ├── rim_023_overlay.png
+│   ├── rim_024_overlay.png
+│   ├── rim_025_overlay.png
+│   ├── rim_026_overlay.png
+│   ├── rim_027_overlay.png
+│   ├── rim_028_overlay.png
+│   ├── rim_029_overlay.png
+│   ├── rim_030_overlay.png
+│   ├── rim_031_overlay.png
+│   ├── rim_032_overlay.png
+│   ├── rim_033_overlay.png
+│   ├── rim_034_overlay.png
+│   ├── rim_035_overlay.png
+│   ├── rim_036_overlay.png
+│   ├── rim_037_overlay.png
+│   ├── rim_038_overlay.png
+│   ├── rim_039_overlay.png
+│   ├── rim_040_overlay.png
+│   ├── rim_041_overlay.png
+│   ├── rim_042_overlay.png
+│   ├── rim_043_overlay.png
+│   ├── rim_044_overlay.png
+│   ├── rim_045_overlay.png
+│   ├── rim_046_overlay.png
+│   ├── rim_047_overlay.png
+│   ├── rim_048_overlay.png
+│   ├── rim_049_overlay.png
+│   ├── rim_050_overlay.png
+│   ├── rim_051_overlay.png
+│   ├── rim_052_overlay.png
+│   ├── rim_053_overlay.png
+│   ├── rim_054_overlay.png
+│   ├── rim_055_overlay.png
+│   ├── rim_056_overlay.png
+│   ├── rim_057_overlay.png
+│   ├── rim_058_overlay.png
+│   ├── rim_059_overlay.png
+│   ├── rim_060_overlay.png
+│   ├── rim_061_overlay.png
+│   ├── rim_062_overlay.png
+│   ├── rim_063_overlay.png
+│   ├── rim_064_overlay.png
+│   ├── rim_065_overlay.png
+│   ├── rim_066_overlay.png
+│   ├── rim_067_overlay.png
+│   ├── rim_068_overlay.png
+│   ├── rim_069_overlay.png
+│   ├── rim_070_overlay.png
+│   ├── rim_071_overlay.png
+│   ├── rim_072_overlay.png
+│   ├── rim_073_overlay.png
+│   ├── rim_074_overlay.png
+│   ├── rim_075_overlay.png
+│   ├── rim_076_overlay.png
+│   ├── rim_077_overlay.png
+│   ├── rim_078_overlay.png
+│   ├── rim_079_overlay.png
+│   ├── rim_080_overlay.png
+│   ├── rim_081_overlay.png
+│   ├── rim_082_overlay.png
+│   ├── rim_083_overlay.png
+│   ├── rim_084_overlay.png
+│   ├── rim_085_overlay.png
+│   ├── rim_086_overlay.png
+│   ├── rim_087_overlay.png
+│   ├── rim_088_overlay.png
+│   ├── rim_089_overlay.png
+│   ├── rim_090_overlay.png
+│   ├── rim_091_overlay.png
+│   ├── rim_092_overlay.png
+│   ├── rim_093_overlay.png
+│   ├── rim_094_overlay.png
+│   ├── rim_095_overlay.png
+│   ├── rim_096_overlay.png
+│   ├── rim_097_overlay.png
+│   ├── rim_098_overlay.png
+│   ├── rim_099_overlay.png
+│   ├── rim_100_overlay.png
+│   ├── rim_101_overlay.png
+│   ├── rim_102_overlay.png
+│   ├── rim_103_overlay.png
+│   ├── rim_104_overlay.png
+│   ├── rim_105_overlay.png
+│   ├── rim_106_overlay.png
+│   ├── rim_107_overlay.png
+│   ├── rim_108_overlay.png
+│   ├── rim_109_overlay.png
+│   ├── rim_110_overlay.png
+│   ├── rim_111_overlay.png
+│   ├── rim_112_overlay.png
+│   ├── rim_113_overlay.png
+│   ├── rim_114_overlay.png
+│   ├── rim_115_overlay.png
+│   ├── rim_116_overlay.png
+│   ├── rim_117_overlay.png
+│   ├── rim_118_overlay.png
+│   ├── rim_119_overlay.png
+│   ├── rim_120_overlay.png
+│   ├── rim_121_overlay.png
+│   ├── rim_122_overlay.png
+│   ├── rim_123_overlay.png
+│   ├── rim_124_overlay.png
+│   ├── rim_125_overlay.png
+│   ├── rim_126_overlay.png
+│   ├── rim_127_overlay.png
+│   ├── rim_128_overlay.png
+│   ├── rim_129_overlay.png
+│   ├── rim_130_overlay.png
+│   ├── rim_131_overlay.png
+│   ├── rim_132_overlay.png
+│   ├── rim_133_overlay.png
+│   ├── rim_134_overlay.png
+│   ├── rim_135_overlay.png
+│   ├── rim_136_overlay.png
+│   ├── rim_137_overlay.png
+│   ├── rim_138_overlay.png
+│   ├── rim_139_overlay.png
+│   ├── rim_140_overlay.png
+│   ├── rim_141_overlay.png
+│   ├── rim_142_overlay.png
+│   ├── rim_143_overlay.png
+│   ├── rim_144_overlay.png
+│   ├── rim_145_overlay.png
+│   ├── rim_146_overlay.png
+│   ├── rim_147_overlay.png
+│   ├── rim_148_overlay.png
+│   ├── rim_149_overlay.png
+│   ├── rim_150_overlay.png
+│   ├── rim_151_overlay.png
+│   ├── rim_152_overlay.png
+│   ├── rim_153_overlay.png
+│   ├── rim_154_overlay.png
+│   ├── rim_155_overlay.png
+│   ├── rim_156_overlay.png
+│   ├── rim_157_overlay.png
+│   ├── rim_158_overlay.png
+│   ├── rim_159_overlay.png
+│   ├── rim_160_overlay.png
+│   ├── rim_161_overlay.png
+│   ├── rim_162_overlay.png
+│   ├── rim_163_overlay.png
+│   ├── rim_164_overlay.png
+│   ├── rim_165_overlay.png
+│   ├── rim_166_overlay.png
+│   ├── rim_167_overlay.png
+│   ├── rim_168_overlay.png
+│   ├── rim_169_overlay.png
+│   ├── rim_170_overlay.png
+│   ├── rim_171_overlay.png
+│   ├── rim_172_overlay.png
+│   ├── rim_173_overlay.png
+│   ├── rim_174_overlay.png
+│   ├── rim_175_overlay.png
+│   ├── rim_176_overlay.png
+│   ├── rim_177_overlay.png
+│   ├── rim_178_overlay.png
+│   ├── rim_179_overlay.png
+│   ├── rim_180_overlay.png
+│   ├── rim_181_overlay.png
+│   ├── rim_182_overlay.png
+│   ├── rim_183_overlay.png
+│   ├── rim_184_overlay.png
+│   ├── rim_185_overlay.png
+│   ├── rim_186_overlay.png
+│   ├── rim_187_overlay.png
+│   ├── rim_188_overlay.png
+│   ├── rim_189_overlay.png
+│   ├── rim_190_overlay.png
+│   ├── rim_191_overlay.png
+│   ├── rim_192_overlay.png
+│   ├── rim_193_overlay.png
+│   ├── rim_194_overlay.png
+│   ├── rim_195_overlay.png
+│   ├── rim_196_overlay.png
+│   ├── rim_197_overlay.png
+│   ├── rim_198_overlay.png
+│   ├── rim_199_overlay.png
+│   ├── rim_200_overlay.png
+│   ├── rim_201_overlay.png
+│   ├── rim_202_overlay.png
+│   ├── rim_203_overlay.png
+│   ├── rim_204_overlay.png
+│   ├── rim_205_overlay.png
+│   ├── rim_206_overlay.png
+│   ├── rim_207_overlay.png
+│   ├── rim_208_overlay.png
+│   ├── rim_209_overlay.png
+│   ├── rim_210_overlay.png
+│   ├── rim_211_overlay.png
+│   ├── rim_212_overlay.png
+│   ├── rim_213_overlay.png
+│   ├── rim_214_overlay.png
+│   ├── rim_215_overlay.png
+│   ├── rim_216_overlay.png
+│   ├── rim_217_overlay.png
+│   ├── rim_218_overlay.png
+│   ├── rim_219_overlay.png
+│   ├── rim_220_overlay.png
+│   ├── rim_221_overlay.png
+│   ├── rim_222_overlay.png
+│   ├── rim_223_overlay.png
+│   ├── rim_224_overlay.png
+│   ├── rim_225_overlay.png
+│   ├── rim_226_overlay.png
+│   ├── rim_227_overlay.png
+│   ├── rim_228_overlay.png
+│   ├── rim_229_overlay.png
+│   ├── rim_230_overlay.png
+│   ├── rim_231_overlay.png
+│   ├── rim_232_overlay.png
+│   ├── rim_233_overlay.png
+│   ├── rim_234_overlay.png
+│   ├── rim_235_overlay.png
+│   ├── rim_236_overlay.png
+│   ├── rim_237_overlay.png
+│   ├── rim_238_overlay.png
+│   ├── rim_239_overlay.png
+│   ├── rim_240_overlay.png
+│   ├── rim_241_overlay.png
+│   ├── rim_242_overlay.png
+│   ├── rim_243_overlay.png
+│   ├── rim_244_overlay.png
+│   ├── rim_245_overlay.png
+│   ├── rim_246_overlay.png
+│   ├── rim_247_overlay.png
+│   ├── rim_248_overlay.png
+│   ├── rim_249_overlay.png
+│   ├── rim_250_overlay.png
+│   ├── rim_251_overlay.png
+│   ├── rim_252_overlay.png
+│   ├── rim_253_overlay.png
+│   ├── rim_254_overlay.png
+│   ├── rim_255_overlay.png
+│   ├── rim_256_overlay.png
+│   ├── rim_257_overlay.png
+│   ├── rim_258_overlay.png
+│   ├── rim_259_overlay.png
+│   ├── rim_260_overlay.png
+│   ├── rim_261_overlay.png
+│   ├── rim_262_overlay.png
+│   ├── rim_263_overlay.png
+│   ├── rim_264_overlay.png
+│   ├── rim_265_overlay.png
+│   ├── rim_266_overlay.png
+│   ├── rim_267_overlay.png
+│   ├── rim_268_overlay.png
+│   ├── rim_269_overlay.png
+│   ├── rim_270_overlay.png
+│   ├── rim_271_overlay.png
+│   ├── rim_272_overlay.png
+│   ├── rim_273_overlay.png
+│   ├── rim_274_overlay.png
+│   ├── rim_275_overlay.png
+│   ├── rim_276_overlay.png
+│   ├── rim_277_overlay.png
+│   ├── rim_278_overlay.png
+│   ├── rim_279_overlay.png
+│   ├── rim_280_overlay.png
+│   ├── rim_281_overlay.png
+│   ├── rim_282_overlay.png
+│   ├── rim_283_overlay.png
+│   ├── rim_284_overlay.png
+│   ├── rim_285_overlay.png
+│   ├── rim_286_overlay.png
+│   ├── rim_287_overlay.png
+│   ├── rim_288_overlay.png
+│   ├── rim_289_overlay.png
+│   ├── rim_290_overlay.png
+│   ├── rim_291_overlay.png
+│   ├── rim_292_overlay.png
+│   ├── rim_293_overlay.png
+│   ├── rim_294_overlay.png
+│   ├── rim_295_overlay.png
+│   ├── rim_296_overlay.png
+│   ├── rim_297_overlay.png
+│   ├── rim_298_overlay.png
+│   ├── rim_299_overlay.png
+│   ├── rim_300_overlay.png
+│   ├── rim_301_overlay.png
+│   ├── rim_302_overlay.png
+│   ├── rim_303_overlay.png
+│   ├── rim_304_overlay.png
+│   ├── rim_305_overlay.png
+│   ├── rim_306_overlay.png
+│   ├── rim_307_overlay.png
+│   ├── rim_308_overlay.png
+│   ├── rim_309_overlay.png
+│   ├── rim_310_overlay.png
+│   ├── rim_311_overlay.png
+│   ├── rim_312_overlay.png
+│   ├── rim_313_overlay.png
+│   ├── rim_314_overlay.png
+│   ├── rim_315_overlay.png
+│   ├── rim_316_overlay.png
+│   ├── rim_317_overlay.png
+│   ├── rim_318_overlay.png
+│   ├── rim_319_overlay.png
+│   ├── rim_320_overlay.png
+│   ├── rim_321_overlay.png
+│   ├── rim_322_overlay.png
+│   ├── rim_323_overlay.png
+│   ├── rim_324_overlay.png
+│   ├── rim_325_overlay.png
+│   ├── rim_326_overlay.png
+│   ├── rim_327_overlay.png
+│   ├── rim_328_overlay.png
+│   ├── rim_329_overlay.png
+│   ├── rim_330_overlay.png
+│   ├── rim_331_overlay.png
+│   ├── rim_332_overlay.png
+│   ├── rim_333_overlay.png
+│   ├── rim_334_overlay.png
+│   ├── rim_335_overlay.png
+│   ├── rim_336_overlay.png
+│   ├── rim_337_overlay.png
+│   ├── rim_338_overlay.png
+│   ├── rim_339_overlay.png
+│   ├── rim_340_overlay.png
+│   ├── rim_341_overlay.png
+│   ├── rim_342_overlay.png
+│   ├── rim_343_overlay.png
+│   ├── rim_344_overlay.png
+│   ├── rim_345_overlay.png
+│   ├── rim_346_overlay.png
+│   ├── rim_347_overlay.png
+│   ├── rim_348_overlay.png
+│   ├── rim_349_overlay.png
+│   ├── rim_350_overlay.png
+│   ├── rim_351_overlay.png
+│   ├── rim_352_overlay.png
+│   ├── rim_353_overlay.png
+│   ├── rim_354_overlay.png
+│   ├── rim_355_overlay.png
+│   ├── rim_356_overlay.png
+│   ├── rim_357_overlay.png
+│   ├── rim_358_overlay.png
+│   ├── rim_359_overlay.png
+│   ├── rim_360_overlay.png
+│   ├── rim_361_overlay.png
+│   ├── rim_362_overlay.png
+│   ├── rim_363_overlay.png
+│   ├── rim_364_overlay.png
+│   ├── rim_365_overlay.png
+│   ├── rim_366_overlay.png
+│   ├── rim_367_overlay.png
+│   ├── rim_368_overlay.png
+│   ├── rim_369_overlay.png
+│   ├── rim_370_overlay.png
+│   ├── rim_371_overlay.png
+│   ├── rim_372_overlay.png
+│   ├── rim_373_overlay.png
+│   ├── rim_374_overlay.png
+│   ├── rim_375_overlay.png
+│   ├── rim_376_overlay.png
+│   ├── rim_377_overlay.png
+│   ├── rim_378_overlay.png
+│   ├── rim_379_overlay.png
+│   ├── rim_380_overlay.png
+│   ├── rim_381_overlay.png
+│   ├── rim_382_overlay.png
+│   ├── rim_383_overlay.png
+│   ├── rim_384_overlay.png
+│   ├── rim_385_overlay.png
+│   ├── rim_386_overlay.png
+│   ├── rim_387_overlay.png
+│   ├── rim_388_overlay.png
+│   ├── rim_389_overlay.png
+│   ├── rim_390_overlay.png
+│   ├── rim_391_overlay.png
+│   ├── rim_392_overlay.png
+│   ├── rim_393_overlay.png
+│   ├── rim_394_overlay.png
+│   ├── rim_395_overlay.png
+│   ├── rim_396_overlay.png
+│   ├── rim_397_overlay.png
+│   ├── rim_398_overlay.png
+│   ├── rim_399_overlay.png
+│   ├── rim_400_overlay.png
+│   ├── rim_401_overlay.png
+│   ├── rim_402_overlay.png
+│   ├── rim_403_overlay.png
+│   ├── rim_404_overlay.png
+│   ├── rim_405_overlay.png
+│   ├── rim_406_overlay.png
+│   ├── rim_407_overlay.png
+│   ├── rim_408_overlay.png
+│   ├── rim_409_overlay.png
+│   ├── rim_410_overlay.png
+│   ├── rim_411_overlay.png
+│   ├── rim_412_overlay.png
+│   ├── rim_413_overlay.png
+│   ├── rim_414_overlay.png
+│   ├── rim_415_overlay.png
+│   ├── rim_416_overlay.png
+│   ├── rim_417_overlay.png
+│   ├── rim_418_overlay.png
+│   ├── rim_419_overlay.png
+│   ├── rim_420_overlay.png
+│   ├── rim_421_overlay.png
+│   ├── rim_422_overlay.png
+│   ├── rim_423_overlay.png
+│   ├── rim_424_overlay.png
+│   ├── rim_425_overlay.png
+│   ├── rim_426_overlay.png
+│   ├── rim_427_overlay.png
+│   ├── rim_428_overlay.png
+│   ├── rim_429_overlay.png
+│   ├── rim_430_overlay.png
+│   ├── rim_431_overlay.png
+│   ├── rim_432_overlay.png
+│   ├── rim_433_overlay.png
+│   ├── rim_434_overlay.png
+│   ├── rim_435_overlay.png
+│   ├── rim_436_overlay.png
+│   ├── rim_437_overlay.png
+│   ├── rim_438_overlay.png
+│   ├── rim_439_overlay.png
+│   ├── rim_440_overlay.png
+│   ├── rim_441_overlay.png
+│   ├── rim_442_overlay.png
+│   ├── rim_443_overlay.png
+│   ├── rim_444_overlay.png
+│   ├── rim_445_overlay.png
+│   ├── rim_446_overlay.png
+│   ├── rim_447_overlay.png
+│   ├── rim_448_overlay.png
+│   ├── rim_449_overlay.png
+│   ├── rim_450_overlay.png
+│   ├── rim_451_overlay.png
+│   ├── rim_452_overlay.png
+│   ├── rim_453_overlay.png
+│   ├── rim_454_overlay.png
+│   ├── rim_455_overlay.png
+│   ├── rim_456_overlay.png
+│   ├── rim_457_overlay.png
+│   ├── rim_458_overlay.png
+│   ├── rim_459_overlay.png
+│   ├── rim_460_overlay.png
+│   ├── rim_461_overlay.png
+│   ├── rim_462_overlay.png
+│   ├── rim_463_overlay.png
+│   ├── rim_464_overlay.png
+│   ├── rim_465_overlay.png
+│   ├── rim_466_overlay.png
+│   ├── rim_467_overlay.png
+│   ├── rim_468_overlay.png
+│   ├── rim_469_overlay.png
+│   ├── rim_470_overlay.png
+│   ├── rim_471_overlay.png
+│   ├── rim_472_overlay.png
+│   ├── rim_473_overlay.png
+│   ├── rim_474_overlay.png
+│   ├── rim_475_overlay.png
+│   ├── rim_476_overlay.png
+│   ├── rim_477_overlay.png
+│   ├── rim_478_overlay.png
+│   ├── rim_479_overlay.png
+│   ├── rim_480_overlay.png
+│   ├── rim_481_overlay.png
+│   ├── rim_482_overlay.png
+│   ├── rim_483_overlay.png
+│   ├── rim_484_overlay.png
+│   ├── rim_485_overlay.png
+│   ├── rim_486_overlay.png
+│   ├── rim_487_overlay.png
+│   ├── rim_488_overlay.png
+│   ├── rim_489_overlay.png
+│   ├── rim_490_overlay.png
+│   ├── rim_491_overlay.png
+│   ├── rim_492_overlay.png
+│   ├── rim_493_overlay.png
+│   ├── rim_494_overlay.png
+│   ├── rim_495_overlay.png
+│   ├── rim_496_overlay.png
+│   ├── rim_497_overlay.png
+│   ├── rim_498_overlay.png
+│   ├── rim_499_overlay.png
+│   ├── rim_500_overlay.png
+│   ├── rim_501_overlay.png
+│   ├── rim_502_overlay.png
+│   ├── rim_503_overlay.png
+│   ├── rim_504_overlay.png
+│   ├── rim_505_overlay.png
+│   ├── rim_506_overlay.png
+│   ├── rim_507_overlay.png
+│   ├── rim_508_overlay.png
+│   ├── rim_509_overlay.png
+│   ├── rim_510_overlay.png
+│   ├── rim_511_overlay.png
+│   ├── rim_512_overlay.png
+│   ├── rim_513_overlay.png
+│   ├── rim_514_overlay.png
+│   ├── rim_515_overlay.png
+│   ├── rim_516_overlay.png
+│   ├── rim_517_overlay.png
+│   ├── rim_518_overlay.png
+│   ├── rim_519_overlay.png
+│   ├── rim_520_overlay.png
+│   ├── rim_521_overlay.png
+│   ├── rim_522_overlay.png
+│   ├── rim_523_overlay.png
+│   ├── rim_524_overlay.png
+│   ├── rim_525_overlay.png
+│   ├── rim_526_overlay.png
+│   ├── rim_527_overlay.png
+│   ├── rim_528_overlay.png
+│   ├── rim_529_overlay.png
+│   ├── rim_530_overlay.png
+│   ├── rim_531_overlay.png
+│   ├── rim_532_overlay.png
+│   ├── rim_533_overlay.png
+│   ├── rim_534_overlay.png
+│   ├── rim_535_overlay.png
+│   ├── rim_536_overlay.png
+│   ├── rim_537_overlay.png
+│   ├── rim_538_overlay.png
+│   ├── rim_539_overlay.png
+│   ├── rim_540_overlay.png
+│   ├── rim_541_overlay.png
+│   ├── rim_542_overlay.png
+│   ├── rim_543_overlay.png
+│   ├── rim_544_overlay.png
+│   ├── rim_545_overlay.png
+│   ├── rim_546_overlay.png
+│   ├── rim_547_overlay.png
+│   ├── rim_548_overlay.png
+│   ├── rim_549_overlay.png
+│   ├── rim_550_overlay.png
+│   ├── rim_551_overlay.png
+│   ├── rim_552_overlay.png
+│   ├── rim_553_overlay.png
+│   ├── rim_554_overlay.png
+│   ├── rim_555_overlay.png
+│   ├── rim_556_overlay.png
+│   ├── rim_557_overlay.png
+│   ├── rim_558_overlay.png
+│   ├── rim_559_overlay.png
+│   ├── rim_560_overlay.png
+│   ├── rim_561_overlay.png
+│   ├── rim_562_overlay.png
+│   ├── rim_563_overlay.png
+│   ├── rim_564_overlay.png
+│   ├── rim_565_overlay.png
+│   ├── rim_566_overlay.png
+│   ├── rim_567_overlay.png
+│   ├── rim_568_overlay.png
+│   ├── rim_569_overlay.png
+│   ├── rim_570_overlay.png
+│   ├── rim_571_overlay.png
+│   ├── rim_572_overlay.png
+│   ├── rim_573_overlay.png
+│   ├── rim_574_overlay.png
+│   ├── rim_575_overlay.png
+│   ├── rim_576_overlay.png
+│   ├── rim_577_overlay.png
+│   ├── rim_578_overlay.png
+│   ├── rim_579_overlay.png
+│   ├── rim_580_overlay.png
+│   ├── rim_581_overlay.png
+│   ├── rim_582_overlay.png
+│   ├── rim_583_overlay.png
+│   ├── rim_584_overlay.png
+│   ├── rim_585_overlay.png
+│   ├── rim_586_overlay.png
+│   ├── rim_587_overlay.png
+│   ├── rim_588_overlay.png
+│   ├── rim_589_overlay.png
+│   ├── rim_590_overlay.png
+│   ├── rim_591_overlay.png
+│   ├── rim_592_overlay.png
+│   ├── rim_593_overlay.png
+│   ├── rim_594_overlay.png
+│   ├── rim_595_overlay.png
+│   ├── rim_596_overlay.png
+│   ├── rim_597_overlay.png
+│   ├── rim_598_overlay.png
+│   ├── rim_599_overlay.png
+│   ├── rim_600_overlay.png
+│   ├── rim_601_overlay.png
+│   ├── rim_602_overlay.png
+│   ├── rim_603_overlay.png
+│   ├── rim_604_overlay.png
+│   ├── rim_605_overlay.png
+│   ├── rim_606_overlay.png
+│   ├── rim_607_overlay.png
+│   ├── rim_608_overlay.png
+│   ├── rim_609_overlay.png
+│   ├── rim_610_overlay.png
+│   ├── rim_611_overlay.png
+│   ├── rim_612_overlay.png
+│   ├── rim_613_overlay.png
+│   ├── rim_614_overlay.png
+│   ├── rim_615_overlay.png
+│   ├── rim_616_overlay.png
+│   ├── rim_617_overlay.png
+│   ├── rim_618_overlay.png
+│   ├── rim_619_overlay.png
+│   ├── rim_620_overlay.png
+│   ├── rim_621_overlay.png
+│   ├── rim_622_overlay.png
+│   ├── rim_623_overlay.png
+│   ├── rim_624_overlay.png
+│   ├── rim_625_overlay.png
+│   ├── rim_626_overlay.png
+│   ├── rim_627_overlay.png
+│   ├── rim_628_overlay.png
+│   ├── rim_629_overlay.png
+│   ├── rim_630_overlay.png
+│   ├── rim_631_overlay.png
+│   ├── rim_632_overlay.png
+│   ├── rim_633_overlay.png
+│   ├── rim_634_overlay.png
+│   ├── rim_635_overlay.png
+│   ├── rim_636_overlay.png
+│   ├── rim_637_overlay.png
+│   ├── rim_638_overlay.png
+│   ├── rim_639_overlay.png
+│   ├── rim_640_overlay.png
+│   ├── rim_641_overlay.png
+│   ├── rim_642_overlay.png
+│   ├── rim_643_overlay.png
+│   ├── rim_644_overlay.png
+│   ├── rim_645_overlay.png
+│   ├── rim_646_overlay.png
+│   ├── rim_647_overlay.png
+│   ├── rim_648_overlay.png
+│   ├── rim_649_overlay.png
+│   ├── rim_650_overlay.png
+│   ├── rim_651_overlay.png
+│   ├── rim_652_overlay.png
+│   ├── rim_653_overlay.png
+│   ├── rim_654_overlay.png
+│   ├── rim_655_overlay.png
+│   ├── rim_656_overlay.png
+│   ├── rim_657_overlay.png
+│   ├── rim_658_overlay.png
+│   ├── rim_659_overlay.png
+│   ├── rim_660_overlay.png
+│   ├── rim_661_overlay.png
+│   ├── rim_662_overlay.png
+│   ├── rim_663_overlay.png
+│   ├── rim_664_overlay.png
+│   ├── rim_665_overlay.png
+│   ├── rim_666_overlay.png
+│   ├── rim_667_overlay.png
+│   ├── rim_668_overlay.png
+│   ├── rim_669_overlay.png
+│   ├── rim_670_overlay.png
+│   ├── rim_671_overlay.png
+│   ├── rim_672_overlay.png
+│   ├── rim_673_overlay.png
+│   ├── rim_674_overlay.png
+│   ├── rim_675_overlay.png
+│   ├── rim_676_overlay.png
+│   ├── rim_677_overlay.png
+│   ├── rim_678_overlay.png
+│   ├── rim_679_overlay.png
+│   ├── rim_680_overlay.png
+│   ├── rim_681_overlay.png
+│   ├── rim_682_overlay.png
+│   ├── rim_683_overlay.png
+│   ├── rim_684_overlay.png
+│   ├── rim_685_overlay.png
+│   ├── rim_686_overlay.png
+│   ├── rim_687_overlay.png
+│   ├── rim_688_overlay.png
+│   ├── rim_689_overlay.png
+│   ├── rim_690_overlay.png
+│   ├── rim_691_overlay.png
+│   ├── rim_692_overlay.png
+│   ├── rim_693_overlay.png
+│   ├── rim_694_overlay.png
+│   ├── rim_695_overlay.png
+│   ├── rim_696_overlay.png
+│   ├── rim_697_overlay.png
+│   ├── rim_698_overlay.png
+│   ├── rim_699_overlay.png
+│   ├── rim_700_overlay.png
+│   ├── rim_701_overlay.png
+│   ├── rim_702_overlay.png
+│   ├── rim_703_overlay.png
+│   ├── rim_704_overlay.png
+│   ├── rim_705_overlay.png
+│   ├── rim_706_overlay.png
+│   ├── rim_707_overlay.png
+│   ├── rim_708_overlay.png
+│   ├── rim_709_overlay.png
+│   ├── rim_710_overlay.png
+│   ├── rim_711_overlay.png
+│   ├── rim_712_overlay.png
+│   ├── rim_713_overlay.png
+│   ├── rim_714_overlay.png
+│   ├── rim_715_overlay.png
+│   ├── rim_716_overlay.png
+│   ├── rim_717_overlay.png
+│   ├── rim_718_overlay.png
+│   ├── rim_719_overlay.png
+│   ├── rim_720_overlay.png
+│   ├── rim_721_overlay.png
+│   ├── rim_722_overlay.png
+│   ├── rim_723_overlay.png
+│   ├── rim_724_overlay.png
+│   ├── rim_725_overlay.png
+│   ├── rim_726_overlay.png
+│   ├── rim_727_overlay.png
+│   ├── rim_728_overlay.png
+│   ├── rim_729_overlay.png
+│   ├── rim_730_overlay.png
+│   ├── rim_731_overlay.png
+│   ├── rim_732_overlay.png
+│   ├── rim_733_overlay.png
+│   ├── rim_734_overlay.png
+│   ├── rim_735_overlay.png
+│   ├── rim_736_overlay.png
+│   ├── rim_737_overlay.png
+│   ├── rim_738_overlay.png
+│   ├── rim_739_overlay.png
+│   ├── rim_740_overlay.png
+│   ├── rim_741_overlay.png
+│   ├── rim_742_overlay.png
+│   ├── rim_743_overlay.png
+│   ├── rim_744_overlay.png
+│   ├── rim_745_overlay.png
+│   ├── rim_746_overlay.png
+│   ├── rim_747_overlay.png
+│   ├── rim_748_overlay.png
+│   ├── rim_749_overlay.png
+│   ├── rim_750_overlay.png
+│   ├── rim_751_overlay.png
+│   ├── rim_752_overlay.png
+│   ├── rim_753_overlay.png
+│   ├── rim_754_overlay.png
+│   ├── rim_755_overlay.png
+│   ├── rim_756_overlay.png
+│   ├── rim_757_overlay.png
+│   ├── rim_758_overlay.png
+│   ├── rim_759_overlay.png
+│   ├── rim_760_overlay.png
+│   ├── rim_761_overlay.png
+│   ├── rim_762_overlay.png
+│   ├── rim_763_overlay.png
+│   ├── rim_764_overlay.png
+│   ├── rim_765_overlay.png
+│   ├── rim_766_overlay.png
+│   ├── rim_767_overlay.png
+│   ├── rim_768_overlay.png
+│   ├── rim_769_overlay.png
+│   ├── rim_770_overlay.png
+│   ├── rim_771_overlay.png
+│   ├── rim_772_overlay.png
+│   ├── rim_773_overlay.png
+│   ├── rim_774_overlay.png
+│   ├── rim_775_overlay.png
+│   ├── rim_776_overlay.png
+│   ├── rim_777_overlay.png
+│   ├── rim_778_overlay.png
+│   ├── rim_779_overlay.png
+│   ├── rim_780_overlay.png
+│   ├── rim_781_overlay.png
+│   ├── rim_782_overlay.png
+│   ├── rim_783_overlay.png
+│   ├── rim_784_overlay.png
+│   ├── rim_785_overlay.png
+│   ├── rim_786_overlay.png
+│   ├── rim_787_overlay.png
+│   ├── rim_788_overlay.png
+│   ├── rim_789_overlay.png
+│   ├── rim_790_overlay.png
+│   ├── rim_791_overlay.png
+│   ├── rim_792_overlay.png
+│   ├── rim_793_overlay.png
+│   ├── rim_794_overlay.png
+│   ├── rim_795_overlay.png
+│   ├── rim_796_overlay.png
+│   ├── rim_797_overlay.png
+│   ├── rim_798_overlay.png
+│   ├── rim_799_overlay.png
+│   ├── rim_800_overlay.png
+│   ├── rim_801_overlay.png
+│   ├── rim_802_overlay.png
+│   ├── rim_803_overlay.png
+│   ├── rim_804_overlay.png
+│   ├── rim_805_overlay.png
+│   ├── rim_806_overlay.png
+│   ├── rim_807_overlay.png
+│   ├── rim_808_overlay.png
+│   ├── rim_809_overlay.png
+│   ├── rim_810_overlay.png
+│   ├── rim_811_overlay.png
+│   ├── rim_812_overlay.png
+│   ├── rim_813_overlay.png
+│   ├── rim_814_overlay.png
+│   ├── rim_815_overlay.png
+│   ├── rim_816_overlay.png
+│   ├── rim_817_overlay.png
+│   ├── rim_818_overlay.png
+│   ├── rim_819_overlay.png
+│   ├── rim_820_overlay.png
+│   ├── rim_821_overlay.png
+│   ├── rim_822_overlay.png
+│   ├── rim_823_overlay.png
+│   ├── rim_824_overlay.png
+│   ├── rim_825_overlay.png
+│   ├── rim_826_overlay.png
+│   ├── rim_827_overlay.png
+│   ├── rim_828_overlay.png
+│   ├── rim_829_overlay.png
+│   ├── rim_830_overlay.png
+│   ├── rim_831_overlay.png
+│   ├── rim_832_overlay.png
+│   ├── rim_833_overlay.png
+│   ├── rim_834_overlay.png
+│   ├── rim_835_overlay.png
+│   ├── rim_836_overlay.png
+│   ├── rim_837_overlay.png
+│   ├── rim_838_overlay.png
+│   ├── rim_839_overlay.png
+│   ├── rim_840_overlay.png
+│   ├── rim_841_overlay.png
+│   ├── rim_842_overlay.png
+│   ├── rim_843_overlay.png
+│   ├── rim_844_overlay.png
+│   ├── rim_845_overlay.png
+│   ├── rim_846_overlay.png
+│   ├── rim_847_overlay.png
+│   ├── rim_848_overlay.png
+│   ├── rim_849_overlay.png
+│   ├── rim_850_overlay.png
+│   ├── rim_851_overlay.png
+│   ├── rim_852_overlay.png
+│   ├── rim_853_overlay.png
+│   ├── rim_854_overlay.png
+│   ├── rim_855_overlay.png
+│   ├── rim_856_overlay.png
+│   ├── rim_857_overlay.png
+│   ├── rim_858_overlay.png
+│   ├── rim_859_overlay.png
+│   ├── rim_860_overlay.png
+│   ├── rim_861_overlay.png
+│   ├── rim_862_overlay.png
+│   ├── rim_863_overlay.png
+│   ├── rim_864_overlay.png
+│   ├── rim_865_overlay.png
+│   ├── rim_866_overlay.png
+│   ├── rim_867_overlay.png
+│   ├── rim_868_overlay.png
+│   ├── rim_869_overlay.png
+│   ├── rim_870_overlay.png
+│   ├── rim_871_overlay.png
+│   ├── rim_872_overlay.png
+│   ├── rim_873_overlay.png
+│   ├── rim_874_overlay.png
+│   ├── rim_875_overlay.png
+│   ├── rim_876_overlay.png
+│   ├── rim_877_overlay.png
+│   ├── rim_878_overlay.png
+│   ├── rim_879_overlay.png
+│   ├── rim_880_overlay.png
+│   ├── rim_881_overlay.png
+│   ├── rim_882_overlay.png
+│   ├── rim_883_overlay.png
+│   ├── rim_884_overlay.png
+│   ├── rim_885_overlay.png
+│   ├── rim_886_overlay.png
+│   ├── rim_887_overlay.png
+│   ├── rim_888_overlay.png
+│   ├── rim_889_overlay.png
+│   ├── rim_890_overlay.png
+│   ├── rim_891_overlay.png
+│   ├── rim_892_overlay.png
+│   ├── rim_893_overlay.png
+│   ├── rim_894_overlay.png
+│   ├── rim_895_overlay.png
+│   ├── rim_896_overlay.png
+│   ├── rim_897_overlay.png
+│   ├── rim_898_overlay.png
+│   ├── rim_899_overlay.png
+│   ├── rim_900_overlay.png
+│   ├── rim_901_overlay.png
+│   ├── rim_902_overlay.png
+│   ├── rim_903_overlay.png
+│   ├── rim_904_overlay.png
+│   ├── rim_905_overlay.png
+│   ├── rim_906_overlay.png
+│   ├── rim_907_overlay.png
+│   ├── rim_908_overlay.png
+│   ├── rim_909_overlay.png
+│   ├── rim_910_overlay.png
+│   ├── rim_911_overlay.png
+│   ├── rim_912_overlay.png
+│   ├── rim_913_overlay.png
+│   ├── rim_914_overlay.png
+│   ├── rim_915_overlay.png
+│   ├── rim_916_overlay.png
+│   ├── rim_917_overlay.png
+│   ├── rim_918_overlay.png
+│   ├── rim_919_overlay.png
+│   ├── rim_920_overlay.png
+│   ├── rim_921_overlay.png
+│   ├── rim_922_overlay.png
+│   ├── rim_923_overlay.png
+│   ├── rim_924_overlay.png
+│   ├── rim_925_overlay.png
+│   ├── rim_926_overlay.png
+│   ├── rim_927_overlay.png
+│   ├── rim_928_overlay.png
+│   ├── rim_929_overlay.png
+│   ├── rim_930_overlay.png
+│   ├── rim_931_overlay.png
+│   ├── rim_932_overlay.png
+│   ├── rim_933_overlay.png
+│   ├── rim_934_overlay.png
+│   ├── rim_935_overlay.png
+│   ├── rim_936_overlay.png
+│   ├── rim_937_overlay.png
+│   ├── rim_938_overlay.png
+│   ├── rim_939_overlay.png
+│   ├── rim_940_overlay.png
+│   ├── rim_941_overlay.png
+│   ├── rim_942_overlay.png
+│   ├── rim_943_overlay.png
+│   ├── rim_944_overlay.png
+│   ├── rim_945_overlay.png
+│   ├── rim_946_overlay.png
+│   ├── rim_947_overlay.png
+│   ├── rim_948_overlay.png
+│   ├── rim_949_overlay.png
+│   ├── rim_950_overlay.png
+│   ├── rim_951_overlay.png
+│   ├── rim_952_overlay.png
+│   ├── rim_953_overlay.png
+│   ├── rim_954_overlay.png
+│   ├── rim_955_overlay.png
+│   ├── rim_956_overlay.png
+│   ├── rim_957_overlay.png
+│   ├── rim_958_overlay.png
+│   ├── rim_959_overlay.png
+│   ├── rim_960_overlay.png
+│   ├── rim_961_overlay.png
+│   ├── rim_962_overlay.png
+│   ├── rim_963_overlay.png
+│   ├── rim_964_overlay.png
+│   ├── rim_965_overlay.png
+│   ├── rim_966_overlay.png
+│   ├── rim_967_overlay.png
+│   ├── rim_968_overlay.png
+│   ├── rim_969_overlay.png
+│   ├── rim_970_overlay.png
+│   ├── rim_971_overlay.png
+│   ├── rim_972_overlay.png
+│   ├── rim_973_overlay.png
+│   ├── rim_974_overlay.png
+│   ├── rim_975_overlay.png
+│   ├── rim_976_overlay.png
+│   ├── rim_977_overlay.png
+│   ├── rim_978_overlay.png
+│   ├── rim_979_overlay.png
+│   ├── rim_980_overlay.png
+│   ├── rim_981_overlay.png
+│   ├── rim_982_overlay.png
+│   ├── rim_983_overlay.png
+│   ├── rim_984_overlay.png
+│   ├── rim_985_overlay.png
+│   ├── rim_986_overlay.png
+│   ├── rim_987_overlay.png
+│   ├── rim_988_overlay.png
+│   ├── rim_989_overlay.png
+│   ├── rim_990_overlay.png
+│   ├── rim_991_overlay.png
+│   ├── rim_992_overlay.png
+│   ├── rim_993_overlay.png
+│   ├── rim_994_overlay.png
+│   ├── rim_995_overlay.png
+│   ├── rim_996_overlay.png
+│   ├── rim_997_overlay.png
+│   ├── rim_998_overlay.png
+│   └── rim_999_overlay.png
+├── Relabeling pipeline for annotation drift_1.0.py
+├── requirements.txt
+├── rim_center_ready_updated.txt
+├── synthetic
+│   ├── heatmaps
+│   └── images
+├── Synthetic Data Generator_with_Heatmap_Output.ipynb
+└── train_labels_updated.csv
+
+14 directories, 3464 files
+(.venv) Amrs-MacBook-Air:Challenge 1 - Rim Center Location amrattia$ 
