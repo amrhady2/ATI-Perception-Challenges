@@ -1,0 +1,11 @@
+opencv-python
+numpy
+matplotlib
+scikit-image
+pandas
+jupyter
+notebook
+scipy
+torch
+torchvision
+tensorflow
