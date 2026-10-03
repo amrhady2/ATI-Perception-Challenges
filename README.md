@@ -1,77 +1,40 @@
-# ATI Perception Challenges
+# Automotive perception experiments
 
-This repository contains solutions to two computer vision challenges focused on automotive perception tasks. Each challenge demonstrates structured, reproducible pipelines for visual inference, calibration, and metric estimation.
+Research and take-home challenge experiments by Amr Attia. **Status: notebook-based prototype.**
 
----
+## Wheel-center localization
 
-## 📍 Challenge 1 – Rim Center Location
+The final notebook uses a PyTorch `UNetResNet18Multi` model with heatmap and wheel-presence outputs. It includes training, evaluation, and visualization routines. Earlier approaches are retained under `Challenge 1 - Rim Center Location/Old/`.
 
-**Objective:**  
-Estimate the center of a car rim from a static image using classical computer vision techniques.
+Start with the [final heatmap notebook](Challenge%201%20-%20Rim%20Center%20Location/Final/Heatmaps_Beat_Direct_Regression.ipynb). Review its dataset paths, configuration, and split before running cells.
 
-**Approach:**  
-- Preprocessing: grayscale conversion, Gaussian blur  
-- Edge detection: Canny  
-- Circle detection: Hough Transform  
-- Post-filtering: radius constraints and confidence scoring  
-- Output: pixel coordinates of rim center
+## Tread-depth exploration
 
-**Highlights:**  
-- Modular pipeline for circle detection  
-- Tunable parameters for robustness across rim types  
-- Easily extendable to multi-frame or video-based input
+The notebooks in [Challenge 2 - Tread Depth](Challenge%202%20-%20Tread%20Depth/) explore laser-line detection, pixel-to-distance calibration, video processing, and synthetic profiles. These are experiments; physical accuracy depends on calibration and has not been independently established.
 
----
+## Setup
 
-## 🔴 Challenge 2 – Tread Depth Estimation
-
-**Objective:**  
-Estimate tire tread depth using structured light (laser line) from a lateral pan video.
-
-**Approach:**  
-- Frame extraction from video  
-- Laser line detection via HSV thresholding  
-- Depth estimation from vertical displacement of laser line  
-- Calibration: pixel-to-cm conversion  
-- Output: CSV and plot of tread profile over time
-
-**Highlights:**  
-- Real and simulated pipelines for validation  
-- Sub-millimeter precision via structured light triangulation  
-- Robust to low-texture surfaces and lighting variation
-
----
-
-## 📁 Folder Structure
-
-Challenge 1 - Rim Center Location/
-├── Final/                  # Final model, evaluation scripts, overlays
-├── Old/                   # Archived experiments
-├── rim_center_ready.ipynb # Main Jupyter notebook
-├── README.md              # This file
-├── .gitignore             # Clean repo setup
-
-
-Challenge 2 - Tread Depth/
-├── tread_depth_video.py       # Real video pipeline
-├── tread_depth_simulation.py  # Synthetic validation pipeline
-├── results/
-│   ├── tread_profile.csv
-│   └── tread_depth_plot.png
-
-
-
----
-
-## 🛠️ Requirements
-
-- Python 3.8+
-- OpenCV
-- NumPy
-- Matplotlib
-
-Install dependencies:
+From the repository root:
 
 ```bash
-pip install -r requirements.txt
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m notebook
+```
 
+On Windows, activate with `.venv\Scripts\activate`. Select the final notebook and set its working directory and data paths explicitly. PyTorch hardware support depends on your platform; the dependency list is not a validated lockfile.
+
+## Repository layout
+
+```text
+Challenge 1 - Rim Center Location/Final/    Final notebooks and evaluation artifacts
+Challenge 1 - Rim Center Location/Old/      Earlier experimental approaches
+Challenge 2 - Tread Depth/  Tread-depth notebooks
+```
+
+## Evaluation and limitations
+
+Inspect the notebook’s pixel-error, wheel-presence, and overlay outputs with the associated dataset and split. Saved outputs are historical artifacts, not a fresh benchmark. Real-time performance, robustness, and physical measurement accuracy require evaluation on the intended hardware and data.
+
+The repository contains substantial image and experiment artifacts, so a full clone may be large. Data and model redistribution rights should be verified before reuse.
